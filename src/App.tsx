@@ -1,4 +1,4 @@
-import reactLogo from './assets/react.svg'
+import reactLogo from './assets/image/tree.jpeg'
 import './App.css'
 
 function App() {
@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <div>
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img style={{width:"50vw",height:"50vw"}} src={reactLogo} className="logo react" alt="React logo" />
       </div>
-      <h1>Horror Hallow</h1>
+      <h1 style={{color:"#000",fontFamily:"fantasy",fontSize:"5em"}}>Horror Hallow</h1>
 
     </>
   )
