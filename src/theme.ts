@@ -1,24 +1,45 @@
-import { createTheme } from "@mui/material";
+/*
+    MUI v5 Default theme: https://mui.com/material-ui/customization/default-theme/
+*/
+
+import { createTheme, responsiveFontSizes} from '@mui/material/styles';
+// import { grey } from '@mui/material/colors';
 
 export const colorPalette = {
     white: "#F4F4F4",
-    orange: "#E15634",
-    //Light to dark
-    purple: ["#F4EFFF", "#E5D9F1", "#CDC1FD", "#A493F8", "#7270FC"],
     black: "#1E1E1E",
+    grey: "#123456"
 }
 
-export default createTheme({
-
+// Light mode && default
+const lightTheme = responsiveFontSizes(createTheme({
     palette: {
         mode: "light",
         primary: {
-            main: colorPalette.purple[4],
+            main: colorPalette.black,
             contrastText: colorPalette.white
+        }, 
+    secondary: {
+            main: colorPalette.grey,
+            contrastText: colorPalette.grey
         }
+
     },
     typography: {
         fontFamily: "Roboto",
     },
+})); 
 
-});
+// Override the theme for dark mode colors
+export const darkTheme = responsiveFontSizes(createTheme({
+    ...lightTheme,
+    palette: {
+        mode: "light",
+        primary: {
+            main: colorPalette.white,
+            contrastText: colorPalette.black
+        },
+    }
+}));
+
+export default lightTheme;
