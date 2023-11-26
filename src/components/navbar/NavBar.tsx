@@ -24,7 +24,7 @@ export default function NavBar() {
       {ratioOver3to2 ?
       <AppDrawer appDrawerOpen={appDrawerOpen} toggleAppDrawer={toggleAppDrawer}/>
       :
-      <></>
+      <AppDrawer appDrawerOpen={appDrawerOpen} toggleAppDrawer={toggleAppDrawer}/>
       }
       </>
     );
