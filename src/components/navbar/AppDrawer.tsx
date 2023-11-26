@@ -23,17 +23,26 @@ interface AppDrawerProps {
   minimal?: boolean;
 }
 
-export default function AppDrawer({
+const styles = {
+  link: {
+    textDecoration: 'none',
+    width: '100%',
+    color: 'inherit',
+  }
+}
+
+const AppDrawer = ({
   appDrawerOpen,
   toggleAppDrawer,
   minimal = false,
-}: AppDrawerProps) {
+}: AppDrawerProps) => {
+
   const list = () => (
-    <Box sx={minimal ? { width: 60 } : { width: 250 }} role="presentation">
+    <Box sx={minimal ? { width: 60 } : { width: 250 }} role="presentation" onClick={() => toggleAppDrawer(false)}>
       <TopAppBar toggleAppDrawer={toggleAppDrawer} showName={!minimal} />
       <List>
         <ListItem disablePadding>
-          <Link to={PATHS.HOME}>
+          <Link style={styles.link} to={PATHS.HOME}>
             <ListItemButton>
               <ListItemIcon>
                 <Home />
@@ -45,7 +54,7 @@ export default function AppDrawer({
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link to={PATHS.FILM}>
+          <Link style={styles.link} to={PATHS.FILM}>
             <ListItemButton>
               <ListItemIcon>
                 <Theaters />
@@ -57,7 +66,7 @@ export default function AppDrawer({
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link to={PATHS.VIDEO_GAMES}>
+          <Link style={styles.link} to={PATHS.VIDEO_GAMES}>
             <ListItemButton>
               <ListItemIcon>
                 <VideogameAssetIcon />
@@ -69,7 +78,7 @@ export default function AppDrawer({
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link to={PATHS.BOOKS}>
+          <Link style={styles.link} to={PATHS.BOOKS}>
             <ListItemButton>
               <ListItemIcon>
                 <Book />
@@ -86,7 +95,7 @@ export default function AppDrawer({
 
       <List>
         <ListItem disablePadding>
-          <Link to={PATHS.SIGN_IN}>
+          <Link style={styles.link} to={PATHS.SIGN_IN}>
             <ListItemButton>
               <ListItemIcon>
                 <AccountCircleIcon />
@@ -98,7 +107,7 @@ export default function AppDrawer({
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link to={PATHS.SETTINGS}>
+          <Link style={styles.link} to={PATHS.SETTINGS}>
             <ListItemButton>
               <ListItemIcon>
                 <Settings />
@@ -125,3 +134,5 @@ export default function AppDrawer({
     </>
   );
 }
+
+export default AppDrawer;
