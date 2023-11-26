@@ -3,16 +3,16 @@ import {Box, Typography} from '@mui/material'
 
 const styles = {
     container:{
-        backgroundColor:"#123456",
+        backgroundColor:"#fff",
     }
 }
 
-const Books: React.FC<PropsWithChildren> = () => {
+const Film: React.FC<PropsWithChildren> = () => {
 return (
 <Box style={styles.container}>
-    <Typography>Books</Typography>
+    <Typography>Film</Typography>
 </Box>
 )
 };
 
-export default Books;
+export default Film;
