@@ -1,31 +1,49 @@
-import { useState, useLayoutEffect } from 'react';
-import TopAppBar from './TopAppBar';
-import AppDrawer from './AppDrawer';
+import { useState, useLayoutEffect, useEffect } from "react";
+import TopAppBar from "./TopAppBar";
+import AppDrawer from "./AppDrawer";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { setOrientation } from "../../redux/slices/settingsSlice";
 
 export default function NavBar() {
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  const ratioOver3to2 = size.height / size.width >= 1.5;
+  const [appDrawerOpen, setAppDrawerOpen] = useState<boolean>(false);
+  const toggleAppDrawer = (dir: boolean | null) =>
+    dir == null
+      ? setAppDrawerOpen((prevValue) => !prevValue)
+      : setAppDrawerOpen(dir);
+  const orientation = useAppSelector((state) => state.settings.orientation);
+  const dispatch = useAppDispatch();
 
-    const [size, setSize] = useState({width: 0, height: 0});
-    const ratioOver3to2 = size.height / size.width >= 1.5;
-    const [appDrawerOpen, setAppDrawerOpen] = useState<boolean>(false);
-    const toggleAppDrawer = (dir:boolean | null) => dir == null ? setAppDrawerOpen(prevValue=>!prevValue) : setAppDrawerOpen(dir);
+  // Set up and destroy a listener for orientation change
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize({ width: window.innerWidth, height: window.innerHeight });
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
-    useLayoutEffect(() => {
-        function updateSize() {
-          setSize({width: window.innerWidth, height: window.innerHeight});
-        }
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        return () => window.removeEventListener('resize', updateSize);
-      }, []);
-    
-    return (
-      <>
-      <TopAppBar toggleAppDrawer={toggleAppDrawer}/>
-      {ratioOver3to2 ?
-      <AppDrawer appDrawerOpen={appDrawerOpen} toggleAppDrawer={toggleAppDrawer}/>
-      :
-      <AppDrawer appDrawerOpen={appDrawerOpen} toggleAppDrawer={toggleAppDrawer}/>
-      }
-      </>
-    );
-  }
+  // Dispatch the new orientation if changed
+  useEffect(() => {
+    dispatch(setOrientation(ratioOver3to2 ? "vertical" : "horizontal"));
+  }, [dispatch, ratioOver3to2]);
+
+  return (
+    <>
+      <TopAppBar toggleAppDrawer={toggleAppDrawer} />
+      {orientation === "vertical" ? (
+        <AppDrawer
+          appDrawerOpen={appDrawerOpen}
+          toggleAppDrawer={toggleAppDrawer}
+        />
+      ) : (
+        <AppDrawer
+          appDrawerOpen={appDrawerOpen}
+          toggleAppDrawer={toggleAppDrawer}
+        />
+      )}
+    </>
+  );
+}
