@@ -7,15 +7,15 @@ import { SettingsState } from '../types'
 // Define the initial state using that type
 const initialState = {
     orientation: "horizontal",
-    colorMode: "light"
+    colorTheme: "light"
 } as SettingsState;
 
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setColorMode: (state, action: PayloadAction<SettingsState["colorMode"]>) => {
-      state.colorMode = action.payload
+    setColorTheme: (state, action: PayloadAction<SettingsState["colorTheme"]>) => {
+      state.colorTheme = action.payload
     },
     setOrientation: (state, action: PayloadAction<SettingsState["orientation"]>) => {
       state.orientation = action.payload
@@ -23,10 +23,10 @@ export const settingsSlice = createSlice({
   },
 })
 
-export const { setColorMode, setOrientation } = settingsSlice.actions
+export const { setColorTheme, setOrientation } = settingsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectColorMode = (state: RootState) => state.settings.colorMode
+export const selectColorTheme = (state: RootState) => state.settings.colorTheme
 export const selectOrientation = (state: RootState) => state.settings.orientation
 
 export default settingsSlice.reducer

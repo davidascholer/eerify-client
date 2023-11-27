@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { setColorMode } from "../../redux/slices/settingsSlice";
+import { setColorTheme } from "../../redux/slices/settingsSlice";
 
 // interface AppDrawerProps {}
 
@@ -16,11 +16,11 @@ import { setColorMode } from "../../redux/slices/settingsSlice";
 const label = { inputProps: { "aria-label": "Color Mode" } };
 
 const Settings = () => {
-  const colorMode = useAppSelector((state) => state.settings.colorMode);
+  const colorTheme = useAppSelector((state) => state.settings.colorTheme);
   const dispatch = useAppDispatch();
 
-  const toggleColorMode = () => {
-    dispatch(setColorMode(colorMode === "light" ? "dark" : "light"));
+  const togglecolorTheme = () => {
+    dispatch(setColorTheme(colorTheme === "light" ? "dark" : "light"));
   };
 
   return (
@@ -31,8 +31,8 @@ const Settings = () => {
             <Typography>Color Mode</Typography>
           </ListItemText>
           <FormControlLabel
-            control={<Switch {...label} onChange={toggleColorMode} />}
-            label="Light"
+            control={<Switch {...label} onChange={togglecolorTheme} />}
+            label={colorTheme==="light"?"LIGHT":"DARK"}
           />
         </ListItem>
       </List>

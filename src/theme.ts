@@ -34,12 +34,13 @@ const lightTheme = responsiveFontSizes(createTheme({
 export const darkTheme = responsiveFontSizes(createTheme({
     ...lightTheme,
     palette: {
-        mode: "light",
+        mode: "dark",
         primary: {
             main: colorPalette.white,
             contrastText: colorPalette.black
         },
     }
+    
 }));
 
 export default lightTheme;

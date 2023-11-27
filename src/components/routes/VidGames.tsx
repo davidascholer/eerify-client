@@ -3,7 +3,6 @@ import {Box, Typography} from '@mui/material'
 
 const styles = {
     container:{
-        backgroundColor:"#fff",
     }
 }
 
