@@ -27,7 +27,7 @@ export default function TopAppBar({toggleAppDrawer, showName=true}:TopAppBarProp
           </IconButton>
           {showName && 
           <Typography component="div" sx={{ flexGrow: 1, textAlign:"left" }}>
-            Horror Hallow
+            Divine Dread
           </Typography>
 }
         </Toolbar>
