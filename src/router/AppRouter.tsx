@@ -8,6 +8,7 @@ import SignIn from "../components/routes/SignIn";
 import Settings from "../components/routes/Settings";
 import ErrorPage from '../components/views/ErrorPage';
 import PATHS from "../router/paths";
+import Mortgage from "../components/mortgage/Mortgage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const AppRouter = createBrowserRouter([
       {
         path: PATHS.SETTINGS,
         element: <Settings />,
+      },
+      {
+        path: PATHS.TEST,
+        element: <Mortgage/>,
       },
     ]
   },
