@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import BasicTextInput from "./BasicTextInput";
-import { ResultType } from "../App";
+import { ResultType } from "./Mortgage";
 
 function Results({
   monthlyMortgage,
