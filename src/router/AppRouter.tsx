@@ -16,9 +16,13 @@ const AppRouter = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-            {
+      {
         path: PATHS.HOME,
         element: <Home />,
+      },
+      {
+        path: PATHS.TEST,
+        element: <Mortgage/>,
       },
       {
         path: PATHS.FILM,
@@ -39,10 +43,6 @@ const AppRouter = createBrowserRouter([
       {
         path: PATHS.SETTINGS,
         element: <Settings />,
-      },
-      {
-        path: PATHS.TEST,
-        element: <Mortgage/>,
       },
     ]
   },
