@@ -1,14 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from '../components/routes/Root';
-import Home from '../components/routes/Home'
-import Film from '../components/routes/Film';
-import VideoGames from '../components/routes/VidGames';
-import Books from '../components/routes/Books';
+import Root from "../components/routes/Root";
+import Home from "../components/routes/Home";
+import Film from "../components/routes/Film";
+import VideoGames from "../components/routes/VidGames";
+import Books from "../components/routes/Books";
 import SignIn from "../components/routes/SignIn";
 import Settings from "../components/routes/Settings";
-import ErrorPage from '../components/views/ErrorPage';
+import ErrorPage from "../components/views/ErrorPage";
 import PATHS from "../router/paths";
-import Mortgage from "../components/mortgage/Mortgage";
 
 const AppRouter = createBrowserRouter([
   {
@@ -19,10 +18,6 @@ const AppRouter = createBrowserRouter([
       {
         path: PATHS.HOME,
         element: <Home />,
-      },
-      {
-        path: PATHS.TEST,
-        element: <Mortgage/>,
       },
       {
         path: PATHS.FILM,
@@ -44,9 +39,8 @@ const AppRouter = createBrowserRouter([
         path: PATHS.SETTINGS,
         element: <Settings />,
       },
-    ]
+    ],
   },
 ]);
 
 export default AppRouter;
-

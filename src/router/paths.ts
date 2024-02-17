@@ -6,5 +6,4 @@ export default {
   BOOKS: "/books",
   SIGN_IN: "/sign-in",
   SETTINGS: "/settings",
-  TEST: "/mortgage",
 };
