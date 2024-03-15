@@ -1,24 +1,24 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient, { FetchResponse } from "../services/api-client";
-// import useGameQueryStore from '../store';
+import { useAppSelector } from "../../../../redux/hooks";
 import Game from "../entities/Game";
+import { GamesState } from "../../../../redux/types";
 
 const apiClient = new APIClient<Game>("/games");
 
 const useGames = () => {
-  // const gameQuery = useGameQueryStore((s) => s.gameQuery);
+  const gamesState: GamesState = useAppSelector((state) => state.games);
 
   return useInfiniteQuery<FetchResponse<Game>, Error>({
-    queryKey: ["games"],
-    // queryKey: ['games', gameQuery],
+    queryKey: ["games", gamesState],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.getAll({
         params: {
-          // genres: GameQueryStoreInterface.genreId,
-          // parent_platforms: gameQuery.platformId,
-          // ordering: gameQuery.sortOrder,
-          // search: gameQuery.searchText,
+          genres: gamesState.genreId,
+          parent_platforms: gamesState.platformId,
+          ordering: gamesState.sortOrder,
+          search: gamesState.searchText,
           page: pageParam,
         },
       }),

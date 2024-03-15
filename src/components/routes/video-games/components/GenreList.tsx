@@ -9,12 +9,16 @@ import {
 } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
-// import useGameQueryStore from '../store';
+import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
+import { setGenreId } from "../../../../redux/slices/gamesSlice";
 
 const GenreList = () => {
+  const dispatch = useAppDispatch();
   const { data, isLoading, error } = useGenres();
-  // const selectedGenreId = useGameQueryStore(s => s.gameQuery.genreId);
-  // const setSelectedGenreId = useGameQueryStore(s => s.setGenreId);
+  const selectedGenreId = useAppSelector((state) => state.games.genreId);
+  const handleSetGenreId = (genreId: number) => {
+    dispatch(setGenreId(genreId));
+  };
 
   if (error) return null;
 
@@ -38,14 +42,8 @@ const GenreList = () => {
               <Button
                 whiteSpace="normal"
                 textAlign="left"
-                fontWeight={
-                  // genre.id === selectedGenreId
-                  // ? 'bold'
-                  // : 'normal'
-                  "bold"
-                }
-                // onClick={() => setSelectedGenreId(genre.id)}
-                onClick={() => alert(genre.id)}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
+                onClick={() => handleSetGenreId(genre.id)}
                 fontSize="md"
                 variant="link"
               >

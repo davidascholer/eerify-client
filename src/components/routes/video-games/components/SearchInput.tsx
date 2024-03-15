@@ -2,11 +2,15 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-// import useGameQueryStore from "../store";
+import { setSearchText } from "../../../../redux/slices/gamesSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
 
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
-  // const setSearchText = useGameQueryStore(s => s.setSearchText);
+  const dispatch = useAppDispatch();
+  const handleSetSearchText = (searchText: string) => {
+    dispatch(setSearchText(searchText));
+  };
   const navigate = useNavigate();
 
   return (
@@ -14,8 +18,7 @@ const SearchInput = () => {
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) {
-          console.debug("fix this " + ref.current.value);
-          // setSearchText(ref.current.value);
+          handleSetSearchText(ref.current.value);
           navigate("/");
         }
       }}

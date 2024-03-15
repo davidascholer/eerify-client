@@ -1,4 +1,3 @@
-import "./App.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";

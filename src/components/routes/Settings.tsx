@@ -32,7 +32,7 @@ const Settings = () => {
           </ListItemText>
           <FormControlLabel
             control={<Switch {...label} onChange={togglecolorTheme} />}
-            label={colorTheme==="light"?"LIGHT":"DARK"}
+            label={colorTheme === "light" ? "LIGHT" : "DARK"}
           />
         </ListItem>
       </List>

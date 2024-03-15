@@ -1,8 +1,10 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-// import useGameQueryStore from '../store';
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { setSortOrder } from "../../../../redux/slices/gamesSlice";
 
 const SortSelector = () => {
+  const dispatch = useAppDispatch();
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date added" },
@@ -12,25 +14,24 @@ const SortSelector = () => {
     { value: "-rating", label: "Average rating" },
   ];
 
-  // const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
-  // const sortOrder = useGameQueryStore(
-  //   (s) => s.gameQuery.sortOrder
-  // );
-  // const currentSortOrder = sortOrders.find(
-  //   (order) => order.value === sortOrder
-  // );
+  const sortOrder = useAppSelector((state) => state.games.sortOrder);
+  const handleSetSortOrder = (sortOrder: string) => {
+    dispatch(setSortOrder(sortOrder));
+  };
+
+  const currentSortOrder = sortOrders.find(
+    (order) => order.value === sortOrder
+  );
 
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        Order by: {"RelevanceFixThis"}
-        {/* Order by: {currentSortOrder?.label || 'Relevance'} */}
+        Order by: {currentSortOrder?.label || "Relevance"}
       </MenuButton>
       <MenuList>
         {sortOrders.map((order) => (
           <MenuItem
-            onClick={() => alert(order.value)}
-            // onClick={() => setSortOrder(order.value)}
+            onClick={() => handleSetSortOrder(order.value)}
             key={order.value}
             value={order.value}
           >
