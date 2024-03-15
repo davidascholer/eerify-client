@@ -1,16 +1,14 @@
-import {
-  Card,
-  CardBody,
-  Heading,
-  HStack,
-  Image
-} from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import Game from '../entities/Game';
-import getCroppedImageUrl from '../services/image-url';
-import CriticScore from './CriticScore';
-import Emoji from './Emoji';
-import PlatformIconList from './PlatformIconList';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import Game from "../entities/Game";
+import getCroppedImageUrl from "../services/image-url";
+import CriticScore from "./CriticScore";
+import Emoji from "./Emoji";
+import PlatformIconList from "./PlatformIconList";
+import { Paper } from "@mui/material";
 
 interface Props {
   game: Game;
@@ -18,22 +16,22 @@ interface Props {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card>
-      <Image src={getCroppedImageUrl(game.background_image)} />
-      <CardBody>
-        <HStack justifyContent="space-between" marginBottom={3}>
+    <Card sx={{ minWidth: 275 }}>
+      <Paper variant="outlined">
+        <img src={getCroppedImageUrl(game.background_image)} />
+      </Paper>
+      <CardContent>
+        <Stack justifyContent="space-between" marginBottom={3}>
           <PlatformIconList
-            platforms={game.parent_platforms?.map(
-              (p) => p.platform
-            )}
+            platforms={game.parent_platforms?.map((p) => p.platform)}
           />
           <CriticScore score={game.metacritic} />
-        </HStack>
-        <Heading fontSize="2xl">
-          <Link to={'/games/' + game.slug}>{game.name}</Link>
+        </Stack>
+        <Typography fontSize="2xl">
+          <Link to={"/games/" + game.slug}>{game.name}</Link>
           <Emoji rating={game.rating_top} />
-        </Heading>
-      </CardBody>
+        </Typography>
+      </CardContent>
     </Card>
   );
 };

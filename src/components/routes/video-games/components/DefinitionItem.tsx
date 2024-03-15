@@ -1,5 +1,5 @@
-import { Box, Heading } from '@chakra-ui/react';
-import React, { ReactNode } from 'react'
+import { Box, Typography } from "@mui/material";
+import React, { ReactNode } from "react";
 
 interface Props {
   term: string;
@@ -9,14 +9,12 @@ interface Props {
 const DefinitionItem = ({ term, children }: Props) => {
   return (
     <Box marginY={5}>
-      <Heading as='dt' fontSize='md' color='gray.600'>
+      <Typography variant="h1" fontSize={"md"} color="gray.600">
         {term}
-      </Heading>
-      <dd>
-        {children}
-      </dd>
+      </Typography>
+      <dd>{children}</dd>
     </Box>
-  )
-}
+  );
+};
 
-export default DefinitionItem
+export default DefinitionItem;

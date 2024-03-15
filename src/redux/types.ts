@@ -10,8 +10,8 @@ export type GamesState = {
     sortOrder?: string;
     searchText?: string;
   };
-  searchText: string;
-  genreId: number;
-  platformId: number;
-  sortOrder: string;
+  searchText?: string;
+  genreId?: number;
+  platformId?: number;
+  sortOrder?: string;
 };

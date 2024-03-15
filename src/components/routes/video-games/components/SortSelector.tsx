@@ -1,9 +1,11 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { BsChevronDown } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setSortOrder } from "../../../../redux/slices/gamesSlice";
+import { useState } from "react";
 
 const SortSelector = () => {
+  const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const sortOrders = [
     { value: "", label: "Relevance" },
@@ -24,21 +26,25 @@ const SortSelector = () => {
   );
 
   return (
-    <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+    <Menu open={open} onChange={(isOpen) => setOpen(!isOpen)}>
+      <Button
+        component="label"
+        role={undefined}
+        variant="contained"
+        tabIndex={-1}
+        startIcon={<BsChevronDown />}
+      >
         Order by: {currentSortOrder?.label || "Relevance"}
-      </MenuButton>
-      <MenuList>
-        {sortOrders.map((order) => (
-          <MenuItem
-            onClick={() => handleSetSortOrder(order.value)}
-            key={order.value}
-            value={order.value}
-          >
-            {order.label}
-          </MenuItem>
-        ))}
-      </MenuList>
+      </Button>
+      {sortOrders.map((order) => (
+        <MenuItem
+          onClick={() => handleSetSortOrder(order.value)}
+          key={order.value}
+          value={order.value}
+        >
+          {order.label}
+        </MenuItem>
+      ))}
     </Menu>
   );
 };

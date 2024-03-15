@@ -1,11 +1,15 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatform from "../hooks/usePlatform";
 import usePlatforms from "../hooks/usePlatforms";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { setPlatformId } from "../../../../redux/slices/gamesSlice";
+import { useState } from "react";
 
 const PlatformSelector = () => {
+  const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { data, error } = usePlatforms();
   const handleSetSelectedPlatformId = (platformId: number) => {
@@ -17,20 +21,24 @@ const PlatformSelector = () => {
   if (error) return null;
 
   return (
-    <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+    <Menu open={open} onChange={(isOpen) => setOpen(!isOpen)}>
+      <Button
+        component="label"
+        role={undefined}
+        variant="contained"
+        tabIndex={-1}
+        startIcon={<BsChevronDown />}
+      >
         {selectedPlatform?.name || "Platforms"}
-      </MenuButton>
-      <MenuList>
-        {data?.results.map((platform) => (
-          <MenuItem
-            onClick={() => handleSetSelectedPlatformId(Number(platform.id))}
-            key={platform.id}
-          >
-            {platform.name}
-          </MenuItem>
-        ))}
-      </MenuList>
+      </Button>
+      {data?.results.map((platform) => (
+        <MenuItem
+          onClick={() => handleSetSelectedPlatformId(Number(platform.id))}
+          key={platform.id}
+        >
+          {platform.name}
+        </MenuItem>
+      ))}
     </Menu>
   );
 };

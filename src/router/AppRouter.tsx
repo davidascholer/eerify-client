@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../components/routes/Root";
 import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
-import VideoGames from "../components/routes/video-games/pages/VideoGamesMain";
+import GamesMain from "../components/routes/video-games/pages/Main";
 import Books from "../components/routes/Books";
 import SignIn from "../components/routes/SignIn";
 import Settings from "../components/routes/Settings";
@@ -31,7 +31,7 @@ const AppRouter = createBrowserRouter([
         element: <Layout />,
         errorElement: <ErrorPage />,
         children: [
-          { index: true, element: <VideoGames /> },
+          { index: true, element: <GamesMain /> },
           { path: PATHS.VIDEO_GAMES + "/:slug", element: <GameDetailPage /> },
         ],
       },

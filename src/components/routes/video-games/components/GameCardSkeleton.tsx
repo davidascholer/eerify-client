@@ -1,14 +1,16 @@
-import { Card, CardBody, Skeleton, SkeletonText } from '@chakra-ui/react'
+import { Skeleton, Box } from "@mui/material";
 
 const GameCardSkeleton = () => {
   return (
-    <Card>
-      <Skeleton height="200px" />
-      <CardBody>
-        <SkeletonText />
-      </CardBody>
-    </Card>
-  )
-}
+    <>
+      <Skeleton variant="rounded" height={118} />
+      <Box sx={{ pt: 0.5 }}>
+        <Skeleton />
+        <Skeleton width={"80%"} />
+        <Skeleton width={"60%"} />
+      </Box>
+    </>
+  );
+};
 
-export default GameCardSkeleton
+export default GameCardSkeleton;

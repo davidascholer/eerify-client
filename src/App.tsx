@@ -3,10 +3,8 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import lightTheme, { darkTheme } from "./theme";
-import chokratheme from "./chokratheme";
 import AppRouter from "./router/AppRouter";
 import { useAppSelector } from "./redux/hooks";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -26,15 +24,10 @@ const App = () => {
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={chokratheme}>
-          <ColorModeScript
-            initialColorMode={chokratheme.config.initialColorMode}
-          />
-          <Provider store={store}>
-            <Content />
-          </Provider>
-          <ReactQueryDevtools />
-        </ChakraProvider>
+        <Provider store={store}>
+          <Content />
+        </Provider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Typography } from "@mui/material";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
 import { useAppSelector } from "../../../../redux/hooks";
@@ -13,9 +13,9 @@ const GameHeading = () => {
   const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
 
   return (
-    <Heading as="h1" marginY={5} fontSize="5xl">
+    <Typography variant="h1" marginY={5} fontSize="5xl">
       {heading}
-    </Heading>
+    </Typography>
   );
 };
 

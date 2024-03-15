@@ -1,12 +1,12 @@
 import {
-  Button,
-  Heading,
-  HStack,
-  Image,
+  Link,
+  Typography,
+  Stack,
   List,
   ListItem,
-  Spinner,
-} from "@chakra-ui/react";
+  CircularProgress,
+  Paper,
+} from "@mui/material";
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
@@ -22,34 +22,37 @@ const GenreList = () => {
 
   if (error) return null;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <CircularProgress />;
 
   return (
     <>
-      <Heading fontSize="2xl" marginTop={9} marginBottom={3}>
+      <Typography variant="h1" fontSize="2xl" marginTop={9} marginBottom={3}>
         Genres
-      </Heading>
+      </Typography>
       <List>
         {data?.results.map((genre) => (
-          <ListItem key={genre.id} paddingY="5px">
-            <HStack>
-              <Image
-                boxSize="32px"
-                borderRadius={8}
-                objectFit="cover"
-                src={getCroppedImageUrl(genre.image_background)}
-              />
-              <Button
+          <ListItem key={genre.id} sx={{ paddingY: "5px" }}>
+            <Stack>
+              <Paper
+                sx={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: 8,
+                  objectFit: "cover",
+                }}
+              >
+                <img src={getCroppedImageUrl(genre.image_background)} />
+              </Paper>
+              <Link
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
                 onClick={() => handleSetGenreId(genre.id)}
                 fontSize="md"
-                variant="link"
               >
                 {genre.name}
-              </Button>
-            </HStack>
+              </Link>
+            </Stack>
           </ListItem>
         ))}
       </List>

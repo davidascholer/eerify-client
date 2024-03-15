@@ -4,11 +4,10 @@ import type { RootState } from "../store";
 import { GamesState } from "../types";
 
 const initialState = {
-  gameQuery: {},
-  searchText: "",
-  genreId: 0,
-  platformId: 0,
-  sortOrder: "",
+  searchText: undefined,
+  genreId: undefined,
+  platformId: undefined,
+  sortOrder: undefined,
 } as GamesState;
 
 export const gamesSlice = createSlice({
