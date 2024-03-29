@@ -9,7 +9,7 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { Stack, Icon } from "@mui/material";
+import { Box, Icon } from "@mui/material";
 import Platform from "../entities/Platform";
 import { IconType } from "react-icons";
 
@@ -31,11 +31,15 @@ const PlatformIconList = ({ platforms = [] }: Props) => {
   };
 
   return (
-    <Stack marginY={1}>
+    <Box>
       {platforms.map((platform) => (
-        <Icon key={platform.id} component={iconMap[platform.slug]} />
+        <Icon
+          key={platform.id}
+          component={iconMap[platform.slug]}
+          sx={{ mr: 1, color: "#222" }}
+        />
       ))}
-    </Stack>
+    </Box>
   );
 };
 

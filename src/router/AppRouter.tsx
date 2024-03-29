@@ -8,7 +8,6 @@ import SignIn from "../components/routes/SignIn";
 import Settings from "../components/routes/Settings";
 import ErrorPage from "../components/views/ErrorPage";
 import PATHS from "../router/paths";
-// import HomePage from "../components/routes/video-games/pages/HomePage";
 import GameDetailPage from "../components/routes/video-games/pages/GameDetailPage";
 import Layout from "../components/routes/video-games/pages/Layout";
 

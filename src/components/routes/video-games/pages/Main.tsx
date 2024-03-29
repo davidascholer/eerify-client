@@ -14,16 +14,7 @@ import SortSelector from "../components/SortSelector";
 
 const HomePage = () => {
   return (
-    <Grid
-    // templateAreas={{
-    //   base: `"main"`,
-    //   lg: `"aside main"`,
-    // }}
-    // templateColumns={{
-    //   base: "1fr",
-    //   lg: "250px 1fr",
-    // }}
-    >
+    <>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -38,19 +29,17 @@ const HomePage = () => {
           </Grid>
         </AccordionDetails>
       </Accordion>
-      <Grid item>
-        <Box paddingLeft={2}>
-          <GameHeading />
-          <Box sx={{ display: "flex" }} marginBottom={5}>
-            <Box marginRight={5}>
-              <PlatformSelector />
-            </Box>
-            <SortSelector />
+      <Box paddingLeft={2}>
+        <GameHeading />
+        <Box sx={{ display: "flex" }} marginBottom={5}>
+          <Box marginRight={5}>
+            <PlatformSelector />
           </Box>
+          <SortSelector />
         </Box>
-        <GameGrid />
-      </Grid>
-    </Grid>
+      </Box>
+      <GameGrid />
+    </>
   );
 };
 

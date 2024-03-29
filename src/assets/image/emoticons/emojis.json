@@ -1,0 +1,287 @@
+[
+    {
+        "title": "ghost",
+        "emoji": "👻",
+        "description": "Ghost"
+    },
+    {
+        "title": "zombie",
+        "emoji": "🧟",
+        "description": "Zombie"
+    },
+    {
+        "title": "pumpkin",
+        "emoji": "🎃",
+        "description": "Jack-o'-lantern"
+    },
+    {
+        "title": "vampire",
+        "emoji": "🧛",
+        "description": "Vampire"
+    },
+    {
+        "title": "bat",
+        "emoji": "🦇",
+        "description": "Bat"
+    },
+    {
+        "title": "spider",
+        "emoji": "🕷️",
+        "description": "Spider"
+    },
+    {
+        "title": "spiderweb",
+        "emoji": "🕸️",
+        "description": "Spider Web"
+    },
+    {
+        "title": "skull",
+        "emoji": "💀",
+        "description": "Skull"
+    },
+    {
+        "title": "knife",
+        "emoji": "🔪",
+        "description": "Knife"
+    },
+    {
+        "title": "blood",
+        "emoji": "🩸",
+        "description": "Blood"
+    },
+    {
+        "title": "haunted-house",
+        "emoji": "🏚️",
+        "description": "Haunted House"
+    },
+    {
+        "title": "full-moon",
+        "emoji": "🌕",
+        "description": "Full Moon"
+    },
+    {
+        "title": "gravestone",
+        "emoji": "🪦",
+        "description": "Gravestone"
+    },
+    {
+        "title": "coffin",
+        "emoji": "⚰️",
+        "description": "Coffin"
+    },
+    {
+        "title": "candle",
+        "emoji": "🕯️",
+        "description": "Candle"
+    },
+    {
+        "title": "clock",
+        "emoji": "🕰️",
+        "description": "Mantel Clock"
+    },
+    {
+        "title": "new-moon",
+        "emoji": "🌑",
+        "description": "New Moon"
+    },
+    {
+        "title": "waning-crescent-moon",
+        "emoji": "🌘",
+        "description": "Waning Crescent Moon"
+    },
+    {
+        "title": "last-quarter-moon",
+        "emoji": "🌗",
+        "description": "Last Quarter Moon"
+    },
+    {
+        "title": "waning-gibbous-moon",
+        "emoji": "🌖",
+        "description": "Waning Gibbous Moon"
+    },
+    {
+        "title": "full-moon",
+        "emoji": "🌕",
+        "description": "Full Moon"
+    },
+    {
+        "title": "waxing-gibbous-moon",
+        "emoji": "🌔",
+        "description": "Waxing Gibbous Moon"
+    },
+    {
+        "title": "first-quarter-moon",
+        "emoji": "🌓",
+        "description": "First Quarter Moon"
+    },
+    {
+        "title": "waxing-crescent-moon",
+        "emoji": "🌒",
+        "description": "Waxing Crescent Moon"
+    },
+    {
+        "title": "smiling-demon",
+        "emoji": "😈",
+        "description": "smiling demon"
+    },
+    {
+        "title": "grinning-demon",
+        "emoji": "👿",
+        "description": "grinning demon"
+    },
+    {
+        "title": "demon",
+        "emoji": "👹",
+        "description": "demon"
+    },
+    {
+        "title": "devil",
+        "emoji": "👺",
+        "description": "devil"
+    },
+    {
+        "title": "alien",
+        "emoji": "👾",
+        "description": "alien"
+    },
+    {
+        "title": "fire",
+        "emoji": "🔥",
+        "description": "fire"
+    },
+    {
+        "title": "lightning",
+        "emoji": "⚡️",
+        "description": "lightning"
+    },
+    {
+        "title": "storm",
+        "emoji": "⛈️",
+        "description": "storm"
+    },
+    {
+        "title": "garlic",
+        "emoji": "🧄",
+        "description": "garlic"
+    },
+    {
+        "title": "red-wine",
+        "emoji": "🍷",
+        "description": "red wine"
+    },
+    {
+        "title": "tv",
+        "emoji": "📺",
+        "description": "tv"
+    },
+    {
+        "title": "sword",
+        "emoji": "🗡️",
+        "description": "sword"
+    },
+    {
+        "title": "axe",
+        "emoji": "🪓",
+        "description": "axe"
+    },
+    {
+        "title": "knife",
+        "emoji": "🔪",
+        "description": "knife"
+    },
+    {
+        "title": "casket",
+        "emoji": "⚰️",
+        "description": "casket"
+    },
+    {
+        "title": "gravestone",
+        "emoji": "🪦",
+        "description": "gravestone"
+    },
+    {
+        "title": "urn",
+        "emoji": "⚱️",
+        "description": "urn"
+    },
+    {
+        "title": "crystal-ball",
+        "emoji": "🔮",
+        "description": "crystal ball"
+    },
+    {
+        "title": "x-ray",
+        "emoji": "🩻",
+        "description": "x-ray"
+    },
+    {
+        "title": "drop-of-blood",
+        "emoji": "🩸",
+        "description": "drop of blood"
+    },
+    {
+        "title": "virus",
+        "emoji": "🦠",
+        "description": "virus"
+    },
+    {
+        "title": "broom",
+        "emoji": "🧹",
+        "description": "broom"
+    },
+    {
+        "title": "teddy-bear",
+        "emoji": "🧸",
+        "description": "teddy bear"
+    },
+    {
+        "title": "balloon",
+        "emoji": "🎈",
+        "description": "balloon"
+    },
+    {
+        "title": "heart",
+        "emoji": "🖤",
+        "description": "heart"
+    },
+    {
+        "title": "elf",
+        "emoji": "🧝",
+        "description": "elf"
+    },
+    {
+        "title": "troll",
+        "emoji": "🧌",
+        "description": "troll"
+    },
+    {
+        "title": "vampire",
+        "emoji": "🧛🏻",
+        "description": "vampire"
+    },
+    {
+        "title": "zombie",
+        "emoji": "🧟",
+        "description": "zombie"
+    },
+    {
+        "title": "genie",
+        "emoji": "🧞",
+        "description": "genie"
+    },
+    {
+        "title": "merperson",
+        "emoji": "🧜",
+        "description": "merperson"
+    },
+    {
+        "title": "fairy",
+        "emoji": "🧚",
+        "description": "fairy"
+    },
+    {
+        "title": "mage",
+        "emoji": "🧙",
+        "description": "mage"
+    }
+]

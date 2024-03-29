@@ -5,8 +5,8 @@ import { RouterProvider } from "react-router-dom";
 import lightTheme, { darkTheme } from "./theme";
 import AppRouter from "./router/AppRouter";
 import { useAppSelector } from "./redux/hooks";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ReactQueryContainer from "./react-query/ReactQueryProvider";
 
 const Content = () => {
   const colorTheme = useAppSelector((state) => state.settings.colorTheme);
@@ -18,17 +18,15 @@ const Content = () => {
   );
 };
 
-const queryClient = new QueryClient();
-
 const App = () => {
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
+      <ReactQueryContainer>
         <Provider store={store}>
           <Content />
         </Provider>
         <ReactQueryDevtools />
-      </QueryClientProvider>
+      </ReactQueryContainer>
     </div>
   );
 };
