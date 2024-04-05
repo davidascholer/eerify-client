@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem } from "@mui/material";
 import { BsChevronDown } from "react-icons/bs";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import { setSortOrder } from "../../../../redux/slices/gamesSlice";
+import { useAppDispatch, useAppSelector } from "../../../../lib/redux/hooks";
+import { setSortOrder } from "../../../../lib/redux/slices/gamesSlice";
 import { useState } from "react";
 
 const SortSelector = () => {

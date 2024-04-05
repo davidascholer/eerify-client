@@ -1,8 +1,8 @@
 import { useState, useLayoutEffect, useEffect } from "react";
 import TopAppBar from "./TopAppBar";
 import AppDrawer from "./AppDrawer";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { setOrientation } from "../../redux/slices/settingsSlice";
+import { useAppSelector, useAppDispatch } from "../../lib/redux/hooks";
+import { setOrientation } from "../../lib/redux/slices/settingsSlice";
 
 export default function NavBar() {
   const [size, setSize] = useState({ width: 0, height: 0 });

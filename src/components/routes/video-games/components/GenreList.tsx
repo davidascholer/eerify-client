@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
-import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
-import { setGenreId } from "../../../../redux/slices/gamesSlice";
+import { useAppSelector, useAppDispatch } from "../../../../lib/redux/hooks";
+import { setGenreId } from "../../../../lib/redux/slices/gamesSlice";
 
 const GenreList = () => {
   const dispatch = useAppDispatch();

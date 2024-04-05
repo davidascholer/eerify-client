@@ -1,12 +1,12 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { store } from "./redux/store";
+import { store } from "../lib/redux/store";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import lightTheme, { darkTheme } from "./theme";
-import AppRouter from "./router/AppRouter";
-import { useAppSelector } from "./redux/hooks";
+import AppRouter from "../lib/react-router/AppRouter";
+import { useAppSelector } from "../lib/redux/hooks";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ReactQueryContainer from "./react-query/ReactQueryProvider";
+import ReactQueryContainer from "../lib/react-query/ReactQueryProvider";
 
 const Content = () => {
   const colorTheme = useAppSelector((state) => state.settings.colorTheme);

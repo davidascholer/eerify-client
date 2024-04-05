@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../lib/redux/hooks";
 
 const GameHeading = () => {
   const genreId = useAppSelector((state) => state.games.genreId);

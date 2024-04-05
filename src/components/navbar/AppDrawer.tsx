@@ -15,7 +15,7 @@ import Home from "@mui/icons-material/Home";
 import Book from "../../assets/icons/Book";
 import TopAppBar from "./TopAppBar";
 import { Typography } from "@mui/material";
-import PATHS from "../../router/paths";
+import PATHS from "../../lib/react-router/paths";
 
 interface AppDrawerProps {
   appDrawerOpen: boolean;
@@ -25,20 +25,23 @@ interface AppDrawerProps {
 
 const styles = {
   link: {
-    textDecoration: 'none',
-    width: '100%',
-    color: 'inherit',
-  }
-}
+    textDecoration: "none",
+    width: "100%",
+    color: "inherit",
+  },
+};
 
 const AppDrawer = ({
   appDrawerOpen,
   toggleAppDrawer,
   minimal = false,
 }: AppDrawerProps) => {
-
   const list = () => (
-    <Box sx={minimal ? { width: 60 } : { width: 250 }} role="presentation" onClick={() => toggleAppDrawer(false)}>
+    <Box
+      sx={minimal ? { width: 60 } : { width: 250 }}
+      role="presentation"
+      onClick={() => toggleAppDrawer(false)}
+    >
       <TopAppBar toggleAppDrawer={toggleAppDrawer} showName={!minimal} />
       <List>
         <ListItem disablePadding>
@@ -133,6 +136,6 @@ const AppDrawer = ({
       </Drawer>
     </>
   );
-}
+};
 
 export default AppDrawer;

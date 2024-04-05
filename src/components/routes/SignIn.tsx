@@ -4,8 +4,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
 import { Typography } from "@mui/material";
-import useCustomQuery from "../../react-query/hooks/useCustomQuery";
-import useCookie from "../../react-cookies/useCookie";
+import useCustomQuery from "../../lib/react-query/hooks/useCustomQuery";
+import useCookie from "../../lib/js-cookie/hooks/useCookie";
 
 const LoginFormContainer = styled(Box)({
   display: "flex",

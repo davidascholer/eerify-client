@@ -1,9 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient, { FetchResponse } from "../services/api-client";
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../lib/redux/hooks";
 import Game from "../entities/Game";
-import { GamesState } from "../../../../redux/types";
+import { GamesState } from "../../../../lib/redux/types";
 
 const apiClient = new APIClient<Game>("/games");
 
