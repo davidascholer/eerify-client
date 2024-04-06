@@ -4,7 +4,7 @@ import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
 import GamesMain from "../components/routes/video-games/pages/Main";
 import Books from "../components/routes/Books";
-import SignIn from "../components/routes/SignIn";
+import SignIn from "../components/routes/UserAuthPage";
 import Settings from "../components/routes/Settings";
 import ErrorPage from "../components/views/ErrorPage";
 import GameDetailPage from "../components/routes/video-games/pages/GameDetailPage";

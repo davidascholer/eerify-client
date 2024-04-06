@@ -1,17 +1,17 @@
-import React, {type PropsWithChildren} from 'react';
-import {Box, Typography} from '@mui/material'
+import React, { type PropsWithChildren } from "react";
+import { Box } from "@mui/material";
+import UserAuthPage from "./UserAuthPage";
 
 const styles = {
-    container:{
-    }
-}
+  container: {},
+};
 
 const Home: React.FC<PropsWithChildren> = () => {
-return (
-<Box style={styles.container}>
-    <Typography>Home</Typography>
-</Box>
-)
+  return (
+    <Box style={styles.container}>
+      <UserAuthPage />
+    </Box>
+  );
 };
 
 export default Home;

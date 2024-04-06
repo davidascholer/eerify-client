@@ -3,7 +3,7 @@ import { store } from "../lib/redux/store";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import lightTheme, { darkTheme } from "./theme";
-import AppRouter from "./appRouter";
+import AppRouter from "./AppRouter";
 import { useAppSelector } from "../lib/redux/hooks";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReactQueryContainer from "../lib/react-query/ReactQueryProvider";
