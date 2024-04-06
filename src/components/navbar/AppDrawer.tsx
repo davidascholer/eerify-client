@@ -15,7 +15,7 @@ import Home from "@mui/icons-material/Home";
 import Book from "../../assets/icons/Book";
 import TopAppBar from "./TopAppBar";
 import { Typography } from "@mui/material";
-import PATHS from "../../lib/react-router/paths";
+import { PATHS } from "../../app-root/appRouter";
 
 interface AppDrawerProps {
   appDrawerOpen: boolean;
