@@ -1,8 +1,19 @@
 # About
 - Handles all of the user login information including resetting forgotten passwords, verification, login, and account disabling. 
-- The app home page calls the `/users/me` endpont up to three times (React Query default) w the auth jwt stored in cookies to get the user object.
+
+---
+
+# Logging In
+- Nest the app or any appropriate components in the AuthHomeWrapper component to create the following logic:
+    1. The app home page calls the `/users/me` endpont up to three times (React Query default) w the auth jwt stored in cookies to get the user object.
+    2. If the auth fails, make a post call to the endpoint `/auth/jwt/refresh` with the refrsh token.
+        - If a new auth is returned, replace the auth token and retry step 1.
+        - If a 4xx error is returned (refresh token expired), continue as an unregistered user.
+
+---
 
 # Pages
+- For proper data structures, don't reference but rather move these to or wrap these with the apps current page structure. 
 
 ## UserAuthForm
 - The user auth form is formik wrapper around 3 sub components:
@@ -38,6 +49,16 @@
 2. Show's a prompt for a user to send to the endpoint `/users/activate` which will set a user's is_activated property to true.
 3. Upon success, the component notifies the user.
 
+---
+
+# Dependencies
+- mui/material
+- formik
+- yup
+- useQuery hook from on-prem react-query lib wrapper
+- useCookie hook from on-prem js-cookie lib wrapper
+
+---
 
 # Extra
 

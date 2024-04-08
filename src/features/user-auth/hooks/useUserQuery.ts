@@ -13,7 +13,11 @@ const userClient = (endpoint: string, authToken: string) => {
 };
 
 // Create a hook that makes the query to the API
-const useUserQuery = (endpoint: string, authToken: string) => {
+const useUserQuery = (
+  endpoint: string,
+  authToken: string,
+  initialLoad: boolean = true // default
+) => {
   const service = userClient(endpoint, authToken);
   // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
   return useQuery({
@@ -22,6 +26,7 @@ const useUserQuery = (endpoint: string, authToken: string) => {
       service.getAll({
         params: {},
       }),
+    enabled: initialLoad, // disable this query from automatically running
   });
 };
 

@@ -1,11 +1,13 @@
+/*
+A generic page for user authentication. Wrap, replace, or move this page with the apps authentication structure.
+*/
 import React from "react";
-import { UserAuthForm } from "../../features/user-auth/UserAuthForm";
+import { UserAuthForm } from "../components/user-auth-form/UserAuthForm";
 import { Box } from "@mui/material";
 
 const styles = () => ({
   container: {
     width: "100%",
-    backgroundColor: "green",
     display: "flex",
     justifyContent: "center",
   },

@@ -1,26 +1,24 @@
 import React, { type PropsWithChildren } from "react";
-import { Box, Typography } from "@mui/material";
-import UserAuthPage from "./UserAuthPage";
-import useCookie from "../../lib/js-cookie/hooks/useCookie";
-import useUserQuery from "../../features/user-auth/hooks/useUserQuery";
-import ENDPOINTS from "../../features/user-auth/util/endpoints";
+import { Box } from "@mui/material";
+import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 
 const styles = {
   container: {},
 };
 
 const Home: React.FC<PropsWithChildren> = () => {
-  const authCookie = useCookie("app-auth");
-  //   const refreshCookie = useCookie("app-refresh");
-  const { data: userData, isLoading: userLoading } = useUserQuery(
-    ENDPOINTS.me,
-    authCookie.value
-  );
-
+  // Returns the user data object, status string, error object, and refetch function.
+  const loginState = useAutoLogin();
   return (
     <Box style={styles.container}>
-      <UserAuthPage />
-      {!userLoading && <Typography>{JSON.stringify(userData)}</Typography>}
+      Status:
+      {loginState.status}
+      <br />
+      Data:
+      {JSON.stringify(loginState.data)}
+      <br />
+      Error:
+      {JSON.stringify(loginState.error)}
     </Box>
   );
 };
