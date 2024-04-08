@@ -1,14 +1,19 @@
 import React from "react";
-import { UserAuthForm } from "../user-auth/UserAuth";
+import { UserAuthForm } from "../../features/user-auth/UserAuthForm";
 import { Box } from "@mui/material";
 
-const UserAuthPage: React.FC = () => {
-  // const styles = (theme?) => ({
-  //   backgroundColor: "green",
-  // });
+const styles = () => ({
+  container: {
+    width: "100%",
+    backgroundColor: "green",
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
+const UserAuthPage: React.FC = () => {
   return (
-    <Box sx={{ backgroundColor: "green" }}>
+    <Box sx={styles().container}>
       <UserAuthForm />
     </Box>
   );

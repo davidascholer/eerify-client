@@ -6,48 +6,52 @@ const log = (message: string, data: unknown) => {
   if (isDev()) console.debug(message, data);
 };
 
-const axiosInstance = axios.create({
-  baseURL: API_BASE_LINK,
-  headers: {
-    Authorization:
-      "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExNjY1Mzk0LCJpYXQiOjE3MTE1Nzg5OTQsImp0aSI6ImVkYjg0NmY2MmY2ODQ5MjI5YWUwOGFiMDMwZjExNmQ0IiwidXNlcl9pZCI6MX0.VFdTh-a-wvXuYgkxZRei91whmd_sW2WoWXGNsJ_zfCQ",
-  },
-});
+const axiosInstance = (authToken: string) =>
+  axios.create({
+    baseURL: API_BASE_LINK,
+    headers: {
+      Authorization: authToken,
+    },
+  });
 
 class APIClient<T> {
   endpoint: string;
+  authToken: string;
 
-  constructor(endpoint: string) {
+  constructor(endpoint: string, authToken?: string) {
     this.endpoint = endpoint;
+    this.authToken = authToken ? authToken : "";
   }
 
   getAll = async (config: AxiosRequestConfig) => {
     try {
-      return axiosInstance.get<T[]>(this.endpoint, config).then((res) => {
-        log("Fetched get data", res.data);
-        return res.data;
-      });
-      // const result = await axiosInstance.get<T[]>(this.endpoint, config);
-      // log("Fetched getAll result", JSON.stringify(result));
-      // return result.data;
+      return axiosInstance(this.authToken)
+        .get<T[]>(this.endpoint, config)
+        .then((res) => {
+          log("Fetched get data", res.data);
+          return res.data;
+        });
     } catch (e) {
       console.debug("error", e);
-      // return JSON.stringify(e);
     }
   };
 
   get = (id: number | string) => {
-    return axiosInstance.get<T>(this.endpoint + "/" + id).then((res) => {
-      log("Fetched get data", res.data);
-      return res.data;
-    });
+    return axiosInstance(this.authToken)
+      .get<T>(this.endpoint + "/" + id)
+      .then((res) => {
+        log("Fetched get data", res.data);
+        return res.data;
+      });
   };
 
   post = (data: T) => {
-    return axiosInstance.post<T>(this.endpoint, data).then((res) => {
-      log("Fetched post data", res.data);
-      return res.data;
-    });
+    return axiosInstance(this.authToken)
+      .post<T>(this.endpoint, data)
+      .then((res) => {
+        log("Fetched post data", res.data);
+        return res.data;
+      });
   };
 }
 

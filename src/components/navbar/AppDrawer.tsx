@@ -98,7 +98,7 @@ const AppDrawer = ({
 
       <List>
         <ListItem disablePadding>
-          <Link style={styles.link} to={PATHS.SIGN_IN}>
+          <Link style={styles.link} to={PATHS.USER_AUTH}>
             <ListItemButton>
               <ListItemIcon>
                 <AccountCircleIcon />

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { UserAuthForm } from "./UserAuth";
+import { UserAuthForm } from "./UserAuthForm";
 
 const meta = {
   title: "Components/UserAuth",
