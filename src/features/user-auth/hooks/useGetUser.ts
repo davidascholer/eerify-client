@@ -23,17 +23,17 @@ const userClient = (authToken: string) => {
 // Create a hook that makes the query to the API
 const useUserQuery = () => {
   const authCookie = useCookie(TOKEN_NAMES.auth);
-  const client = userClient(authCookie.value);
 
   const getUser = async () => {
+    const currentToken = await authCookie.get();
+    const client = userClient(currentToken);
     try {
+      devDebug("useGetUser GETUSER CALLED w :", currentToken);
       const result = await client.get();
-      devDebug("useGetUser getUser status:", result.status);
+      const status = result.status ? result.status : result.response.status;
+      devDebug("useGetUser getUser status", status);
       devDebug("useGetUser getUser data:", result.data);
-      if (result.status === 200) {
-        return result;
-      }
-      return { verified: false };
+      return result;
     } catch (e) {
       console.error("useGetUser error:", e);
       return e;

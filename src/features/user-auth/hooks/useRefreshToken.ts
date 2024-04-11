@@ -19,19 +19,20 @@ const useRefreshToken = () => {
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);
 
   const resetAuthToken = async () => {
+    const refreshToken = await refreshCookie.get();
     try {
-      const response = await client.post({ refresh: refreshCookie.value });
+      const response = await client.post({ refresh: refreshToken });
       devDebug("useRefreshToken response status:", response.status);
       const { access } = response.data as {
         access: string;
       };
       if (response.status === 200) {
         devDebug("useRefreshToken replaced auth token:", access);
-        authCookie.set(access);
+        const newCookie = await authCookie.set(access);
+        return { ...response, newCookie };
       } else {
         return new Error("Invalid login credentials");
       }
-      return response;
     } catch (e) {
       devDebug("useRefreshToken error:", e);
       return e;

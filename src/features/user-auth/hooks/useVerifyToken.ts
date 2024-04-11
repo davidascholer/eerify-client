@@ -4,6 +4,7 @@ import USER_ENDPOINTS from "../util/endpoints";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
 import { devDebug } from "../util/helpers";
 import useReactQuery from "../../../lib/react-query/useReactQuery";
+import { useEffect } from "react";
 
 // Create an  instance of the API client custom to login
 const verifyClient = () => {
@@ -18,10 +19,14 @@ const useVerifyToken = (runOnMount: boolean) => {
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);
 
   const verifyAuth = async () => {
+    const authToken = await authCookie.get();
     try {
       const result = await client.post({
-        token: authCookie.value,
+        token: authToken,
       });
+
+      if (result === undefined) return;
+
       devDebug(
         "useVerifyToken auth token verification result status:",
         result.status
@@ -35,9 +40,11 @@ const useVerifyToken = (runOnMount: boolean) => {
           },
         };
       }
+
+      // Not 200 status
       devDebug(
-        "useVerifyToken",
-        "auth token verification failed. Attempting refresh token verification."
+        "useVerifyToken auth token verification failed.",
+        "Attempting refresh token verification. auth result:" + result
       );
       return verifyRefresh();
     } catch (e) {
@@ -46,9 +53,10 @@ const useVerifyToken = (runOnMount: boolean) => {
   };
 
   const verifyRefresh = async () => {
+    const refreshToken = await refreshCookie.get();
     try {
       const result = await client.post({
-        token: refreshCookie.value,
+        token: refreshToken,
       });
       devDebug(
         "useVerifyToken refresh token verification result status:",
@@ -63,6 +71,7 @@ const useVerifyToken = (runOnMount: boolean) => {
           },
         };
       }
+      // Not 200 status
       return {
         ...result,
         data: {

@@ -8,6 +8,8 @@ const styles = {
 };
 
 const Home: React.FC<PropsWithChildren> = () => {
+  const userLoggedIn: boolean = false;
+
   // Returns the user data object, status string, error object, and refetch function.
   const loginState = useAutoLogin();
   const logout = useLogout();
