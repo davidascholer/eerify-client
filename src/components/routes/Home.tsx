@@ -1,6 +1,7 @@
 import React, { type PropsWithChildren } from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
+import useLogout from "../../features/user-auth/hooks/useLogout";
 
 const styles = {
   container: {},
@@ -9,6 +10,7 @@ const styles = {
 const Home: React.FC<PropsWithChildren> = () => {
   // Returns the user data object, status string, error object, and refetch function.
   const loginState = useAutoLogin();
+  const logout = useLogout();
   return (
     <Box style={styles.container}>
       Status:
@@ -19,6 +21,8 @@ const Home: React.FC<PropsWithChildren> = () => {
       <br />
       Error:
       {JSON.stringify(loginState.error)}
+      <br></br>
+      <Button onClick={logout}>Logout</Button>
     </Box>
   );
 };

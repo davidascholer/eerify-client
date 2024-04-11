@@ -1,8 +1,4 @@
-import process from "process";
-
-const development: boolean =
-  !process.env.NODE_ENV || process.env.NODE_ENV === "development";
-
-export function isDev(): boolean {
-  return development;
-}
+export const devDebug = (message: string, data: unknown) => {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development")
+    console.debug("REACT-QUERY", message, JSON.stringify(data));
+};

@@ -1,15 +1,4 @@
-import * as yup from "yup";
-
-export const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
-});
+import { validationSchema } from "./helpers";
 
 export type FormikObjectValuesProps = {
   email: string;
@@ -19,10 +8,17 @@ export type FormikObjectValuesProps = {
 export type FormikObjectProps = {
   initialValues: FormikObjectValuesProps;
   validationSchema: typeof validationSchema;
-  onSubmit: (values: any) => void;
+  onSubmit: (values?: any) => void;
+};
+
+export type VerifyTokenType = {
+  verified?: boolean;
+  type?: "auth" | "refresh" | unknown;
 };
 
 export const TOKEN_NAMES = {
   auth: "app-auth",
   refresh: "app-refresh",
 };
+
+export const SIMPLE_JWT_TOKEN_PREFIX = "JWT ";

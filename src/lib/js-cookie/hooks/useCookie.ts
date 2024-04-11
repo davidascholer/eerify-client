@@ -8,27 +8,30 @@ example use:
   // Get value
   authCookie.value;
   // Set value
-  authCookie.set("auth-token");
+  authCookie.set(auth-token);
   // Refresh value in hook (useful for when cookie is updated outside of hook)
   authCookie.refresh();
 */
 import Cookies from "js-cookie";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-const useCookies = (name: string) => {
-  const cookieName = useRef(name);
+const useCookie = (name: string) => {
   const [cookieValue, setCookieValue] = useState<string>(
     Cookies.get(name) || ""
   );
 
   useEffect(() => {
-    Cookies.set(cookieName.current, cookieValue);
-  }, [cookieValue]);
+    Cookies.set(name, cookieValue);
+  }, [cookieValue, name]);
 
   return {
     value: cookieValue,
     set: (value: string) => {
       setCookieValue(value);
+    },
+    remove: () => {
+      setCookieValue("");
+      Cookies.remove(name);
     },
     refresh: () => {
       const newCookieValue = Cookies.get(name) || "";
@@ -37,4 +40,4 @@ const useCookies = (name: string) => {
   };
 };
 
-export default useCookies;
+export default useCookie;

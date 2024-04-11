@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
-import useLoginQuery from "../../hooks/useLoginQuery";
-import ENDPOINTS from "../../util/endpoints";
-import useCookie from "../../../../lib/js-cookie/hooks/useCookie";
+import useLogin from "../../hooks/useLogin";
 import EmailField from "../common/EmailField";
 import PasswordField from "../common/PasswordField";
 import SubmitButton from "../common/SubmitButton";
-import {
-  FormikObjectProps,
-  FormikObjectValuesProps,
-  TOKEN_NAMES,
-  validationSchema,
-} from "../../util/constants";
-import { Form, Formik, useFormik } from "formik";
+import { validationSchema } from "../../util/helpers";
+import { FormikObjectValuesProps } from "../../util/constants";
+import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 // Styles for the form fields
 const styles = {
@@ -41,11 +36,15 @@ const ErrorBox = ({ msg }: { msg: string }) => {
   return (
     <>
       <Box
-        sx={{
-          color: "red",
-          width: "100%",
-          display: typeof msg === "object" ? "block" : "none",
-        }}
+        sx={[
+          styles.field,
+          {
+            color: "red",
+            width: "100%",
+            fontSize: "80%",
+            // display: typeof msg === "object" ? "block" : "none",
+          },
+        ]}
       >
         {msg}
       </Box>
@@ -55,42 +54,61 @@ const ErrorBox = ({ msg }: { msg: string }) => {
 
 // User authentication form
 export const UserAuthForm = () => {
+  const navigate = useNavigate();
   const [postData, setPostData] = useState<FormikObjectValuesProps>({
-    email: "1",
-    password: "3",
+    email: "",
+    password: "",
   });
-  const authCookie = useCookie(TOKEN_NAMES.auth);
-  const refreshCookie = useCookie(TOKEN_NAMES.refresh);
+  const [runLoginQuery, setRunLoginQuery] = useState<boolean>(false);
   const {
-    refetch: loginRefetch,
+    // refetch: loginRefetch,
     data: loginData,
     status: loginStatus,
     error: loginError,
-  } = useLoginQuery(ENDPOINTS.create, postData);
+  }: { data: any; status: any; error: any } = useLogin(postData, runLoginQuery);
 
   const handleSubmit = (values: FormikObjectValuesProps) => {
-    setPostData(values);
-    loginRefetch();
+    const { email, password } = values;
+    if (!!email && !!password) {
+      setPostData({ email, password });
+    } else {
+      setRunLoginQuery(false);
+      setPostData({ email: "", password: "" });
+    }
+    setRunLoginQuery(true);
   };
 
+  // const handleCreateUser = (values: FormikObjectValuesProps) => {
+  //   const { email, password } = values;
+  //   setEmail(email);
+  //   setPassword(password);
+  //   if (password === verifyPassword) loginRefetch();
+  // };
+
   useEffect(() => {
-    if (loginData) {
-      const { access, refresh } = loginData as {
-        access: string;
-        refresh: string;
-      };
-      if (access && refresh) {
-        authCookie.set("JWT " + access);
-        refreshCookie.set("JWT " + refresh);
-      }
+    switch (loginStatus) {
+      case "loading":
+        break;
+      case "error":
+        setRunLoginQuery(false);
+        break;
+      case "success":
+        setRunLoginQuery(false);
+        // Redirect to the root page
+        navigate("/");
+        break;
+      default:
+        break;
     }
     // Disable eslint because we don't want to run this effect every time the cookies change are we are changing the cookies in the function.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loginData]);
-
-  useEffect(() => {
-    console.debug("Login Status:", loginStatus);
   }, [loginStatus]);
+
+  // useEffect(() => {
+  //   const data = loginData as FormikObjectValuesProps;
+  //   if (typeof data?.email === "string" && typeof data?.password === "string")
+  //     loginRefetch();
+  // }, [loginData, loginRefetch]);
 
   return (
     <Formik
@@ -103,7 +121,13 @@ export const UserAuthForm = () => {
           <EmailField styles={styles.field} />
           <PasswordField styles={styles.field} />
           <SubmitButton styles={styles.field} />
-          <ErrorBox msg={JSON.stringify(loginError)} />
+          <ErrorBox
+            msg={
+              loginError?.response?.data?.detail
+                ? loginError.response.data.detail
+                : ""
+            }
+          />
         </Form>
       </FormBox>
     </Formik>

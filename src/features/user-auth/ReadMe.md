@@ -55,7 +55,7 @@
 - mui/material
 - formik
 - yup
-- useQuery hook from on-prem react-query lib wrapper
+- useReactQuery hook from on-prem react-query lib wrapper
 - useCookie hook from on-prem js-cookie lib wrapper
 
 ---
@@ -65,3 +65,36 @@
 ## Backend
 - This app's backend uses Djano with Django-Rest-Framework and Djoser dependencies for user auth. 
 - If using the *appgen* tool, you will need to install both the core app and the userprofile app.
+
+---
+
+# User Auth Model
+
+## Login
+- Set the auth token and refresh token to cookies upon valid username and password
+
+## Logout
+- Deletes respective cookies from browser and reloads
+
+## Verification
+1)  verify auth token
+2)  a. Auth token is verified, go to [get user](#get-user)
+    b. Auth token is not verified, continue.
+3)  verify refresh token
+4)  a. Refresh token is verified, [refresh auth token](#refresh)
+    b. Refresh token is not verified, do nothing. User stays logged out.
+
+## Refresh {#refresh}
+- Refreshes an auth token with a valid refresh token and saves it to cookies.
+- Get User with fresh auth token [get user](#get-user)
+
+## Get User {#get-user}
+- Fetch user account info
+
+## Create Account
+- Sends a valid email and passwords to the server, creating a user object.
+
+## Reset/Forgot Password
+- Sends a valid email a link to recover password.
+
+---

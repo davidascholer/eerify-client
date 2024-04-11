@@ -1,10 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { API_BASE_LINK } from "../utility/constants";
-import { isDev } from "../utility/helpers";
-
-const log = (message: string, data: unknown) => {
-  if (isDev()) console.debug(message, data);
-};
+import { devDebug } from "../utility/helpers";
 
 const axiosInstance = (authToken: string) =>
   axios.create({
@@ -23,35 +19,34 @@ class APIClient<T> {
     this.authToken = authToken ? authToken : "";
   }
 
-  getAll = async (config: AxiosRequestConfig) => {
-    try {
-      return axiosInstance(this.authToken)
-        .get<T[]>(this.endpoint, config)
-        .then((res) => {
-          log("Fetched get data", res.data);
-          return res.data;
-        });
-    } catch (e) {
-      console.debug("error", e);
-    }
+  get = async (config: AxiosRequestConfig = {}) => {
+    return axiosInstance(this.authToken)
+      .get<T[]>(this.endpoint, config)
+      .then((res) => {
+        devDebug("api-client get response", res);
+        return res;
+      })
+      .catch((e) => e);
   };
 
-  get = (id: number | string) => {
+  getOne = (id: number | string) => {
     return axiosInstance(this.authToken)
       .get<T>(this.endpoint + "/" + id)
       .then((res) => {
-        log("Fetched get data", res.data);
-        return res.data;
-      });
+        devDebug("api-client get response", res);
+        return res;
+      })
+      .catch((e) => e);
   };
 
   post = (data: T) => {
     return axiosInstance(this.authToken)
       .post<T>(this.endpoint, data)
       .then((res) => {
-        log("Fetched post data", res.data);
-        return res.data;
-      });
+        devDebug("api-client post response", res);
+        return res;
+      })
+      .catch((e) => e);
   };
 }
 
