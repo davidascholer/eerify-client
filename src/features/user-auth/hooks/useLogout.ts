@@ -11,6 +11,7 @@ const useLogout = () => {
   return () => {
     authCookie.remove();
     refreshCookie.remove();
+    window.location.reload();
   };
 };
 
