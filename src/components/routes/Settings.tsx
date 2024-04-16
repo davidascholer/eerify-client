@@ -6,8 +6,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import { FormControlLabel } from "@mui/material";
-import { useAppSelector, useAppDispatch } from "../../lib/redux/hooks";
-import { setColorTheme } from "../../lib/redux/slices/settingsSlice";
+import { useAppSelector, useAppDispatch } from "../../lib/redux-toolkit/hooks";
+import { setColorTheme } from "../../redux/slices/settingsSlice";
 
 // interface AppDrawerProps {}
 

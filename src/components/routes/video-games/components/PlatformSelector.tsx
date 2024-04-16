@@ -4,8 +4,11 @@ import MenuItem from "@mui/material/MenuItem";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatform from "../hooks/usePlatform";
 import usePlatforms from "../hooks/usePlatforms";
-import { useAppDispatch, useAppSelector } from "../../../../lib/redux/hooks";
-import { setPlatformId } from "../../../../lib/redux/slices/gamesSlice";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../lib/redux-toolkit/hooks";
+import { setPlatformId } from "../../../../redux/slices/gamesSlice";
 import { useState } from "react";
 
 const PlatformSelector = () => {

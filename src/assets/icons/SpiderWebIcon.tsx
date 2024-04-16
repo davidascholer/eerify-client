@@ -1,19 +1,14 @@
 import SvgIcon from "@mui/material/SvgIcon";
-import { colorPalette } from "../../theme/theme";
+import { useTheme } from "@mui/material";
 
-const SpiderWebIcon = ({
-  sx,
-  fill = colorPalette.blue,
-}: {
-  sx?: object;
-  fill?: string;
-}) => {
+const SpiderWebIcon = ({ sx }: { sx?: object }) => {
   const styles = sx ? sx : {};
+  const theme = useTheme();
   return (
     <SvgIcon sx={[styles]}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill={fill}
+        fill={theme.colors.iconColor}
         viewBox="0 0 408.67 408.5"
         strokeWidth={1}
         stroke="none"

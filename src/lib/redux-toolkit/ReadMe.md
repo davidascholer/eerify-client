@@ -1,0 +1,1 @@
+Abstraction for React Toolkit is limited using typescript as type annotations are imported from redux and toolkit all over the place. However, most toolkit app logic is limited to the redux app folder.

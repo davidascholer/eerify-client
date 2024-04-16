@@ -10,6 +10,8 @@ import ErrorPage from "../components/routes/ErrorPage";
 import GameDetailPage from "../components/routes/video-games/pages/GameDetailPage";
 import Layout from "../components/routes/video-games/pages/Layout";
 import ReactRouterWrapper from "../lib/react-router/ReactRouterWrapper";
+import Notifications from "../components/routes/Notifications";
+import Favorites from "../components/routes/Favorites";
 
 export const PATHS = {
   ROOT: "/",
@@ -19,6 +21,8 @@ export const PATHS = {
   BOOKS: "/books",
   USER_AUTH: "/user-auth",
   SETTINGS: "/settings",
+  NOTIFICATIONS: "/notifications",
+  FAVORITES: "/favorites",
 };
 
 const routes = [
@@ -55,6 +59,14 @@ const routes = [
       {
         path: PATHS.SETTINGS,
         element: <Settings />,
+      },
+      {
+        path: PATHS.NOTIFICATIONS,
+        element: <Notifications />,
+      },
+      {
+        path: PATHS.FAVORITES,
+        element: <Favorites />,
       },
     ],
   },

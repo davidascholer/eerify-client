@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
+import type { RootState } from "../../lib/redux-toolkit/store";
 import { GamesState } from "../types";
 
 const initialState = {

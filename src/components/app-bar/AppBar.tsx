@@ -9,10 +9,12 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./Options";
-import ThemedIcon from "../../theme/ThemedIcon";
+import { MainListItems, SecondaryListItems } from "./Options";
 import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
 import EerifyHoriz from "../../assets/icons/EerifyHoriz";
+import { PATHS } from "../../app-root/AppRouter";
+import { Typography } from "@mui/material";
+import { useHandleNavigate } from "../../lib/react-router/hooks";
 
 const drawerWidth: number = 240;
 const drawerHeight: number = 65;
@@ -24,13 +26,13 @@ const Drawer = styled(MuiDrawer, {
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
-    marginTop: drawerHeight,
-    backgroundColor: theme.palette.primary,
+    paddingTop: drawerHeight,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-
     boxSizing: "border-box",
     ...(!open && {
       overflowX: "hidden",
@@ -51,6 +53,7 @@ const CustomToolbar = ({
 }: {
   toggleDrawer: React.Dispatch<React.SetStateAction<void>>;
 }) => {
+  const handleNavigate = useHandleNavigate();
   return (
     <Toolbar
       disableGutters
@@ -84,14 +87,25 @@ const CustomToolbar = ({
         >
           <SpiderWebIcon sx={{ width: drawerHeight, height: drawerHeight }} />
         </IconButton>
-        <EerifyHoriz
+        <IconButton
+          color="inherit"
+          aria-label="home"
           sx={{
-            height: drawerHeight,
-            width: "inherit",
-            p: 1,
-            ml: 2,
+            borderRadius: 4,
+            m: 0,
+            p: 0,
           }}
-        />
+          onClick={() => handleNavigate(PATHS.HOME)}
+        >
+          <EerifyHoriz
+            sx={{
+              height: drawerHeight,
+              width: "inherit",
+              p: 1,
+              ml: 2,
+            }}
+          />
+        </IconButton>
       </Box>
       <Box
         sx={{
@@ -101,9 +115,17 @@ const CustomToolbar = ({
           mr: 2,
         }}
       >
-        <IconButton color="inherit">
-          <Badge badgeContent={4}>
-            <ThemedIcon Icon={NotificationsIcon} />
+        <IconButton
+          color="inherit"
+          onClick={() => handleNavigate(PATHS.NOTIFICATIONS)}
+        >
+          <Badge badgeContent={1}>
+            <NotificationsIcon
+              sx={{
+                color: (theme) => theme.colors.iconColor,
+                transform: " scale(1.4)",
+              }}
+            />
           </Badge>
         </IconButton>
       </Box>
@@ -127,13 +149,25 @@ export default function Dashboard() {
       >
         <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
       </MuiAppBar>
-      <Drawer variant="permanent" open={open} sx={{ backgroundColor: "#000" }}>
+      <Drawer variant="permanent" open={open}>
         {/* Drawer items */}
         <List component="nav">
-          {mainListItems}
+          <MainListItems />
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          <SecondaryListItems />
         </List>
+        <Typography
+          sx={{
+            display: "flex",
+            fontFamily: "typeface Roboto",
+            justifyContent: "center",
+            alignItems: "center",
+            m: 2,
+            mt: "auto",
+          }}
+        >
+          v 0.0.1
+        </Typography>
       </Drawer>
       {/* Main content */}
       <Box
