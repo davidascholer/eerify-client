@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import NavBar from "../navbar/NavBar";
+import AppBar from "../app-bar/AppBar";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 
 export default function Root() {
@@ -12,7 +12,7 @@ export default function Root() {
 
   return (
     <>
-      <NavBar />
+      <AppBar />
       <Outlet />
     </>
   );
