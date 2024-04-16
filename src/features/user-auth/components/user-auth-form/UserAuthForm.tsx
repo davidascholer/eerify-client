@@ -62,7 +62,7 @@ export const UserAuthForm = () => {
   const [runLoginQuery, setRunLoginQuery] = useState<boolean>(false);
   const {
     // refetch: loginRefetch,
-    data: loginData,
+    // data: loginData,
     status: loginStatus,
     error: loginError,
   }: { data: any; status: any; error: any } = useLogin(postData, runLoginQuery);

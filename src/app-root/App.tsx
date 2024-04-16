@@ -2,9 +2,9 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { store } from "../lib/redux/store";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import { lightTheme, darkTheme } from "../theme/theme";
+import { darkTheme } from "../theme/theme";
 import AppRouter from "./AppRouter";
-import { useAppSelector } from "../lib/redux/hooks";
+// import { useAppSelector } from "../lib/redux/hooks";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReactQueryContainer from "../lib/react-query/ReactQueryProvider";
 

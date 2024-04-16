@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface Props {
   children: string;

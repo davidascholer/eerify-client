@@ -4,7 +4,6 @@ import USER_ENDPOINTS from "../util/endpoints";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
 import { devDebug } from "../util/helpers";
 import useReactQuery from "../../../lib/react-query/useReactQuery";
-import { useEffect } from "react";
 
 // Create an  instance of the API client custom to login
 const verifyClient = () => {
