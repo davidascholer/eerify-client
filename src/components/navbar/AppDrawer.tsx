@@ -19,7 +19,7 @@ import { PATHS } from "../../app-root/AppRouter";
 
 interface AppDrawerProps {
   appDrawerOpen: boolean;
-  toggleAppDrawer: { (dir: boolean | null): void };
+  toggleAppDrawer: any;
   minimal?: boolean;
 }
 

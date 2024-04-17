@@ -8,7 +8,7 @@ export type FormikObjectValuesProps = {
 export type FormikObjectProps = {
   initialValues: FormikObjectValuesProps;
   validationSchema: typeof validationSchema;
-  onSubmit: (values?: any) => void;
+  onSubmit: any;
 };
 
 export type VerifyTokenType = {
