@@ -26,9 +26,7 @@ const FormBox = styled(Box)({
   padding: "20px",
   border: "1px solid black",
   borderRadius: "5px",
-  marginTop: "20px",
   width: "100%",
-  maxWidth: "600px",
 });
 
 // Create a component that displays an error message
@@ -52,8 +50,12 @@ const ErrorBox = ({ msg }: { msg: string }) => {
   );
 };
 
+type UserAuthFormProps = {
+  sx?: object;
+};
+
 // User authentication form
-export const UserAuthForm = () => {
+export const UserAuthForm: React.FC<UserAuthFormProps> = ({ sx }) => {
   const navigate = useNavigate();
   const [postData, setPostData] = useState<FormikObjectValuesProps>({
     email: "",
@@ -111,25 +113,27 @@ export const UserAuthForm = () => {
   // }, [loginData, loginRefetch]);
 
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <FormBox>
-        <Form>
-          <EmailField styles={styles.field} />
-          <PasswordField styles={styles.field} />
-          <SubmitButton styles={styles.field} />
-          <ErrorBox
-            msg={
-              loginError?.response?.data?.detail
-                ? loginError.response.data.detail
-                : ""
-            }
-          />
-        </Form>
-      </FormBox>
-    </Formik>
+    <Box sx={sx}>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <FormBox>
+          <Form>
+            <EmailField styles={styles.field} />
+            <PasswordField styles={styles.field} />
+            <SubmitButton styles={styles.field} />
+            <ErrorBox
+              msg={
+                loginError?.response?.data?.detail
+                  ? loginError.response.data.detail
+                  : ""
+              }
+            />
+          </Form>
+        </FormBox>
+      </Formik>
+    </Box>
   );
 };

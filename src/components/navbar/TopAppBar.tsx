@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 interface TopAppBarProps {
+  // eslint-disable-next-line no-unused-vars
   toggleAppDrawer: { (dir: boolean | null): void };
   showName?: boolean;
 }

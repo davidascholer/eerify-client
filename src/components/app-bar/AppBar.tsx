@@ -16,8 +16,8 @@ import { PATHS } from "../../app-root/AppRouter";
 import { Typography } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 
-const drawerWidth: number = 240;
-const drawerHeight: number = 65;
+const drawerWidth: string = "240px";
+const toolbarHeight: string = "65px";
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -26,7 +26,7 @@ const Drawer = styled(MuiDrawer, {
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
-    paddingTop: drawerHeight,
+    paddingTop: toolbarHeight,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("width", {
@@ -58,7 +58,7 @@ const CustomToolbar = ({
     <Toolbar
       disableGutters
       sx={{
-        height: drawerHeight,
+        height: toolbarHeight,
         overflow: "hidden",
         display: "flex",
         justifyContent: "space-between",
@@ -85,7 +85,7 @@ const CustomToolbar = ({
           }}
           onClick={() => toggleDrawer()}
         >
-          <SpiderWebIcon sx={{ width: drawerHeight, height: drawerHeight }} />
+          <SpiderWebIcon sx={{ width: toolbarHeight, height: toolbarHeight }} />
         </IconButton>
         <IconButton
           color="inherit"
@@ -99,7 +99,7 @@ const CustomToolbar = ({
         >
           <EerifyHoriz
             sx={{
-              height: drawerHeight,
+              height: toolbarHeight,
               width: "inherit",
               p: 1,
               ml: 2,
@@ -133,14 +133,14 @@ const CustomToolbar = ({
   );
 };
 
-export default function Dashboard() {
+const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <MuiAppBar
         elevation={0}
         sx={{
@@ -170,18 +170,11 @@ export default function Dashboard() {
         </Typography>
       </Drawer>
       {/* Main content */}
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      ></Box>
+      <Box sx={{ mt: toolbarHeight, display: "flex", width: "100%" }}>
+        {children}
+      </Box>
     </Box>
   );
-}
+};
+
+export default AppBar;

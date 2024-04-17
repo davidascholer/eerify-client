@@ -13,8 +13,9 @@ export default function Root() {
 
   return (
     <>
-      <AppBar />
-      <Outlet />
+      <AppBar>
+        <Outlet />
+      </AppBar>
     </>
   );
 }

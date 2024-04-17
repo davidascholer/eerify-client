@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 // icons
 import TheatersIcon from "@mui/icons-material/Theaters";
 import BookIcon from "../../assets/icons/Book";
-import JasonMaskIcon from "../../assets/icons/JasonMask";
+import GhostIcon from "../../assets/icons/Ghost";
 import PentagramIcon from "../../assets/icons/Pentagram";
 import SettingsIcon from "@mui/icons-material/Settings";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
@@ -73,7 +73,7 @@ export const SecondaryListItems = ({
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
       >
         <ListItemIcon>
-          <JasonMaskIcon color={styles.color} />
+          <GhostIcon color={styles.color} />
         </ListItemIcon>
         <ListItemText primary={loggedIn ? "Log Out" : "Log In"} />
       </ListItemButton>
