@@ -23,3 +23,7 @@ export type GamesState = {
   platformId?: number;
   sortOrder?: string;
 };
+
+export type UserState = {
+  email: string | null;
+};

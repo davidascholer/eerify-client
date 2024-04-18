@@ -21,7 +21,7 @@ const userClient = (authToken: string) => {
 };
 
 // Create a hook that makes the query to the API
-const useUserQuery = () => {
+const useGetUserQuery = () => {
   const authCookie = useCookie(TOKEN_NAMES.auth);
 
   const getUser = async () => {
@@ -48,4 +48,4 @@ const useUserQuery = () => {
   });
 };
 
-export default useUserQuery;
+export default useGetUserQuery;

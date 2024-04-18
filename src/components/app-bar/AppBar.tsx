@@ -15,6 +15,8 @@ import EerifyHoriz from "../../assets/icons/EerifyHoriz";
 import { PATHS } from "../../app-root/AppRouter";
 import { Typography } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
+import useIsLoggedIn from "../../features/user-auth/hooks/useIsLoggedIn";
+import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 
 const drawerWidth: string = "240px";
 const toolbarHeight: string = "65px";
@@ -141,6 +143,9 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  // Returns the user data object, status string, error object, and refetch function.
+  useAutoLogin();
+  const isLoggedIn = useIsLoggedIn();
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -157,7 +162,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         <List component="nav">
           <MainListItems />
           <Divider sx={{ my: 1 }} />
-          <SecondaryListItems />
+          <SecondaryListItems loggedIn={isLoggedIn} />
         </List>
         <Typography
           sx={{

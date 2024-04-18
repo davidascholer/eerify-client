@@ -1,5 +1,5 @@
 {
-  "name": "divine-dread",
+  "name": "eerify",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -25,6 +25,7 @@
     "formik": "^2.4.5",
     "framer-motion": "^10.0.1",
     "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "ms": "^2.1.3",

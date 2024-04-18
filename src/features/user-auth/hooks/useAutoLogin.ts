@@ -5,6 +5,10 @@ import useRefreshToken from "./useRefreshToken";
 import { VerifyTokenType } from "../util/constants";
 import { devDebug } from "../util/helpers";
 import { UseQueryResult } from "@tanstack/react-query";
+import { userSetEmail } from "../../../redux/slices/userSlice";
+import { UserState } from "../../../redux/types";
+import { useAppDispatch } from "../../../lib/redux-toolkit/hooks";
+import { isLoggedIn } from "../../../redux/helper";
 
 /*
   This hook is used to automatically login the user when called from a component.
@@ -35,6 +39,7 @@ const useAutoLogin = () => {
     error: getUserError,
     refetch: refetchGetUser,
   } = useGetUser();
+  const dispatch = useAppDispatch();
 
   // Validate the auth token. If it's invalid but the refresh token is valid, refresh the auth token.
   useEffect(() => {
@@ -74,9 +79,15 @@ const useAutoLogin = () => {
           response: { status: number } | undefined;
           status: number;
           message: string;
+          data: UserState;
         };
         if (getData.status === 200) {
           devDebug("useAutoLogin getUserData status", getData.status);
+          devDebug(
+            "useAutoLogin getUserData getData?.data?.email",
+            getData?.data?.email
+          );
+          dispatch(userSetEmail(getData?.data?.email));
           setUserData(
             getUserData as SetStateAction<UseQueryResult | undefined>
           );
@@ -97,6 +108,9 @@ const useAutoLogin = () => {
     setUserStatus(getUserStatus);
     setUserError(getUserError);
   }, [getUserStatus, getUserData, getUserError]);
+
+  // If there is a user in the redux store, don't attempt to login the user.
+  if (isLoggedIn()) return;
 
   return {
     data: userData?.data,
