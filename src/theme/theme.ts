@@ -5,7 +5,15 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 // import TiffanyGothicCC from "../assets/fonts/TiffanyGothicCC-Regular.ttf";
 
-export const colorPalette = {
+type ColorPaletteType = {
+  blue: string;
+  dark: string;
+  deepBlue: string;
+  darkBlue: string;
+  white: string;
+};
+
+export const colorPalette: ColorPaletteType = {
   blue: "#007ed2",
   dark: "#00060a",
   deepBlue: "#015893",
@@ -17,11 +25,13 @@ declare module "@mui/material/styles" {
   interface Theme {
     colors: {
       iconColor: string;
+      colorPalette: ColorPaletteType;
     };
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
     colors?: {
+      colorPalette?: ColorPaletteType;
       iconColor?: string;
     };
   }
@@ -32,9 +42,42 @@ const defaultTheme = responsiveFontSizes(
   createTheme({
     typography: {
       fontFamily: "TiffanyGothicCC, Roboto",
-      // allVariants: {
-      //   color: colorPalette.blue,
-      // },
+    },
+    colors: {
+      colorPalette: colorPalette,
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            backgroundColor: colorPalette.blue,
+          },
+        },
+      },
+      MuiSwitch: {
+        styleOverrides: {
+          switchBase: {
+            // Controls default (unchecked) color for the thumb
+            color: colorPalette.blue,
+          },
+          colorPrimary: {
+            "&.Mui-checked": {
+              // Controls checked color for the thumb
+              color: colorPalette.blue,
+            },
+          },
+          track: {
+            // Controls default (unchecked) color for the track
+            opacity: 0.2,
+            backgroundColor: colorPalette.blue,
+            ".Mui-checked.Mui-checked + &": {
+              // Controls checked color for the track
+              opacity: 0.7,
+              backgroundColor: colorPalette.blue,
+            },
+          },
+        },
+      },
     },
   })
 );
@@ -48,8 +91,10 @@ export const lightTheme = responsiveFontSizes(
         main: colorPalette.blue,
         contrastText: colorPalette.white,
       },
+      divider: colorPalette.blue,
     },
     colors: {
+      ...defaultTheme.colors,
       iconColor: colorPalette.white,
     },
   })
@@ -64,8 +109,10 @@ export const darkTheme = responsiveFontSizes(
         main: colorPalette.dark,
         contrastText: colorPalette.white,
       },
+      divider: colorPalette.blue,
     },
     colors: {
+      ...defaultTheme.colors,
       iconColor: colorPalette.blue,
     },
   })

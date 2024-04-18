@@ -38,7 +38,7 @@ const AppDrawer = ({
 }: AppDrawerProps) => {
   const list = () => (
     <Box
-      sx={minimal ? { width: 60 } : { width: 250 }}
+      sx={minimal ? { width: 50 } : { width: 250 }}
       role="presentation"
       onClick={() => toggleAppDrawer(false)}
     >

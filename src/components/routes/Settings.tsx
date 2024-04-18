@@ -9,35 +9,48 @@ import { FormControlLabel } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../lib/redux-toolkit/hooks";
 import { setColorTheme } from "../../redux/slices/settingsSlice";
 
-// interface AppDrawerProps {}
-
-// const styles = {}
-
 const label = { inputProps: { "aria-label": "Color Mode" } };
+
+const styles = {
+  container: {},
+  spacing: {
+    mx: 5,
+    my: 2,
+  },
+};
 
 const Settings = () => {
   const colorTheme = useAppSelector((state) => state.settings.colorTheme);
   const dispatch = useAppDispatch();
+  const isDarkTheme = colorTheme === "dark";
 
   const togglecolorTheme = () => {
-    dispatch(setColorTheme(colorTheme === "light" ? "dark" : "light"));
+    dispatch(setColorTheme(isDarkTheme ? "light" : "dark"));
   };
 
   return (
     <Box>
-      <List>
-        <ListItem>
+      <Typography sx={[styles.spacing, { textAlign: "center" }]}>
+        Settings
+      </Typography>
+      <Divider sx={{ m: 1, width: "100%" }} />
+      <List sx={styles.container}>
+        <ListItem sx={styles.spacing}>
           <ListItemText>
             <Typography>Color Mode</Typography>
           </ListItemText>
           <FormControlLabel
-            control={<Switch {...label} onChange={togglecolorTheme} />}
-            label={colorTheme === "light" ? "LIGHT" : "DARK"}
+            control={
+              <Switch
+                {...label}
+                onChange={togglecolorTheme}
+                checked={isDarkTheme}
+              />
+            }
+            label={isDarkTheme ? "DARK" : "LIGHT"}
           />
         </ListItem>
       </List>
-
-      <Divider />
     </Box>
   );
 };

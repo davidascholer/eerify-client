@@ -63,6 +63,9 @@ const CustomToolbar = ({
         display: "flex",
         justifyContent: "space-between",
         alignContent: "center",
+        borderBottom: 1,
+        borderColor: (theme) => theme.palette.divider,
+        backgroundColor: (theme) => theme.palette.primary.main,
       }}
     >
       <Box

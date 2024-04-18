@@ -6,7 +6,7 @@ import { SettingsState } from "../types";
 // Define the initial state using that type
 const initialState = {
   orientation: "horizontal",
-  colorTheme: "light",
+  colorTheme: "dark",
 } as SettingsState;
 
 export const settingsSlice = createSlice({
