@@ -29,7 +29,7 @@ const Settings = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ m: 3 }}>
       <Typography sx={[styles.spacing, { textAlign: "center" }]}>
         Settings
       </Typography>

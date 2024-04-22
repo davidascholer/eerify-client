@@ -12,13 +12,17 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  child: {},
 };
 
-const UserAuthPage: React.FC = () => {
+type UserAuthPageProps = {
+  propStyles?: object;
+};
+
+const UserAuthPage: React.FC<UserAuthPageProps> = ({ propStyles }) => {
+  console.debug("propStyles", propStyles);
   return (
     <Box sx={styles.container}>
-      <UserAuthForm sx={styles.child} />
+      <UserAuthForm propStyles={{ ...propStyles }} />
     </Box>
   );
 };

@@ -1,14 +1,7 @@
-import { validationSchema } from "./helpers";
-
 export type FormikObjectValuesProps = {
   email: string;
-  password: string;
-};
-
-export type FormikObjectProps = {
-  initialValues: FormikObjectValuesProps;
-  validationSchema: typeof validationSchema;
-  onSubmit: any;
+  password?: string;
+  confirmPassword?: string;
 };
 
 export type VerifyTokenType = {

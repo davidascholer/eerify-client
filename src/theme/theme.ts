@@ -25,6 +25,7 @@ declare module "@mui/material/styles" {
   interface Theme {
     colors: {
       iconColor: string;
+      backgroundColor: string;
       colorPalette: ColorPaletteType;
     };
   }
@@ -33,6 +34,7 @@ declare module "@mui/material/styles" {
     colors?: {
       colorPalette?: ColorPaletteType;
       iconColor?: string;
+      backgroundColor?: string;
     };
   }
 }
@@ -47,10 +49,30 @@ const defaultTheme = responsiveFontSizes(
       colorPalette: colorPalette,
     },
     components: {
-      MuiButton: {
+      MuiInputLabel: {
         styleOverrides: {
           root: {
+            // userSelect: "text",
+            "::selection, *::selection": {
+              borderColor: colorPalette.blue,
+            },
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          contained: {
             backgroundColor: colorPalette.blue,
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "::selection, *::selection": {
+              borderColor: colorPalette.blue,
+              background: colorPalette.blue,
+            },
           },
         },
       },
@@ -96,6 +118,7 @@ export const lightTheme = responsiveFontSizes(
     colors: {
       ...defaultTheme.colors,
       iconColor: colorPalette.white,
+      backgroundColor: colorPalette.blue,
     },
   })
 );
@@ -106,7 +129,7 @@ export const darkTheme = responsiveFontSizes(
     palette: {
       mode: "dark",
       primary: {
-        main: colorPalette.dark,
+        main: colorPalette.blue,
         contrastText: colorPalette.white,
       },
       divider: colorPalette.blue,
@@ -114,6 +137,7 @@ export const darkTheme = responsiveFontSizes(
     colors: {
       ...defaultTheme.colors,
       iconColor: colorPalette.blue,
+      backgroundColor: colorPalette.dark,
     },
   })
 );

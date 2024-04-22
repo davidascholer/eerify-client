@@ -29,7 +29,7 @@ const Drawer = styled(MuiDrawer, {
     whiteSpace: "nowrap",
     width: drawerWidth,
     paddingTop: toolbarHeight,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.colors.backgroundColor,
     color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -67,7 +67,7 @@ const CustomToolbar = ({
         alignContent: "center",
         borderBottom: 1,
         borderColor: (theme) => theme.palette.divider,
-        backgroundColor: (theme) => theme.palette.primary.main,
+        backgroundColor: (theme) => theme.colors.backgroundColor,
       }}
     >
       <Box
@@ -148,7 +148,13 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const isLoggedIn = useIsLoggedIn();
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+      }}
+    >
+      {/* Topbar */}
       <MuiAppBar
         elevation={0}
         sx={{
@@ -157,7 +163,12 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
       >
         <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
       </MuiAppBar>
-      <Drawer variant="permanent" open={open}>
+      {/* Sidebar */}
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{ backgroundColor: (theme) => theme.colors.colorPalette.dark }}
+      >
         {/* Drawer items */}
         <List component="nav">
           <MainListItems />
@@ -170,11 +181,12 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
             fontFamily: "typeface Roboto",
             justifyContent: "center",
             alignItems: "center",
-            m: 2,
+            m: 1,
             mt: "auto",
+            fontSize: "0.8rem",
           }}
         >
-          v 0.0.1
+          v{APP_VERSION}
         </Typography>
       </Drawer>
       {/* Main content */}

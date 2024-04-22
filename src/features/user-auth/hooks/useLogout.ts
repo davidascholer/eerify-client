@@ -1,6 +1,5 @@
 import { TOKEN_NAMES } from "../util/constants";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
-import { useEffect } from "react";
 import { clearUser } from "../../../redux/slices/userSlice";
 
 /*
@@ -9,8 +8,6 @@ import { clearUser } from "../../../redux/slices/userSlice";
 const useLogout = () => {
   const authCookie = useCookie(TOKEN_NAMES.auth);
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);
-
-  useEffect(() => {}, []);
 
   return () => {
     clearUser();

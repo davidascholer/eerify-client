@@ -1,13 +1,18 @@
+/*
+    Requires a Formik parent.
+*/
 import React from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
 import { FormikObjectValuesProps } from "../../util/constants";
 
-type EmailFieldProps = {
+type PasswordVerifyFieldProps = {
   styles: object;
 };
 
-const EmailField: React.FC<EmailFieldProps> = ({ styles }) => {
+const PasswordVerifyField: React.FC<PasswordVerifyFieldProps> = ({
+  styles,
+}) => {
   const context = useFormikContext<FormikObjectValuesProps>();
   return (
     <Box
@@ -19,22 +24,25 @@ const EmailField: React.FC<EmailFieldProps> = ({ styles }) => {
     >
       <TextField
         sx={[styles]}
-        InputLabelProps={{ sx: { userSelect: "text" } }}
         fullWidth
-        id="email"
-        name="email"
-        label="Email"
-        autoComplete="email"
-        value={context.values.email}
+        id="confirmPassword"
+        name="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        autoComplete="off"
+        value={context.values.confirmPassword}
         onChange={context.handleChange}
         onBlur={context.handleBlur}
-        error={context.touched.email && Boolean(context.errors.email)}
+        error={
+          context.touched.confirmPassword &&
+          Boolean(context.errors.confirmPassword)
+        }
       />
       <Typography sx={[styles]} variant="caption" color="error">
-        {context.touched.email && context.errors.email}
+        {context.touched.confirmPassword && context.errors.confirmPassword}
       </Typography>
     </Box>
   );
 };
 
-export default EmailField;
+export default PasswordVerifyField;
