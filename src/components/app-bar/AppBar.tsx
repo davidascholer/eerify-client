@@ -17,6 +17,7 @@ import { Typography } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import useIsLoggedIn from "../../features/user-auth/hooks/useIsLoggedIn";
 import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
+import { useLocation } from "react-router-dom";
 
 const drawerWidth: string = "240px";
 const toolbarHeight: string = "65px";
@@ -140,11 +141,13 @@ const CustomToolbar = ({
 
 const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = React.useState(true);
+  const location = useLocation();
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
   // Returns the user data object, status string, error object, and refetch function.
-  useAutoLogin();
+  useAutoLogin(location.pathname === PATHS.USER_AUTH);
   const isLoggedIn = useIsLoggedIn();
 
   return (

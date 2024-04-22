@@ -19,7 +19,7 @@ import { isLoggedIn } from "../../../redux/helper";
 
   NOTE: This hook should be called from a component after a check to make sure a user isn't already logged in to avoid redundancy.
 */
-const useAutoLogin = () => {
+const useAutoLogin = (bypass = false) => {
   // Verify one of the auth tokens are valid. If not, don't attempt to sign in the user.
 
   const [userStatus, setUserStatus] = useState<
@@ -109,8 +109,8 @@ const useAutoLogin = () => {
     setUserError(getUserError);
   }, [getUserStatus, getUserData, getUserError]);
 
-  // If there is a user in the redux store, don't attempt to login the user.
-  if (isLoggedIn()) return;
+  // If there is a user in the redux store or some other condition, don't attempt to login the user.
+  if (isLoggedIn() || bypass) return;
 
   return {
     data: userData?.data,

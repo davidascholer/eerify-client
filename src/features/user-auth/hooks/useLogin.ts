@@ -20,7 +20,10 @@ const useLogin = (postData: FormikObjectValuesProps, runOnMount: boolean) => {
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);
 
   const login = async () => {
-    const response = await client.post(postData);
+    const response = await client.post({
+      email: postData.email,
+      password: postData.password,
+    });
     const { access, refresh } = response.data as {
       access: string;
       refresh: string;
@@ -28,8 +31,6 @@ const useLogin = (postData: FormikObjectValuesProps, runOnMount: boolean) => {
     if (!!access && !!refresh && response.status === 200) {
       authCookie.set(access);
       refreshCookie.set(refresh);
-    } else {
-      return new Error("Invalid login credentials");
     }
     return response;
   };

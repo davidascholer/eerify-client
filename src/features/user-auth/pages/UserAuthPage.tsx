@@ -19,7 +19,6 @@ type UserAuthPageProps = {
 };
 
 const UserAuthPage: React.FC<UserAuthPageProps> = ({ propStyles }) => {
-  console.debug("propStyles", propStyles);
   return (
     <Box sx={styles.container}>
       <UserAuthForm propStyles={{ ...propStyles }} />

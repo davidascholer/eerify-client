@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import useLogin from "../../hooks/useLogin";
 import EmailField from "../common/EmailField";
@@ -60,6 +60,8 @@ const ErrorBox = ({ msg }: { msg: string }) => {
           color: "red",
           width: "100%",
           fontSize: "75%",
+          textAlign: "center",
+          my: 2,
         },
         styles.field,
       ]}
@@ -90,6 +92,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
       confirmPassword: nullableValidation,
     })
   );
+  const [loading, setLoading] = useState(false);
   const [postData, setPostData] = useState<FormikObjectValuesProps>({
     email: "",
     password: "",
@@ -105,12 +108,29 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
 
   /* Login */
   const handleSubmitLogin = async () => {
+    setLoading(true);
     const { email, password } = postData;
     if (!!email && !!password) {
-      const loggedInUser = await userLogin.refetch();
-      setUserResponse(loggedInUser);
-      devDebug("handleSubmitLogin", loginType);
-      navigate("/");
+      const response = await userLogin.refetch();
+      devDebug("USERAUTHFORM handleSubmitLogin response", response);
+      if (response.status === "success") {
+        setUserResponse({
+          data: response.data,
+          status: response.status,
+          error: "",
+        });
+        navigate("/");
+      } else if (response.status === "error") {
+        setUserResponse({
+          data: {},
+          status: response.status,
+          error:
+            response.status === "error"
+              ? "Invalid Crdentials"
+              : "Unable To Login",
+        });
+      }
+      setLoading(false);
     }
   };
 
@@ -121,7 +141,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
       const createdUser = await userCreate.refetch();
       setUserResponse(createdUser);
       devDebug("handleSubmitSignup", loginType);
-      // navigate("/");
+      navigate("/");
     }
   };
 
@@ -197,14 +217,23 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
                 <ConfirmPasswordField styles={styles.field} />
               </>
             )}
-            <SubmitButton styles={{ my: 2 }} />
-            <ErrorBox
-              msg={
-                userResponse.error?.response?.data?.detail
-                  ? userResponse.error.response.data.detail
-                  : ""
-              }
-            />
+            {loading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  my: 2,
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              <>
+                <SubmitButton styles={{ my: 2 }} />
+                <ErrorBox msg={userResponse.error ? userResponse.error : ""} />
+              </>
+            )}
           </Form>
           <Box
             sx={{
