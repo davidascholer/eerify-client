@@ -4,6 +4,7 @@ import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
 import GamesMain from "../components/routes/video-games/pages/Main";
 import Books from "../components/routes/Books";
+import Authenticate from "../components/routes/Authenticate";
 import UserAuth from "../components/routes/UserAuth";
 import Settings from "../components/routes/Settings";
 import ErrorPage from "../components/routes/ErrorPage";
@@ -12,18 +13,7 @@ import Layout from "../components/routes/video-games/pages/Layout";
 import ReactRouterWrapper from "../lib/react-router/ReactRouterWrapper";
 import Notifications from "../components/routes/Notifications";
 import Favorites from "../components/routes/Favorites";
-
-export const PATHS = {
-  ROOT: "/",
-  HOME: "/home",
-  FILM: "/film",
-  VIDEO_GAMES: "/games",
-  BOOKS: "/books",
-  USER_AUTH: "/user-auth",
-  SETTINGS: "/settings",
-  NOTIFICATIONS: "/notifications",
-  FAVORITES: "/favorites",
-};
+import { PATHS } from "./paths";
 
 const routes = [
   {
@@ -32,7 +22,7 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: PATHS.HOME,
+        path: PATHS.ROOT,
         element: <Home />,
       },
       {
@@ -47,6 +37,10 @@ const routes = [
           { index: true, element: <GamesMain /> },
           { path: PATHS.VIDEO_GAMES + "/:slug", element: <GameDetailPage /> },
         ],
+      },
+      {
+        path: PATHS.AUTHENTICATE,
+        element: <Authenticate />,
       },
       {
         path: PATHS.BOOKS,

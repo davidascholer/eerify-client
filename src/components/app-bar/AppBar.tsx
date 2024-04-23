@@ -12,12 +12,13 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { MainListItems, SecondaryListItems } from "./Options";
 import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
 import EerifyHoriz from "../../assets/icons/EerifyHoriz";
-import { PATHS } from "../../app-root/AppRouter";
+import { PATHS } from "../../app-root/paths";
 import { Typography } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import useIsLoggedIn from "../../features/user-auth/hooks/useIsLoggedIn";
 import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 import { useLocation } from "react-router-dom";
+import { isBlacklisted } from "./blacklist";
 
 const drawerWidth: string = "240px";
 const toolbarHeight: string = "65px";
@@ -101,7 +102,7 @@ const CustomToolbar = ({
             m: 0,
             p: 0,
           }}
-          onClick={() => handleNavigate(PATHS.HOME)}
+          onClick={() => handleNavigate(PATHS.ROOT)}
         >
           <EerifyHoriz
             sx={{
@@ -139,13 +140,48 @@ const CustomToolbar = ({
   );
 };
 
+const NavBar = ({
+  open,
+  isLoggedIn,
+}: {
+  open: boolean;
+  isLoggedIn: boolean;
+}) => {
+  return (
+    <Drawer
+      variant="permanent"
+      open={open}
+      sx={{ backgroundColor: (theme) => theme.colors.colorPalette.dark }}
+    >
+      {/* Drawer items */}
+      <List component="nav">
+        <MainListItems />
+        <Divider sx={{ my: 1 }} />
+        <SecondaryListItems loggedIn={isLoggedIn} />
+      </List>
+      <Typography
+        sx={{
+          display: "flex",
+          fontFamily: "typeface Roboto",
+          justifyContent: "center",
+          alignItems: "center",
+          m: 1,
+          mt: "auto",
+          fontSize: "0.8rem",
+        }}
+      >
+        v{APP_VERSION}
+      </Typography>
+    </Drawer>
+  );
+};
+
 const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const location = useLocation();
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
   // Returns the user data object, status string, error object, and refetch function.
   useAutoLogin(location.pathname === PATHS.USER_AUTH);
   const isLoggedIn = useIsLoggedIn();
@@ -167,31 +203,9 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
       </MuiAppBar>
       {/* Sidebar */}
-      <Drawer
-        variant="permanent"
-        open={open}
-        sx={{ backgroundColor: (theme) => theme.colors.colorPalette.dark }}
-      >
-        {/* Drawer items */}
-        <List component="nav">
-          <MainListItems />
-          <Divider sx={{ my: 1 }} />
-          <SecondaryListItems loggedIn={isLoggedIn} />
-        </List>
-        <Typography
-          sx={{
-            display: "flex",
-            fontFamily: "typeface Roboto",
-            justifyContent: "center",
-            alignItems: "center",
-            m: 1,
-            mt: "auto",
-            fontSize: "0.8rem",
-          }}
-        >
-          v{APP_VERSION}
-        </Typography>
-      </Drawer>
+      {!isBlacklisted(location.pathname) && (
+        <NavBar open={open} isLoggedIn={isLoggedIn} />
+      )}
       {/* Main content */}
       <Box sx={{ mt: toolbarHeight, display: "flex", width: "100%" }}>
         {children}

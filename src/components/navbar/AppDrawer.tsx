@@ -15,7 +15,7 @@ import Home from "@mui/icons-material/Home";
 import Book from "../../assets/icons/Book";
 import TopAppBar from "./TopAppBar";
 import { Typography } from "@mui/material";
-import { PATHS } from "../../app-root/AppRouter";
+import { PATHS } from "../../app-root/paths";
 
 interface AppDrawerProps {
   appDrawerOpen: boolean;
@@ -45,7 +45,7 @@ const AppDrawer = ({
       <TopAppBar toggleAppDrawer={toggleAppDrawer} showName={!minimal} />
       <List>
         <ListItem disablePadding>
-          <Link style={styles.link} to={PATHS.HOME}>
+          <Link style={styles.link} to={PATHS.ROOT}>
             <ListItemButton>
               <ListItemIcon>
                 <Home />

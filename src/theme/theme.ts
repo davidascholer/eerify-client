@@ -132,7 +132,7 @@ export const darkTheme = responsiveFontSizes(
         main: colorPalette.blue,
         contrastText: colorPalette.white,
       },
-      divider: colorPalette.blue,
+      divider: colorPalette.dark,
     },
     colors: {
       ...defaultTheme.colors,
