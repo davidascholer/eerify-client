@@ -203,7 +203,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
       </MuiAppBar>
       {/* Sidebar */}
-      {!isBlacklisted(location.pathname) && (
+      {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
         <NavBar open={open} isLoggedIn={isLoggedIn} />
       )}
       {/* Main content */}

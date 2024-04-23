@@ -4,7 +4,8 @@ import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
 import GamesMain from "../components/routes/video-games/pages/Main";
 import Books from "../components/routes/Books";
-import Authenticate from "../components/routes/Authenticate";
+import Activate from "../components/routes/Activate";
+import PasswordReset from "../components/routes/PasswordReset";
 import UserAuth from "../components/routes/UserAuth";
 import Settings from "../components/routes/Settings";
 import ErrorPage from "../components/routes/ErrorPage";
@@ -39,8 +40,12 @@ const routes = [
         ],
       },
       {
-        path: PATHS.AUTHENTICATE,
-        element: <Authenticate />,
+        path: PATHS.ACTIVATE,
+        element: <Activate />,
+      },
+      {
+        path: PATHS.PASSWORD_RESET,
+        element: <PasswordReset />,
       },
       {
         path: PATHS.BOOKS,
