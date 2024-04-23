@@ -1,11 +1,11 @@
-import useReactQuery from "../../../lib/react-query/useReactQuery";
 import APIClient from "../../../lib/react-query/services/api-client";
-import { FormikObjectValuesProps, TOKEN_NAMES } from "../util/constants";
+import { TOKEN_NAMES } from "../util/constants";
 import USER_ENDPOINTS from "../util/endpoints";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
+import { devDebug } from "../util/helpers";
 
 // Create an  instance of the API client custom to create a user
-const loginClient = () => {
+const createUserClient = () => {
   const url: string = `/${USER_ENDPOINTS.createUser}`;
   const client = new APIClient(url);
   return client;
@@ -14,12 +14,13 @@ const loginClient = () => {
 /*
   Make a server call to the api to get create a user.
 */
-const useCreateUser = (postData: FormikObjectValuesProps) => {
-  const client = loginClient();
+const useCreateUser = () => {
+  const client = createUserClient();
   const authCookie = useCookie(TOKEN_NAMES.auth);
 
-  const createUser = async () => {
-    const response = await client.post(postData);
+  const createUser = async (email: string, password: string) => {
+    const response = await client.post({ email, password });
+    devDebug("useCreateUser response", response);
     const { access } = response.data as {
       access: string;
     };
@@ -31,12 +32,7 @@ const useCreateUser = (postData: FormikObjectValuesProps) => {
     return response;
   };
 
-  // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
-  return useReactQuery({
-    queryKey: USER_ENDPOINTS.createUser.split("/"),
-    queryFn: createUser,
-    enabled: false,
-  });
+  return createUser;
 };
 
 export default useCreateUser;

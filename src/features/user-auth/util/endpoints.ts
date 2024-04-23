@@ -1,6 +1,6 @@
 // https://djoser.readthedocs.io/en/latest/getting_started.html for a full list of auth endpoints
 const USER_ENDPOINTS = {
-  createUser: "users",
+  createUser: "users/",
   me: "users/me",
   verify: "users/auth/jwt/verify",
   refresh: "users/auth/jwt/refresh",

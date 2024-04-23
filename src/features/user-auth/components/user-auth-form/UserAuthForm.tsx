@@ -99,7 +99,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
     confirmPassword: "",
   });
   const userLogin = useLogin(postData, false);
-  const userCreate = useCreateUser(postData);
+  const userCreate = useCreateUser();
   const [userResponse, setUserResponse] =
     useState<UserResponseType>(defaultResponse);
   const [loginType, setLoginType] = useState<
@@ -138,9 +138,9 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
   const handleSubmitSignup = async () => {
     const { email, password } = postData;
     if (!!email && !!password) {
-      const createdUser = await userCreate.refetch();
+      const createdUser = await userCreate(email, password);
+      devDebug("handleSubmitSignup", createdUser);
       setUserResponse(createdUser);
-      devDebug("handleSubmitSignup", loginType);
       navigate("/");
     }
   };
