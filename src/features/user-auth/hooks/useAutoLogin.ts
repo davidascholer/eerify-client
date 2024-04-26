@@ -8,7 +8,7 @@ import { UseQueryResult } from "@tanstack/react-query";
 import { userSetEmail } from "../../../redux/slices/userSlice";
 import { UserState } from "../../../redux/types";
 import { useAppDispatch } from "../../../lib/redux-toolkit/hooks";
-import { isLoggedIn } from "../../../redux/helper";
+import { useLocation } from "react-router-dom";
 
 /*
   This hook is used to automatically login the user when called from a component.
@@ -19,9 +19,9 @@ import { isLoggedIn } from "../../../redux/helper";
 
   NOTE: This hook should be called from a component after a check to make sure a user isn't already logged in to avoid redundancy.
 */
-const useAutoLogin = (bypass = false) => {
+const useAutoLogin = () => {
   // Verify one of the auth tokens are valid. If not, don't attempt to sign in the user.
-
+  devDebug("useAutoLogin", "called");
   const [userStatus, setUserStatus] = useState<
     "loading" | "error" | "success" | "idle"
   >("idle");
@@ -31,6 +31,7 @@ const useAutoLogin = (bypass = false) => {
   const [userError, setUserError] = useState<typeof getUserError | undefined>(
     undefined
   );
+  const location = useLocation();
   const { data: verifyData } = useVerifyToken(true);
   const { refetch: refetchRefreshToken } = useRefreshToken();
   const {
@@ -48,13 +49,8 @@ const useAutoLogin = (bypass = false) => {
 
     devDebug("useAutoLogin verifiedToken type", data.type);
     if (data.verified && data.type === "auth") {
-      devDebug("useAutoLogin", "Auth token verified. Fetching user.");
       refetchGetUser();
     } else if (data.verified && data.type === "refresh") {
-      devDebug(
-        "useAutoLogin",
-        "Refresh token verified. Refreshing Auth Token."
-      );
       // Refetch the user data when the auth token is refreshed.
       refetchRefreshToken().then((res) => {
         const status: number = (res.data as { status: number })?.status;
@@ -109,8 +105,9 @@ const useAutoLogin = (bypass = false) => {
     setUserError(getUserError);
   }, [getUserStatus, getUserData, getUserError]);
 
-  // If there is a user in the redux store or some other condition, don't attempt to login the user.
-  if (isLoggedIn() || bypass) return;
+  useEffect(() => {
+    refetchGetUser();
+  }, [location.pathname]);
 
   return {
     data: userData?.data,

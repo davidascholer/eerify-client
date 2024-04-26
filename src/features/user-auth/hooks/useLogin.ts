@@ -1,8 +1,12 @@
-import useReactQuery from "../../../lib/react-query/useReactQuery";
 import APIClient from "../../../lib/react-query/services/api-client";
 import { FormikObjectValuesProps, TOKEN_NAMES } from "../util/constants";
 import USER_ENDPOINTS from "../util/endpoints";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
+import {
+  devDebug,
+  handleServerResponse,
+  serverErrorValidated,
+} from "../util/helpers";
 
 // Create an  instance of the API client custom to login
 const loginClient = () => {
@@ -14,33 +18,40 @@ const loginClient = () => {
 /*
   Make a server call to the api to get login credentials. Then, place them in cookies upon success.
 */
-const useLogin = (postData: FormikObjectValuesProps, runOnMount: boolean) => {
+const useLogin = (postData: FormikObjectValuesProps) => {
   const client = loginClient();
   const authCookie = useCookie(TOKEN_NAMES.auth);
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);
 
   const login = async () => {
-    const response = await client.post({
-      email: postData.email,
-      password: postData.password,
-    });
-    const { access, refresh } = response.data as {
-      access: string;
-      refresh: string;
-    };
-    if (!!access && !!refresh && response.status === 200) {
-      authCookie.set(access);
-      refreshCookie.set(refresh);
+    try {
+      const response = await client.post({
+        email: postData.email,
+        password: postData.password,
+      });
+      devDebug("useLogin response", response);
+      if (response?.data?.access && response?.data?.refresh) {
+        const { access, refresh } = response?.data as {
+          access: string;
+          refresh: string;
+        };
+        authCookie.set(access);
+        refreshCookie.set(refresh);
+      }
+      return handleServerResponse(response);
+    } catch (error: any) {
+      console.debug("error");
+      console.debug(error);
+      devDebug("useLogin response error", error);
+      return {
+        success: false,
+        data: {},
+        error: serverErrorValidated(error?.response?.data),
+      };
     }
-    return response;
   };
 
-  // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
-  return useReactQuery({
-    queryKey: USER_ENDPOINTS.login.split("/"),
-    queryFn: login,
-    enabled: runOnMount,
-  });
+  return login;
 };
 
 export default useLogin;
