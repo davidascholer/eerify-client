@@ -1,11 +1,15 @@
 import SvgIcon from "@mui/material/SvgIcon";
+import { SxProps } from "@mui/material";
+import { useTheme } from "@mui/material";
 
-export default function Book({ color }: { color?: string }) {
+export default function Book({ sx }: { sx?: SxProps }) {
+  const theme = useTheme();
+
   return (
-    <SvgIcon>
+    <SvgIcon sx={sx ? sx : {}}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill={color ? color : "inherit"}
+        fill={theme.colors.iconColor}
         viewBox="0 0 240 240"
         strokeWidth={1}
         stroke="none"

@@ -14,31 +14,32 @@ import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app-root/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
 
-const rootStyles = {};
-
 export const MainListItems = () => {
   const theme = useTheme();
   const handleNavigate = useHandleNavigate();
   const { iconColor } = theme.colors;
-  const styles = { color: iconColor, ...rootStyles };
+  const styles = {
+    iconContainer: {},
+    icon: { color: iconColor, ml: "5px" },
+  };
 
   return (
     <React.Fragment>
       <ListItemButton onClick={() => handleNavigate(PATHS.FILM)}>
-        <ListItemIcon sx={styles}>
-          <TheatersIcon sx={styles} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <TheatersIcon sx={[styles.icon]} />
         </ListItemIcon>
         <ListItemText primary="Film" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.BOOKS)}>
-        <ListItemIcon sx={styles}>
-          <BookIcon color={styles.color} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <BookIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Books" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}>
-        <ListItemIcon sx={styles}>
-          <VideogameAssetIcon sx={styles} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <VideogameAssetIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Games" />
       </ListItemButton>
@@ -55,27 +56,29 @@ export const SecondaryListItems = ({
   const handleNavigate = useHandleNavigate();
   const logout = useLogout();
   const { iconColor } = theme.colors;
-  const styles = { color: iconColor, ...rootStyles };
-
+  const styles = {
+    iconContainer: {},
+    icon: { color: iconColor, ml: "5px" },
+  };
   return (
     <React.Fragment>
       <ListItemButton onClick={() => handleNavigate(PATHS.FAVORITES)}>
-        <ListItemIcon sx={styles}>
-          <PentagramIcon color={styles.color} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <PentagramIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Favorites" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.SETTINGS)}>
-        <ListItemIcon sx={styles}>
-          <SettingsIcon sx={styles} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <SettingsIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Settings" />
       </ListItemButton>
       <ListItemButton
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
       >
-        <ListItemIcon sx={styles}>
-          <GhostIcon color={styles.color} />
+        <ListItemIcon sx={styles.iconContainer}>
+          <GhostIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary={loggedIn ? "Log Out" : "Log In"} />
       </ListItemButton>

@@ -1,11 +1,15 @@
 import SvgIcon from "@mui/material/SvgIcon";
+import { useTheme } from "@mui/material";
+import { SxProps } from "@mui/material";
 
-export default function GhostIcon({ color }: { color?: string }) {
+export default function GhostIcon({ sx }: { sx?: SxProps }) {
+  const theme = useTheme();
+
   return (
-    <SvgIcon>
+    <SvgIcon sx={sx ? sx : {}}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill={color ? color : "inherit"}
+        fill={theme.colors.iconColor}
         viewBox="0 0 165.37 216.5"
         strokeWidth={1}
         stroke="none"

@@ -1,8 +1,9 @@
 import SvgIcon from "@mui/material/SvgIcon";
+import { SxProps } from "@mui/material";
 
-export default function EerifyLogoX() {
+export default function EerifyLogoX({ sx }: { sx?: SxProps }) {
   return (
-    <SvgIcon>
+    <SvgIcon sx={sx}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="#707070"
