@@ -13,7 +13,12 @@ import { useTheme } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app-root/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
-import { optionsMargin, toolbarSize } from "./config";
+import {
+  iconToToolbarPercentage,
+  optionsFontSize,
+  optionsMargin,
+  toolbarSize,
+} from "./config";
 
 const rootStyles = {
   buttonContainer: {
@@ -22,7 +27,7 @@ const rootStyles = {
   icon: {
     width: toolbarSize + "px",
     // Specifiy ratio of icon size to toolbar size
-    height: toolbarSize / 2.5 + "px",
+    height: toolbarSize * iconToToolbarPercentage * 0.01 + "px",
     my: optionsMargin + "px",
   },
 };
@@ -48,7 +53,7 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText
           primary="Film"
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
       <ListItemButton
@@ -60,7 +65,7 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText
           primary="Books"
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
       <ListItemButton
@@ -72,7 +77,7 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText
           primary="Games"
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
     </React.Fragment>
@@ -104,7 +109,7 @@ export const SecondaryListItems = ({
         </ListItemIcon>
         <ListItemText
           primary="Favorites"
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
       <ListItemButton
@@ -116,7 +121,7 @@ export const SecondaryListItems = ({
         </ListItemIcon>
         <ListItemText
           primary="Settings"
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
       <ListItemButton
@@ -128,7 +133,7 @@ export const SecondaryListItems = ({
         </ListItemIcon>
         <ListItemText
           primary={loggedIn ? "Log Out" : "Log In"}
-          primaryTypographyProps={{ fontSize: "85%" }}
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
         />
       </ListItemButton>
     </React.Fragment>
