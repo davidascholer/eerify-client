@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
-import { toolbarSize } from "./constants";
+import { toolbarSize } from "./config";
 
 const CustomToolbar = ({
   toggleDrawer,

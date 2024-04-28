@@ -1,5 +1,6 @@
 import { MainListItems, SecondaryListItems } from "./Options";
-import { AppBarStateType, drawerWidth, toolbarSize } from "./constants";
+import { drawerWidth, toolbarSize } from "./config";
+import { AppBarStateType } from "./types";
 import {
   Divider,
   List,

@@ -9,7 +9,8 @@ import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import NavBar from "./NavBar";
-import { AppBarStateType, toolbarSize } from "./constants";
+import { AppBarStateType } from "./types";
+import { toolbarSize } from "./config";
 import CustomToolbar from "./CustomToolbar";
 
 const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {

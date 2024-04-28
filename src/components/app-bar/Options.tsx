@@ -13,7 +13,7 @@ import { useTheme } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app-root/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
-import { toolbarSize } from "./constants";
+import { optionsMargin, toolbarSize } from "./config";
 
 const rootStyles = {
   buttonContainer: {
@@ -22,8 +22,8 @@ const rootStyles = {
   icon: {
     width: toolbarSize + "px",
     // Specifiy ratio of icon size to toolbar size
-    height: toolbarSize / 3 + "px",
-    my: 2,
+    height: toolbarSize / 2.5 + "px",
+    my: optionsMargin + "px",
   },
 };
 
@@ -46,7 +46,10 @@ export const MainListItems = () => {
         <ListItemIcon sx={styles.iconContainer}>
           <TheatersIcon sx={[styles.icon]} />
         </ListItemIcon>
-        <ListItemText primary="Film" />
+        <ListItemText
+          primary="Film"
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
       <ListItemButton
         onClick={() => handleNavigate(PATHS.BOOKS)}
@@ -55,7 +58,10 @@ export const MainListItems = () => {
         <ListItemIcon sx={styles.iconContainer}>
           <BookIcon sx={styles.icon} />
         </ListItemIcon>
-        <ListItemText primary="Books" />
+        <ListItemText
+          primary="Books"
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
       <ListItemButton
         onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}
@@ -64,7 +70,10 @@ export const MainListItems = () => {
         <ListItemIcon sx={styles.iconContainer}>
           <VideogameAssetIcon sx={styles.icon} />
         </ListItemIcon>
-        <ListItemText primary="Games" />
+        <ListItemText
+          primary="Games"
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
     </React.Fragment>
   );
@@ -93,7 +102,10 @@ export const SecondaryListItems = ({
         <ListItemIcon sx={styles.iconContainer}>
           <PentagramIcon sx={styles.icon} />
         </ListItemIcon>
-        <ListItemText primary="Favorites" />
+        <ListItemText
+          primary="Favorites"
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
       <ListItemButton
         onClick={() => handleNavigate(PATHS.SETTINGS)}
@@ -102,7 +114,10 @@ export const SecondaryListItems = ({
         <ListItemIcon sx={styles.iconContainer}>
           <SettingsIcon sx={styles.icon} />
         </ListItemIcon>
-        <ListItemText primary="Settings" />
+        <ListItemText
+          primary="Settings"
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
       <ListItemButton
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
@@ -111,7 +126,10 @@ export const SecondaryListItems = ({
         <ListItemIcon sx={styles.iconContainer}>
           <GhostIcon sx={styles.icon} />
         </ListItemIcon>
-        <ListItemText primary={loggedIn ? "Log Out" : "Log In"} />
+        <ListItemText
+          primary={loggedIn ? "Log Out" : "Log In"}
+          primaryTypographyProps={{ fontSize: "85%" }}
+        />
       </ListItemButton>
     </React.Fragment>
   );
