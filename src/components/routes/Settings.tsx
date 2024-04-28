@@ -13,10 +13,18 @@ const label = { inputProps: { "aria-label": "Color Mode" } };
 
 const styles = {
   container: {},
-  spacing: {
+  header: { textAlign: "center", mt: 2 },
+  listItemContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
     mx: 5,
     my: 2,
   },
+  listItem: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  listItemContent: { mr: 10 },
 };
 
 const Settings = () => {
@@ -34,28 +42,37 @@ const Settings = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        width: "100%",
       }}
     >
-      <Box sx={{ m: 3 }}>
-        <Typography sx={[styles.spacing, { textAlign: "center" }]}>
-          Settings
-        </Typography>
-        <Divider sx={{ m: 1, width: "100%" }} />
+      <Box sx={{ width: "100%" }}>
+        <Box>
+          <Typography sx={styles.header}>Settings</Typography>
+          <Divider
+            sx={{
+              borderColor: (theme) => theme.colors.colorPalette.blue,
+              m: 2,
+            }}
+          />
+        </Box>
         <List sx={styles.container}>
-          <ListItem sx={styles.spacing}>
-            <ListItemText>
-              <Typography>Color Mode</Typography>
-            </ListItemText>
-            <FormControlLabel
-              control={
-                <Switch
-                  {...label}
-                  onChange={togglecolorTheme}
-                  checked={isDarkTheme}
-                />
-              }
-              label={isDarkTheme ? "DARK" : "LIGHT"}
-            />
+          <ListItem sx={[styles.listItemContainer]}>
+            <Box sx={styles.listItem}>
+              <ListItemText sx={styles.listItemContent}>
+                <Typography>Color Mode</Typography>
+              </ListItemText>
+              <FormControlLabel
+                sx={styles.listItemContent}
+                control={
+                  <Switch
+                    {...label}
+                    onChange={togglecolorTheme}
+                    checked={isDarkTheme}
+                  />
+                }
+                label={isDarkTheme ? "DARK" : "LIGHT"}
+              />
+            </Box>
           </ListItem>
         </List>
       </Box>
