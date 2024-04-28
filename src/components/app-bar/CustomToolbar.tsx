@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
-import { toolbarHeight } from "./constants";
+import { toolbarSize } from "./constants";
 
 const CustomToolbar = ({
   toggleDrawer,
@@ -22,7 +22,7 @@ const CustomToolbar = ({
     <Toolbar
       disableGutters
       sx={{
-        height: toolbarHeight,
+        height: toolbarSize + "px",
         overflow: "hidden",
         display: "flex",
         justifyContent: "space-between",
@@ -52,7 +52,9 @@ const CustomToolbar = ({
           }}
           onClick={() => toggleDrawer()}
         >
-          <SpiderWebIcon sx={{ width: toolbarHeight, height: toolbarHeight }} />
+          <SpiderWebIcon
+            sx={{ width: toolbarSize + "px", height: toolbarSize + "px" }}
+          />
         </IconButton>
         <IconButton
           color="inherit"
@@ -66,7 +68,7 @@ const CustomToolbar = ({
         >
           <EerifyHoriz
             sx={{
-              height: toolbarHeight,
+              height: toolbarSize + "px",
               width: "inherit",
               p: 1,
               ml: 2,

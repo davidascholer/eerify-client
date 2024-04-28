@@ -1,15 +1,22 @@
 import { MainListItems, SecondaryListItems } from "./Options";
-import { drawerWidth, toolbarHeight } from "./constants";
-import { Divider, List, styled, Drawer as MUIDrawer } from "@mui/material";
+import { AppBarStateType, drawerWidth, toolbarSize } from "./constants";
+import {
+  Divider,
+  List,
+  styled,
+  Drawer as MUIDrawer,
+  Theme,
+  useTheme,
+} from "@mui/material";
 
 const Drawer = styled(MUIDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (prop) => prop !== "openState",
+})(({ theme, openState }: { theme: Theme; openState: AppBarStateType }) => ({
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
-    width: drawerWidth,
-    paddingTop: toolbarHeight,
+    width: drawerWidth + "px",
+    paddingTop: toolbarSize + "px",
     backgroundColor: theme.colors.backgroundColor,
     color: theme.palette.primary.contrastText,
     transition: theme.transitions.create("width", {
@@ -17,35 +24,41 @@ const Drawer = styled(MUIDrawer, {
       duration: theme.transitions.duration.enteringScreen,
     }),
     boxSizing: "border-box",
-    ...(!open && {
+    ...(openState === "EXPANDED" && {
       overflowX: "hidden",
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
+      // Make it square with the toolbar height
+      width: toolbarSize + "px",
+      //   [theme.breakpoints.up("sm")]: {
+      //     width: theme.spacing(7),
+      //   },
+    }),
+    ...(openState === "HIDDEN" && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: 0,
     }),
   },
 }));
 
 const NavBar = ({
-  open,
+  openState,
   isLoggedIn,
 }: {
-  open: boolean;
+  openState: AppBarStateType;
   isLoggedIn: boolean;
 }) => {
+  const theme = useTheme();
   return (
-    <Drawer
-      variant="permanent"
-      open={open}
-      sx={{ backgroundColor: (theme) => theme.colors.colorPalette.dark }}
-    >
+    <Drawer variant="permanent" openState={openState} theme={theme}>
       {/* Drawer items */}
-      <List component="nav">
+      <List component="nav" sx={{ p: 0 }}>
         <MainListItems />
         <Divider
           variant="middle"

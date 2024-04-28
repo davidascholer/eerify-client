@@ -9,16 +9,20 @@ import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import NavBar from "./NavBar";
-import { toolbarHeight } from "./constants";
+import { AppBarStateType, toolbarSize } from "./constants";
 import CustomToolbar from "./CustomToolbar";
 
 const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState<AppBarStateType>("EXPANDED");
   const navigate = useNavigate();
   const location = useLocation();
   const loggedIn = isLoggedIn();
   const toggleDrawer = () => {
-    setOpen(!open);
+    setOpen((prev) => {
+      if (prev === "EXPANDED") return "SHRUNK";
+      if (prev === "SHRUNK") return "HIDDEN";
+      return "EXPANDED";
+    });
   };
   // Returns the user data object, status string, error object, and refetch function.
   // Bypass the login page if the current page is the login page
@@ -49,11 +53,11 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
             <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
           </MuiAppBar>
           {/* Sidebar */}
-          <NavBar open={open} isLoggedIn={loggedIn} />
+          <NavBar openState={open} isLoggedIn={loggedIn} />
         </>
       )}
       {/* Main content */}
-      <Box sx={{ mt: toolbarHeight, display: "flex", width: "100%" }}>
+      <Box sx={{ mt: toolbarSize + "px", display: "flex", width: "100%" }}>
         {children}
       </Box>
       <Toast

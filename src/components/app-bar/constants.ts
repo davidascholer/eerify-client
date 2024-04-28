@@ -1,2 +1,4 @@
-export const drawerWidth: string = "200px";
-export const toolbarHeight: string = "65px";
+export const drawerWidth: number = 300;
+export const toolbarSize: number = 70;
+
+export type AppBarStateType = "EXPANDED" | "SHRUNK" | "HIDDEN";

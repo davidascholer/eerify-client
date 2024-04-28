@@ -13,31 +13,53 @@ import { useTheme } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app-root/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
+import { toolbarSize } from "./constants";
+
+const rootStyles = {
+  buttonContainer: {
+    p: 0,
+  },
+  icon: {
+    width: toolbarSize + "px",
+    height: toolbarSize / 2 + "px",
+    my: 2,
+  },
+};
 
 export const MainListItems = () => {
   const theme = useTheme();
   const handleNavigate = useHandleNavigate();
   const { iconColor } = theme.colors;
   const styles = {
+    ...rootStyles,
     iconContainer: {},
-    icon: { color: iconColor, ml: "5px" },
+    icon: { ...rootStyles.icon, color: iconColor },
   };
 
   return (
     <React.Fragment>
-      <ListItemButton onClick={() => handleNavigate(PATHS.FILM)}>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.FILM)}
+        sx={styles.buttonContainer}
+      >
         <ListItemIcon sx={styles.iconContainer}>
           <TheatersIcon sx={[styles.icon]} />
         </ListItemIcon>
         <ListItemText primary="Film" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleNavigate(PATHS.BOOKS)}>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.BOOKS)}
+        sx={styles.buttonContainer}
+      >
         <ListItemIcon sx={styles.iconContainer}>
           <BookIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Books" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}
+        sx={styles.buttonContainer}
+      >
         <ListItemIcon sx={styles.iconContainer}>
           <VideogameAssetIcon sx={styles.icon} />
         </ListItemIcon>
@@ -57,18 +79,25 @@ export const SecondaryListItems = ({
   const logout = useLogout();
   const { iconColor } = theme.colors;
   const styles = {
+    ...rootStyles,
     iconContainer: {},
-    icon: { color: iconColor, ml: "5px" },
+    icon: { ...rootStyles.icon, color: iconColor },
   };
   return (
     <React.Fragment>
-      <ListItemButton onClick={() => handleNavigate(PATHS.FAVORITES)}>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.FAVORITES)}
+        sx={styles.buttonContainer}
+      >
         <ListItemIcon sx={styles.iconContainer}>
           <PentagramIcon sx={styles.icon} />
         </ListItemIcon>
         <ListItemText primary="Favorites" />
       </ListItemButton>
-      <ListItemButton onClick={() => handleNavigate(PATHS.SETTINGS)}>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.SETTINGS)}
+        sx={styles.buttonContainer}
+      >
         <ListItemIcon sx={styles.iconContainer}>
           <SettingsIcon sx={styles.icon} />
         </ListItemIcon>
@@ -76,6 +105,7 @@ export const SecondaryListItems = ({
       </ListItemButton>
       <ListItemButton
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
+        sx={styles.buttonContainer}
       >
         <ListItemIcon sx={styles.iconContainer}>
           <GhostIcon sx={styles.icon} />
