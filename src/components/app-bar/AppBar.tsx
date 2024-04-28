@@ -1,25 +1,27 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import { useLocation, useNavigate } from "react-router-dom";
+// Local
+import { isBlacklisted } from "./blacklist";
+import Toast from "../../features/toast/Toast";
+import { isLoggedIn } from "../../redux/helper";
+import { MainListItems, SecondaryListItems } from "./Options";
+import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
+import EerifyHoriz from "../../assets/icons/EerifyHoriz";
+import { useHandleNavigate } from "../../lib/react-router/hooks";
+import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
+import { PATHS } from "../../app-root/paths";
+// MUI Components
 import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { MainListItems, SecondaryListItems } from "./Options";
-import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
-import EerifyHoriz from "../../assets/icons/EerifyHoriz";
-import { PATHS } from "../../app-root/paths";
 import { Typography } from "@mui/material";
-import { useHandleNavigate } from "../../lib/react-router/hooks";
-import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
-import { useLocation, useNavigate } from "react-router-dom";
-import { isBlacklisted } from "./blacklist";
-import Toast from "../../features/toast/Toast";
-import { isLoggedIn } from "../../redux/helper";
+import Box from "@mui/material/Box";
 
 const drawerWidth: string = "240px";
 const toolbarHeight: string = "65px";
