@@ -21,7 +21,8 @@ const rootStyles = {
   },
   icon: {
     width: toolbarSize + "px",
-    height: toolbarSize / 2 + "px",
+    // Specifiy ratio of icon size to toolbar size
+    height: toolbarSize / 3 + "px",
     my: 2,
   },
 };

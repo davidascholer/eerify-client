@@ -19,8 +19,8 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const loggedIn = isLoggedIn();
   const toggleDrawer = () => {
     setOpen((prev) => {
-      if (prev === "EXPANDED") return "SHRUNK";
-      if (prev === "SHRUNK") return "HIDDEN";
+      if (prev === "EXPANDED") return "HIDDEN";
+      if (prev === "HIDDEN") return "SHRUNK";
       return "EXPANDED";
     });
   };
