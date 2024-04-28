@@ -14,28 +14,30 @@ import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app-root/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
 
+const rootStyles = {};
+
 export const MainListItems = () => {
   const theme = useTheme();
   const handleNavigate = useHandleNavigate();
   const { iconColor } = theme.colors;
-  const styles = { color: iconColor };
+  const styles = { color: iconColor, ...rootStyles };
 
   return (
     <React.Fragment>
       <ListItemButton onClick={() => handleNavigate(PATHS.FILM)}>
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <TheatersIcon sx={styles} />
         </ListItemIcon>
         <ListItemText primary="Film" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.BOOKS)}>
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <BookIcon color={styles.color} />
         </ListItemIcon>
         <ListItemText primary="Books" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}>
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <VideogameAssetIcon sx={styles} />
         </ListItemIcon>
         <ListItemText primary="Games" />
@@ -53,18 +55,18 @@ export const SecondaryListItems = ({
   const handleNavigate = useHandleNavigate();
   const logout = useLogout();
   const { iconColor } = theme.colors;
-  const styles = { color: iconColor };
+  const styles = { color: iconColor, ...rootStyles };
 
   return (
     <React.Fragment>
       <ListItemButton onClick={() => handleNavigate(PATHS.FAVORITES)}>
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <PentagramIcon color={styles.color} />
         </ListItemIcon>
         <ListItemText primary="Favorites" />
       </ListItemButton>
       <ListItemButton onClick={() => handleNavigate(PATHS.SETTINGS)}>
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <SettingsIcon sx={styles} />
         </ListItemIcon>
         <ListItemText primary="Settings" />
@@ -72,7 +74,7 @@ export const SecondaryListItems = ({
       <ListItemButton
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
       >
-        <ListItemIcon>
+        <ListItemIcon sx={styles}>
           <GhostIcon color={styles.color} />
         </ListItemIcon>
         <ListItemText primary={loggedIn ? "Log Out" : "Log In"} />

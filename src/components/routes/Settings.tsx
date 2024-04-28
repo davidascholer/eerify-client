@@ -29,28 +29,48 @@ const Settings = () => {
   };
 
   return (
-    <Box sx={{ m: 3 }}>
-      <Typography sx={[styles.spacing, { textAlign: "center" }]}>
-        Settings
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <Box sx={{ m: 3 }}>
+        <Typography sx={[styles.spacing, { textAlign: "center" }]}>
+          Settings
+        </Typography>
+        <Divider sx={{ m: 1, width: "100%" }} />
+        <List sx={styles.container}>
+          <ListItem sx={styles.spacing}>
+            <ListItemText>
+              <Typography>Color Mode</Typography>
+            </ListItemText>
+            <FormControlLabel
+              control={
+                <Switch
+                  {...label}
+                  onChange={togglecolorTheme}
+                  checked={isDarkTheme}
+                />
+              }
+              label={isDarkTheme ? "DARK" : "LIGHT"}
+            />
+          </ListItem>
+        </List>
+      </Box>
+      <Typography
+        sx={{
+          display: "flex",
+          fontFamily: "typeface Roboto",
+          justifyContent: "center",
+          alignItems: "center",
+          m: 1,
+          fontSize: "0.8rem",
+        }}
+      >
+        v{APP_VERSION}
       </Typography>
-      <Divider sx={{ m: 1, width: "100%" }} />
-      <List sx={styles.container}>
-        <ListItem sx={styles.spacing}>
-          <ListItemText>
-            <Typography>Color Mode</Typography>
-          </ListItemText>
-          <FormControlLabel
-            control={
-              <Switch
-                {...label}
-                onChange={togglecolorTheme}
-                checked={isDarkTheme}
-              />
-            }
-            label={isDarkTheme ? "DARK" : "LIGHT"}
-          />
-        </ListItem>
-      </List>
     </Box>
   );
 };
