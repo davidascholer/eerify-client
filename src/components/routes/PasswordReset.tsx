@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Theme } from "@mui/material/styles";
-import { Button, CircularProgress, Link, Typography } from "@mui/material";
+import { Button, Link, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import PasswordField from "../../features/user-auth/components/common/PasswordField";
@@ -12,6 +12,7 @@ import SubmitButton from "../../features/user-auth/components/common/SubmitButto
 import useResetPasswordConfirm from "../../features/user-auth/hooks/useResetPasswordConfirm";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
 import { PATHS } from "../../app-root/paths";
+import CenteredCircularProgress from "../loading/CenteredCircularProgress";
 
 // Styles for the form fields
 const styles = {
@@ -154,16 +155,7 @@ const PasswordReset: React.FC = () => {
                   <ConfirmPasswordField styles={styles.field} />
 
                   {loading ? (
-                    <Box
-                      sx={{
-                        display: "flex",
-                        width: "100%",
-                        justifyContent: "center",
-                        my: 2,
-                      }}
-                    >
-                      <CircularProgress />
-                    </Box>
+                    <CenteredCircularProgress />
                   ) : (
                     <>
                       <SubmitButton styles={{ my: 2 }} />

@@ -2,7 +2,7 @@
 import Root from "../components/routes/Root";
 import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
-import Games from "../components/routes/games/Games";
+import Games from "../components/routes/games/pages/Games";
 import Books from "../components/routes/Books";
 import Activate from "../components/routes/Activate";
 import PasswordReset from "../components/routes/PasswordReset";
@@ -13,7 +13,7 @@ import ReactRouterWrapper from "../lib/react-router/ReactRouterWrapper";
 import Notifications from "../components/routes/Notifications";
 import Favorites from "../components/routes/Favorites";
 import { PATHS } from "./paths";
-import GamesDetail from "../components/routes/games/GamesDetail";
+import GamesDetail from "../components/routes/games/pages/GamesDetail";
 import GamesLayout from "../components/routes/games/GamesLayout";
 
 const routes = [

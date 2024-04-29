@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import useLogin from "../../hooks/useLogin";
 import EmailField from "../common/EmailField";
@@ -18,6 +18,7 @@ import * as yup from "yup";
 import useSendResetPasswordEmail from "../../hooks/useSendResetPasswordEmail";
 import useResendResetPasswordEmail from "../../hooks/useResendResetPasswordEmail";
 import { PATHS } from "../../../../app-root/paths";
+import CenteredCircularProgress from "../../../../components/loading/CenteredCircularProgress";
 
 // Styles for the form fields
 const styles = {
@@ -289,16 +290,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
                 </>
               )}
               {loading ? (
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    my: 2,
-                  }}
-                >
-                  <CircularProgress />
-                </Box>
+                <CenteredCircularProgress />
               ) : (
                 <>
                   <SubmitButton styles={{ my: 2 }} />

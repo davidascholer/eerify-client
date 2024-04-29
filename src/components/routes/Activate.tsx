@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState, type PropsWithChildren } from "react";
-import { Box, Button, CircularProgress, Link, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
 import useUserActivation from "../../features/user-auth/hooks/useUserActivation";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../app-root/paths";
+import CenteredCircularProgress from "../loading/CenteredCircularProgress";
 
 const styles = {
   container: {
@@ -52,18 +51,7 @@ const Activate: React.FC<PropsWithChildren> = () => {
       <Link href="/">
         <EerifyLogo sx={styles.image} />
       </Link>
-      {activationSuccessful === null ? (
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "center",
-            my: 2,
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      ) : null}
+      {activationSuccessful === null ? <CenteredCircularProgress /> : null}
       {activationSuccessful === false ? (
         <>
           <Typography sx={{ m: 2 }}>{message}</Typography>

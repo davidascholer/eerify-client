@@ -5,12 +5,12 @@ const styles = {
   container: {},
 };
 
-const GamesNavigation: React.FC<PropsWithChildren> = () => {
+const GamesSearchBar: React.FC<PropsWithChildren> = () => {
   return (
     <Box style={styles.container}>
-      <Typography>GamesNavigation</Typography>
+      <Typography>GamesSearchBar</Typography>
     </Box>
   );
 };
 
-export default GamesNavigation;
+export default GamesSearchBar;

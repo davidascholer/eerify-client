@@ -3,11 +3,11 @@ export const rootAPI = "https://api.rawg.io/api/";
 
 const appendToken = (endpoint: string) => endpoint + "?" + token + "/";
 
-export const GAMES_ENDPOINTS = {
+const GAMES_ENDPOINTS = {
   games: appendToken("games"),
   game: appendToken("games/:id"),
   gameScreenshots: appendToken("games/:id/screenshots"),
-  // Returns the same response as games, but filtered by the game series e.g. Resident Evil 2 -> Resident Evil.
+  // Returns the same response as games, but filtered by the game series e.g. Resident Evil -> Resident Evil.
   gameSeries: appendToken("games/:id/game-series"),
   gameStores: appendToken("games/:id/stores"),
   platforms: appendToken("platforms"),
@@ -16,3 +16,5 @@ export const GAMES_ENDPOINTS = {
   genres: appendToken("genres"),
   genre: appendToken("genres/:id"),
 };
+
+export default GAMES_ENDPOINTS;
