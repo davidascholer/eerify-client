@@ -2,7 +2,7 @@ export const PATHS = {
   // part of side bar
   ROOT: "/",
   FILM: "/film",
-  VIDEO_GAMES: "/games",
+  GAMES: "/games",
   BOOKS: "/books",
   USER_AUTH: "/user-auth",
   SETTINGS: "/settings",

@@ -7,8 +7,8 @@ import usePlatforms from "../hooks/usePlatforms";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../lib/redux-toolkit/hooks";
-import { setPlatformId } from "../../../../redux/slices/gamesSlice";
+} from "../../../../../lib/redux-toolkit/hooks";
+import { setPlatformId } from "../../../../../redux/slices/gamesSlice";
 import { useState } from "react";
 
 const PlatformSelector = () => {

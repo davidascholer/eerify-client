@@ -3,8 +3,8 @@ import { BsChevronDown } from "react-icons/bs";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../lib/redux-toolkit/hooks";
-import { setSortOrder } from "../../../../redux/slices/gamesSlice";
+} from "../../../../../lib/redux-toolkit/hooks";
+import { setSortOrder } from "../../../../../redux/slices/gamesSlice";
 import { useState } from "react";
 
 const SortSelector = () => {

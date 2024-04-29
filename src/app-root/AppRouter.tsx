@@ -2,19 +2,19 @@
 import Root from "../components/routes/Root";
 import Home from "../components/routes/Home";
 import Film from "../components/routes/Film";
-import GamesMain from "../components/routes/video-games/pages/Main";
+import Games from "../components/routes/games/Games";
 import Books from "../components/routes/Books";
 import Activate from "../components/routes/Activate";
 import PasswordReset from "../components/routes/PasswordReset";
 import UserAuth from "../components/routes/UserAuth";
 import Settings from "../components/routes/Settings";
 import ErrorPage from "../components/routes/ErrorPage";
-import GameDetailPage from "../components/routes/video-games/pages/GameDetailPage";
-import Layout from "../components/routes/video-games/pages/Layout";
 import ReactRouterWrapper from "../lib/react-router/ReactRouterWrapper";
 import Notifications from "../components/routes/Notifications";
 import Favorites from "../components/routes/Favorites";
 import { PATHS } from "./paths";
+import GamesDetail from "../components/routes/games/GamesDetail";
+import GamesLayout from "../components/routes/games/GamesLayout";
 
 const routes = [
   {
@@ -31,12 +31,12 @@ const routes = [
         element: <Film />,
       },
       {
-        path: PATHS.VIDEO_GAMES,
-        element: <Layout />,
+        path: PATHS.GAMES,
+        element: <GamesLayout />,
         errorElement: <ErrorPage />,
         children: [
-          { index: true, element: <GamesMain /> },
-          { path: PATHS.VIDEO_GAMES + "/:slug", element: <GameDetailPage /> },
+          { index: true, element: <Games /> },
+          { path: PATHS.GAMES + "/:slug", element: <GamesDetail /> },
         ],
       },
       {

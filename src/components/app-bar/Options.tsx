@@ -69,7 +69,7 @@ export const MainListItems = () => {
         />
       </ListItemButton>
       <ListItemButton
-        onClick={() => handleNavigate(PATHS.VIDEO_GAMES)}
+        onClick={() => handleNavigate(PATHS.GAMES)}
         sx={styles.buttonContainer}
       >
         <ListItemIcon sx={styles.iconContainer}>

@@ -2,8 +2,8 @@ import { Input, FormGroup } from "@mui/material";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { setSearchText } from "../../../../redux/slices/gamesSlice";
-import { useAppDispatch } from "../../../../lib/redux-toolkit/hooks";
+import { setSearchText } from "../../../../../redux/slices/gamesSlice";
+import { useAppDispatch } from "../../../../../lib/redux-toolkit/hooks";
 
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);

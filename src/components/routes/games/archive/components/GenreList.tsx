@@ -12,8 +12,8 @@ import getCroppedImageUrl from "../services/image-url";
 import {
   useAppSelector,
   useAppDispatch,
-} from "../../../../lib/redux-toolkit/hooks";
-import { setGenreId } from "../../../../redux/slices/gamesSlice";
+} from "../../../../../lib/redux-toolkit/hooks";
+import { setGenreId } from "../../../../../redux/slices/gamesSlice";
 
 const GenreList = () => {
   const dispatch = useAppDispatch();
