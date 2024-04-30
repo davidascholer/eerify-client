@@ -1,6 +1,6 @@
 import React, { type PropsWithChildren } from "react";
 import { Box, Typography } from "@mui/material";
-import useGamesQuery from "../hooks/useGames";
+import useGamesQuery from "../hooks/useGamesQuery";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 
 const styles = {

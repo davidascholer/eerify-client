@@ -58,7 +58,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         </>
       )}
       {/* Main content */}
-      <Box sx={{ mt: toolbarSize + "px", display: "flex", width: "100%" }}>
+      <Box sx={{ mt: toolbarSize + "px", width: "100%", overflow: "scroll" }}>
         {children}
       </Box>
       <Toast

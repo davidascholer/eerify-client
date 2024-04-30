@@ -1,7 +1,7 @@
-const token = "key=1e65aff34d6b4ca3be4056fb868c7afc";
-export const rootAPI = "https://api.rawg.io/api/";
+const token = "key=" + import.meta.env.VITE_GAMES_API_KEY;
+export const ROOT_API = import.meta.env.VITE_GAMES_API_ADDRESS;
 
-const appendToken = (endpoint: string) => endpoint + "?" + token + "/";
+const appendToken = (endpoint: string) => endpoint + "?" + token;
 
 const GAMES_ENDPOINTS = {
   games: appendToken("games"),

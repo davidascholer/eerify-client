@@ -1,14 +1,14 @@
 import ms from "ms";
-import APIClient from "../../../../lib/react-query/services/api-client";
 import useReactQuery from "../../../../lib/react-query/useReactQuery";
 import GAMES_ENDPOINTS from "../utils/endpoints";
 import { ResponseInterface } from "../utils/interface";
 import { devDebug } from "../utils/logger";
+import GamesAPIClient from "../services/games-api-client";
 
 // Create an  instance of the API client custom to login
 const gamesClient = (filter: string) => {
   const url: string = `/${filter}`;
-  const client = new APIClient(url);
+  const client = new GamesAPIClient(url);
   return client;
 };
 
