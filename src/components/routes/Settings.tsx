@@ -42,10 +42,15 @@ const Settings = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        minHeight: "100%",
         width: "100%",
       }}
     >
-      <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
         <Box>
           <Typography sx={styles.header}>Settings</Typography>
           <Divider
