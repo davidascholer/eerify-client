@@ -8,7 +8,7 @@ import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 // MUI Components
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import NavBar from "./NavBar";
+import NavDrawer from "./NavDrawer";
 import { AppBarStateType } from "./types";
 import { toolbarSize } from "./config";
 import CustomToolbar from "./CustomToolbar";
@@ -36,30 +36,41 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   // }, [location.pathname]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        minHeight: "100vh",
-      }}
-    >
-      {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
-        <>
-          {/* Topbar */}
-          <MuiAppBar
-            elevation={0}
-            sx={{
-              zIndex: (theme) => theme.zIndex.drawer + 1,
-            }}
-          >
-            <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
-          </MuiAppBar>
-          {/* Sidebar */}
-          <NavBar openState={open} isLoggedIn={loggedIn} />
-        </>
-      )}
-      {/* Main content */}
-      <Box sx={{ mt: toolbarSize + "px", width: "100%", overflow: "scroll" }}>
-        {children}
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
+          <>
+            {/* Topbar */}
+            <MuiAppBar
+              elevation={0}
+              sx={{
+                zIndex: (theme) => theme.zIndex.drawer + 1,
+              }}
+            >
+              <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
+            </MuiAppBar>
+          </>
+        )}
+        {/* <Box sx={{ display: "flex" }}> */}
+        {/* Sidebar */}
+        <NavDrawer openState={open} isLoggedIn={loggedIn} />
+        {/* Main content */}
+        <Box
+          sx={{
+            mt: toolbarSize + "px",
+            width: "100%",
+            overflowY: "scroll",
+            scrollbarWidth: "none",
+          }}
+        >
+          {children}
+        </Box>
       </Box>
       <Toast
         msg={message ? message : ""}
@@ -68,7 +79,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
           navigate(location.pathname, { replace: true });
         }}
       />
-    </Box>
+    </>
   );
 };
 

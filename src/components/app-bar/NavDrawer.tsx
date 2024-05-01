@@ -48,7 +48,7 @@ const Drawer = styled(MUIDrawer, {
   },
 }));
 
-const NavBar = ({
+const NavDrawer = ({
   openState,
   isLoggedIn,
 }: {
@@ -57,9 +57,14 @@ const NavBar = ({
 }) => {
   const theme = useTheme();
   return (
-    <Drawer variant="permanent" openState={openState} theme={theme}>
+    <Drawer
+      variant="permanent"
+      openState={openState}
+      theme={theme}
+      sx={{ overflow: "hidden" }}
+    >
       {/* Drawer items */}
-      <List component="nav" sx={{ p: 0 }}>
+      <List component="nav" sx={{ p: 0, height: "100%" }}>
         <MainListItems />
         <Divider
           variant="middle"
@@ -70,4 +75,4 @@ const NavBar = ({
     </Drawer>
   );
 };
-export default NavBar;
+export default NavDrawer;
