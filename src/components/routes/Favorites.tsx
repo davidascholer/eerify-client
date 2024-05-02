@@ -5,7 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import TheatersIcon from "@mui/icons-material/Theaters";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 import Book from "../../assets/icons/Book";
 import { useNavigate } from "react-router-dom";
 
@@ -76,20 +76,28 @@ const Card = ({
   onPress: () => void;
 }) => {
   return (
-    <AccordionDetails onClick={onPress}>
-      <Typography>{title}</Typography>
-      <Box
-        component="img"
+    <>
+      <Divider
         sx={{
-          // height: 233,
-          // width: 350,
-          maxHeight: { xs: 233, md: 167 },
-          maxWidth: { xs: 350, md: 250 },
+          borderColor: (theme) => theme.colors.colorPalette.blue,
+          m: 2,
         }}
-        alt={title}
-        src={poster}
       />
-    </AccordionDetails>
+      <AccordionDetails onClick={onPress}>
+        <Typography>{title}</Typography>
+        <Box
+          component="img"
+          sx={{
+            // height: 233,
+            // width: 350,
+            maxHeight: { xs: 233, md: 167 },
+            maxWidth: { xs: 350, md: 250 },
+          }}
+          alt={title}
+          src={poster}
+        />
+      </AccordionDetails>
+    </>
   );
 };
 
@@ -103,7 +111,9 @@ const Summary = ({
   return (
     <AccordionSummary
       expandIcon={
-        <ExpandMoreIcon sx={{ color: (theme) => theme.colors.iconColor }} />
+        <ExpandMoreIcon
+          sx={{ color: (theme) => theme.colors.colorPalette.blue }}
+        />
       }
       aria-controls="panel1-content"
       id="panel1-header"
@@ -133,7 +143,7 @@ export default function Favorites() {
         <Accordion defaultExpanded>
           <Summary title="Film">
             <TheatersIcon
-              sx={[styles.icon, { color: theme.colors.iconColor }]}
+              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
             />
           </Summary>
           <AccordionDetails>
@@ -151,7 +161,9 @@ export default function Favorites() {
       {testBooks.length > 0 ? (
         <Accordion defaultExpanded>
           <Summary title="Books">
-            <Book sx={[styles.icon, { color: theme.colors.iconColor }]} />
+            <Book
+              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
+            />
           </Summary>
           <AccordionDetails>
             {testBooks.map((film) => (
@@ -169,7 +181,7 @@ export default function Favorites() {
         <Accordion defaultExpanded>
           <Summary title="Games">
             <VideogameAssetIcon
-              sx={[styles.icon, { color: theme.colors.iconColor }]}
+              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
             />
           </Summary>
           <AccordionDetails>
