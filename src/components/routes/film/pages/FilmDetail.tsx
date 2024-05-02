@@ -5,12 +5,12 @@ const styles = {
   container: {},
 };
 
-const Film: React.FC<PropsWithChildren> = () => {
+const FilmDetail: React.FC<PropsWithChildren> = () => {
   return (
     <Box style={styles.container}>
-      <Typography>Film</Typography>
+      <Typography>FilmDetail</Typography>
     </Box>
   );
 };
 
-export default Film;
+export default FilmDetail;

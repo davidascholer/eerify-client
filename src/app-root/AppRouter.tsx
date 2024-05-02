@@ -2,7 +2,6 @@
 import { PATHS } from "./paths";
 import Root from "../components/routes/Root";
 import Home from "../components/routes/Home";
-import Film from "../components/routes/Film";
 import Games from "../components/routes/games/pages/Games";
 import Activate from "../components/routes/Activate";
 import PasswordReset from "../components/routes/PasswordReset";
@@ -17,6 +16,9 @@ import GamesLayout from "../components/routes/games/GamesLayout";
 import BooksLayout from "../components/routes/books/BooksLayout";
 import BookDetail from "../components/routes/books/pages/BookDetail";
 import Books from "../components/routes/books/pages/Books";
+import FilmLayout from "../components/routes/film/FilmLayout";
+import FilmDetail from "../components/routes/film/pages/FilmDetail";
+import Film from "../components/routes/film/pages/Film";
 
 const routes = [
   {
@@ -30,7 +32,12 @@ const routes = [
       },
       {
         path: PATHS.FILM,
-        element: <Film />,
+        element: <FilmLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Film /> },
+          { path: PATHS.FILM + "/:slug", element: <FilmDetail /> },
+        ],
       },
       {
         path: PATHS.GAMES,
