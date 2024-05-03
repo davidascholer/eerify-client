@@ -1,20 +1,13 @@
-const token = "key=" + import.meta.env.VITE_BOOKS_API_KEY;
 export const ROOT_API = import.meta.env.VITE_BOOKS_API_ADDRESS;
 
-const appendToken = (endpoint: string) => endpoint + "?" + token;
+import { RESULT_COUNT } from "./constants";
 
-const BOOKS_ENDPOINTS = {
-  books: appendToken("books"),
-  book: appendToken("books/:id"),
-  // bookScreenshots: appendToken("books/:id/screenshots"),
-  // // Returns the same response as books, but filtered by the book series e.g. Resident Evil -> Resident Evil.
-  // bookSeries: appendToken("books/:id/book-series"),
-  // bookStores: appendToken("books/:id/stores"),
-  // platforms: appendToken("platforms"),
-  // platform: appendToken("platform/:id"),
-  // platformParents: appendToken("platforms/lists/parents"),
-  // genres: appendToken("genres"),
-  // genre: appendToken("genres/:id"),
+export const BOOKS_ENDPOINTS = {
+  books: "books",
+  book: "books/:id",
 };
 
-export default BOOKS_ENDPOINTS;
+export const booksQuery = (query: string | undefined) =>
+  BOOKS_ENDPOINTS.books + '&q="' + query
+    ? query
+    : '"' + "&maxResults=" + RESULT_COUNT;
