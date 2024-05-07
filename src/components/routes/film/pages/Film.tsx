@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import useFilmQuery from "../hooks/useFilmQuery";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { FilmResultInterface, FilmResponseInterface } from "../utils/interface";
-import SearchBar from "../../../common/SearchBar";
+import SearchBar from "../../../search-bar/SearchBar";
 
 const styles = {
   container: {},

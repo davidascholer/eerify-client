@@ -4,16 +4,9 @@ import TextField from "@mui/material/TextField";
 import { Autocomplete, IconButton } from "@mui/material";
 import { Cancel, Search } from "@mui/icons-material";
 import { toolbarSize } from "../app-bar/config";
+import { SearchBarType } from "./interface";
+import { KEY_PRESS_TIMEOUT, MAX_SUGGESTION_LIMIT } from "./config";
 
-const MAX_SUGGESTION_LIMIT = 8;
-
-type SearchBarType = {
-  handleOnChange: (value: string) => void;
-  handleOnSearch: () => void;
-  setUpdateFlag: () => void;
-  optionList: string[];
-  sx?: object;
-};
 const SearchBar: React.FC<SearchBarType> = ({
   handleOnChange,
   handleOnSearch,
@@ -29,7 +22,7 @@ const SearchBar: React.FC<SearchBarType> = ({
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       handleOnChange(searchText);
-    }, 750);
+    }, KEY_PRESS_TIMEOUT);
 
     return () => {
       clearTimeout(timeout);

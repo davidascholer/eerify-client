@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import { toolbarSize } from "./config";
-import SearchBar from "../common/SearchBar";
+import SearchBar from "../search-bar/SearchBar";
 
 const CustomToolbar = ({
   toggleDrawer,
