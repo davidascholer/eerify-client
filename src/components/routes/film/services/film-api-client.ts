@@ -1,12 +1,14 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { ROOT_API } from "../utils/endpoints";
+import { ROOT_API, TOKEN } from "../utils/endpoints";
 
 const axiosInstance = () =>
   axios.create({
     baseURL: ROOT_API,
+    headers: {
+      Authorization: TOKEN,
+    },
   });
-
-class BooksAPIClient<T> {
+class FilmAPIClient<T> {
   filter: string;
 
   constructor(filter: string) {
@@ -23,4 +25,4 @@ class BooksAPIClient<T> {
   };
 }
 
-export default BooksAPIClient;
+export default FilmAPIClient;

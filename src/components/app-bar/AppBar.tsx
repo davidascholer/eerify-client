@@ -57,7 +57,6 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
             </MuiAppBar>
           </>
         )}
-        {/* <Box sx={{ display: "flex" }}> */}
         {/* Sidebar */}
         <NavDrawer openState={open} isLoggedIn={loggedIn} />
         {/* Main content */}

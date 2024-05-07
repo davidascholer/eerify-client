@@ -1,11 +1,9 @@
-const token = "key=" + import.meta.env.VITE_FILM_API_KEY;
+export const TOKEN = "bearer " + import.meta.env.VITE_FILM_API_KEY;
 export const ROOT_API = import.meta.env.VITE_FILM_API_ADDRESS;
 
-const appendToken = (endpoint: string) => endpoint + "?" + token;
-
 const FILM_ENDPOINTS = {
-  films: appendToken("film"),
-  film: appendToken("film/:id"),
+  films: "film",
+  film: "film/:id",
   // bookScreenshots: appendToken("books/:id/screenshots"),
   // // Returns the same response as books, but filtered by the book series e.g. Resident Evil -> Resident Evil.
   // bookSeries: appendToken("books/:id/book-series"),

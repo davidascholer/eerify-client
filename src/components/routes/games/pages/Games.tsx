@@ -16,6 +16,9 @@ const Games: React.FC<PropsWithChildren> = () => {
 
   return (
     <Box style={styles.container}>
+      {/* {
+        data.results.map((game) => ()
+      } */}
       <Typography>{JSON.stringify(data)}</Typography>
     </Box>
   );

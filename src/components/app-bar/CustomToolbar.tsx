@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import { toolbarSize } from "./config";
+import SearchBar from "../common/SearchBar";
 
 const CustomToolbar = ({
   toggleDrawer,
@@ -76,6 +77,13 @@ const CustomToolbar = ({
           />
         </IconButton>
       </Box>
+      <SearchBar
+        handleOnChange={() => {}}
+        handleOnSearch={() => {}}
+        setUpdateFlag={() => {}}
+        optionList={["one", "two", "three"]}
+        sx={{ width: "50%" }}
+      />
       <Box
         sx={{
           display: "flex",

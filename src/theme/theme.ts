@@ -7,6 +7,25 @@ import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 type ColorPaletteType = {
   blue: string;
+  blueOpaque: (
+    opacity:
+      | "0"
+      | "1"
+      | "2"
+      | "3"
+      | "4"
+      | "5"
+      | "6"
+      | "7"
+      | "8"
+      | "9"
+      | "a"
+      | "b"
+      | "c"
+      | "d"
+      | "e"
+      | "f"
+  ) => string;
   dark: string;
   deepBlue: string;
   darkBlue: string;
@@ -15,6 +34,7 @@ type ColorPaletteType = {
 
 export const colorPalette: ColorPaletteType = {
   blue: "#007ed2",
+  blueOpaque: (opacity) => "#007ed2" + opacity + opacity,
   dark: "#00060a",
   deepBlue: "#015893",
   darkBlue: "#00497a",

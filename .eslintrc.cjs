@@ -21,6 +21,11 @@ module.exports = {
     "no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
+    "no-unused-vars": ["error", { argsIgnorePattern: /^_/u }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "params" },
+    ],
     // 'react-refresh/only-export-components': [
     //   'warn',
     //   { allowConstantExport: true },

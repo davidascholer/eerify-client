@@ -2,7 +2,7 @@ export const ROOT_API = import.meta.env.VITE_BOOKS_API_ADDRESS;
 
 import { RESULT_COUNT } from "./constants";
 
-export const BOOKS_ENDPOINTS = {
+const BOOKS_ENDPOINTS = {
   books: "books",
   book: "books/:id",
 };
@@ -10,4 +10,6 @@ export const BOOKS_ENDPOINTS = {
 export const booksQuery = (query: string | undefined) =>
   BOOKS_ENDPOINTS.books + '&q="' + query
     ? query
-    : '"' + "&maxResults=" + RESULT_COUNT;
+    : '"' + "+subject:horror&maxResults=" + RESULT_COUNT;
+
+export default BOOKS_ENDPOINTS;

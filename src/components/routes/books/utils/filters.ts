@@ -6,7 +6,7 @@ import { LanguageType } from "./interface";
 // Omitting: subject, isbn, lccn, oclc
 
 export const QUERY_FILTERS = {
-  // Search queries must be called first and only one.
+  // Search queries must be called first.
   // e.g. q=+intitle:"harry+potter" OR q=+inauthor:"rowling"
   searchTitle: (search: string) => "+intitle=" + search,
   searchAuthor: (search: string) => "+inauthor=" + search,
@@ -19,3 +19,14 @@ export const QUERY_FILTERS = {
   orderBy: (field: "relevance" | "newest") => "&orderBy=" + field,
   printType: (field: "all" | "books" | "magazines") => "&printType=" + field,
 };
+
+// Poster path =  https://image.tmdb.org/t/p/w185/ + poster_path
+/*
+  "w45",
+  "w92",
+  "w154",
+  "w185",
+  "w300",
+  "w500",
+  "original"
+  */
