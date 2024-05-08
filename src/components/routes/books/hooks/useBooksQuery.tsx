@@ -15,9 +15,9 @@ const BooksClient = (filter: string) => {
 };
 
 // Create a hook that makes the query to the API
-const useBooksQuery = () => {
+const useBooksQuery = ({ searchQuery = "" }) => {
   const fetchBooks = async () => {
-    const client = BooksClient(QUERY_FILTERS.searchTitle("star wars"));
+    const client = BooksClient(QUERY_FILTERS.searchTitle(searchQuery));
     devDebug("BooksClient", client);
     try {
       // const result = data;
@@ -31,10 +31,11 @@ const useBooksQuery = () => {
 
   // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
   return useReactQuery({
-    queryKey: BOOKS_ENDPOINTS.books.split("/"),
+    queryKey: [...BOOKS_ENDPOINTS.books.split("/"), { searchQuery }],
     queryFn: fetchBooks,
     refetchOnWindowFocus: false,
     staleTime: ms("24h"),
+    enabled: searchQuery.length > 0,
   });
 };
 

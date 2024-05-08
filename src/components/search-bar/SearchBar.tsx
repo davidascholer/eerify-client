@@ -1,18 +1,18 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Autocomplete, IconButton } from "@mui/material";
+import { Autocomplete, CircularProgress, IconButton } from "@mui/material";
 import { Cancel, Search } from "@mui/icons-material";
 import { toolbarSize } from "../app-bar/config";
 import { SearchBarType } from "./interface";
 import { KEY_PRESS_TIMEOUT, MAX_SUGGESTION_LIMIT } from "./config";
 
 const SearchBar: React.FC<SearchBarType> = ({
-  handleOnChange,
-  handleOnSearch,
-  setUpdateFlag,
   sx: propStyles = {},
   optionList,
+  handleOnChange,
+  handleOnSubmit,
+  loading,
 }) => {
   const [searchText, setSearchText] = React.useState<string>("");
   const [showSearchAdornment, setShowSearchAdornment] =
@@ -83,15 +83,19 @@ const SearchBar: React.FC<SearchBarType> = ({
           }
           onInputChange={(e) => {
             const text = (e?.target as HTMLInputElement)?.value;
-
             if (typeof text === "string") setSearchText(text);
           }}
           onChange={(e, value) => {
-            setSearchText(() => (value ? value : ""));
-            setUpdateFlag();
+            if (typeof value === "string") {
+              handleOnSubmit(value);
+              setSearchText(value);
+            }
           }}
           clearIcon={
             <Cancel
+              onClick={() => {
+                setSearchText("");
+              }}
               sx={{
                 fill: (theme) => theme.colors.colorPalette.blueOpaque("a"),
                 p: 0,
@@ -136,8 +140,12 @@ const SearchBar: React.FC<SearchBarType> = ({
           alignItems: "center",
         }}
       >
-        <IconButton onClick={handleOnSearch}>
-          <Search />
+        <IconButton
+          onClick={() => {
+            handleOnSubmit(searchText);
+          }}
+        >
+          {loading ? <CircularProgress sx={{ padding: 1 }} /> : <Search />}
         </IconButton>
       </Box>
     </Box>

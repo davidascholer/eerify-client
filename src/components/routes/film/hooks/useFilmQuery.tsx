@@ -35,6 +35,7 @@ const useFilmQuery = ({ searchQuery = "" }) => {
     queryFn: fetchFilms,
     refetchOnWindowFocus: false,
     staleTime: ms("24h"),
+    enabled: searchQuery.length > 0,
   });
 };
 

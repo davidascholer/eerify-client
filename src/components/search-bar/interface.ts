@@ -1,7 +1,7 @@
 export type SearchBarType = {
+  handleOnSubmit: (value: string) => void;
   handleOnChange: (value: string) => void;
-  handleOnSearch: () => void;
-  setUpdateFlag: () => void;
   optionList: string[];
   sx?: object;
+  loading?: boolean;
 };
