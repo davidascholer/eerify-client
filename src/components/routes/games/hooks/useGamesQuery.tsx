@@ -1,9 +1,10 @@
 import ms from "ms";
 import useReactQuery from "../../../../lib/react-query/useReactQuery";
 import GAMES_ENDPOINTS from "../utils/endpoints";
-import { ResponseInterface } from "../utils/interface";
+import { GamesResponseInterface } from "../utils/interface";
 import { devDebug } from "../utils/logger";
 import GamesAPIClient from "../services/games-api-client";
+import { GAMES_FILTERS } from "../utils/filters";
 
 // Create an  instance of the API client custom to login
 const gamesClient = (filter: string) => {
@@ -13,12 +14,12 @@ const gamesClient = (filter: string) => {
 };
 
 // Create a hook that makes the query to the API
-const useGamesQuery = () => {
+const useGamesQuery = ({ searchQuery = "" }) => {
   const fetchGames = async () => {
-    const client = gamesClient(GAMES_ENDPOINTS.games);
+    const client = gamesClient(GAMES_FILTERS.search(searchQuery));
     devDebug("gamesClient", client);
     try {
-      const result: ResponseInterface = await client.get();
+      const result: GamesResponseInterface = await client.get();
       return result;
     } catch (e) {
       console.error("useGetUser error:", e);
@@ -28,10 +29,11 @@ const useGamesQuery = () => {
 
   // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
   return useReactQuery({
-    queryKey: GAMES_ENDPOINTS.games.split("/"),
+    queryKey: [...GAMES_ENDPOINTS.games.split("/"), { searchQuery }],
     queryFn: fetchGames,
     refetchOnWindowFocus: false,
     staleTime: ms("24h"),
+    enabled: searchQuery.length > 0,
   });
 };
 

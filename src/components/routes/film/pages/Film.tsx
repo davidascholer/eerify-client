@@ -15,15 +15,15 @@ const Film: React.FC<PropsWithChildren> = () => {
   const searchParams = useSearchParams()[0];
 
   React.useEffect(() => {
-    const filmQuery = searchParams.get("film-query");
-    if (filmQuery) {
-      setQueryText(filmQuery);
+    const query = searchParams.get("search");
+    if (query) {
+      setQueryText(query);
     } else {
       setQueryText("");
     }
   }, [searchParams]);
 
-  if (isLoading) return <CenteredCircularProgress />;
+  if (isLoading && queryText !== "") return <CenteredCircularProgress />;
 
   return (
     <Box style={styles.container}>

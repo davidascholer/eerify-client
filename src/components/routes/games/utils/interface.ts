@@ -1,18 +1,18 @@
-export interface ResponseInterface {
+export interface GamesResponseInterface {
   count: number;
   next: string | null;
   previous: string | null;
   results: Array<
-    | GameResponseInterface
-    | GenreResponseInterface
-    | PlatformResponseInterface
-    | PlatformsParentResponseInterface
-    | GamesStoresResponseInterface
-    | GamesScreenshotsResponseInterface
+    | GameResult
+    | GenreResult
+    | PlatformResult
+    | PlatformsParentResult
+    | GamesStoresResult
+    | GamesScreenshotsResult
   >;
 }
 
-export interface GameResponseInterface {
+export interface GameResult {
   id: number;
   slug: string; //Format = ^[-a-zA-Z0-9_]+$
   name: string;
@@ -53,10 +53,10 @@ export interface GameResponseInterface {
   additions_count?: number;
   game_series_count?: number;
   esrb_rating?: object | null;
-  platforms?: Array<PlatformResponseInterface>;
+  platforms?: Array<PlatformResult>;
 }
 
-export interface GamesScreenshotsResponseInterface {
+export interface GamesScreenshotsResult {
   id: number;
   image?: string; // up to 20mb
   hidden?: boolean; // default false
@@ -64,14 +64,14 @@ export interface GamesScreenshotsResponseInterface {
   height?: number;
 }
 
-export interface GamesStoresResponseInterface {
+export interface GamesStoresResult {
   id: number;
   game_id?: string;
   store_id?: string;
   url?: string;
 }
 
-export interface GenreResponseInterface {
+export interface GenreResult {
   id: number;
   name: string; //max 100 chars
   slug?: string; //formate = ^[-a-zA-Z0-9_]+$
@@ -80,7 +80,7 @@ export interface GenreResponseInterface {
   description: string;
 }
 
-export interface PlatformResponseInterface {
+export interface PlatformResult {
   id: number;
   name: string; //Format = ^[-a-zA-Z0-9_]+$
   slug?: string;
@@ -91,11 +91,11 @@ export interface PlatformResponseInterface {
   year_end?: number | null;
 }
 
-export interface PlatformsParentResponseInterface {
+export interface PlatformsParentResult {
   id: number;
   name: string; //Format = ^[-a-zA-Z0-9_]+$
   slug?: string;
-  platforms?: Array<PlatformResponseInterface>;
+  platforms?: Array<PlatformResult>;
 }
 
 export interface Ratings {

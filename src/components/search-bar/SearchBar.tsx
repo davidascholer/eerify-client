@@ -144,6 +144,7 @@ const SearchBar: React.FC<SearchBarType> = ({
           onClick={() => {
             handleOnSubmit(searchText);
           }}
+          disabled={loading}
         >
           {loading ? <CircularProgress sx={{ padding: 1 }} /> : <Search />}
         </IconButton>
