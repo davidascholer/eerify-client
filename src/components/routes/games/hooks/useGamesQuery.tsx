@@ -29,7 +29,7 @@ const useGamesQuery = ({ searchQuery = "" }) => {
 
   // https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
   return useReactQuery({
-    queryKey: [...GAMES_ENDPOINTS.games.split("/"), { searchQuery }],
+    queryKey: ["games", { searchQuery }],
     queryFn: fetchGames,
     refetchOnWindowFocus: false,
     staleTime: ms("24h"),

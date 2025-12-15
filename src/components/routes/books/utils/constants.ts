@@ -1,6 +1,6 @@
 import { LanguageCodes } from "./interface";
 
-// 1- 40
+// Default:10, Limit:40
 export const RESULT_COUNT = 20;
 
 export const LANGUAGES: LanguageCodes = [

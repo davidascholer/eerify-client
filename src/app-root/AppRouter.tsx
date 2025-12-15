@@ -2,7 +2,7 @@
 import { PATHS } from "./paths";
 import Root from "../components/routes/Root";
 import Home from "../components/routes/Home";
-import Games from "../components/routes/games/pages/Games";
+import Games from "../components/routes/games/pages/GamesInfiniteScroll";
 import Activate from "../components/routes/Activate";
 import PasswordReset from "../components/routes/PasswordReset";
 import UserAuth from "../components/routes/UserAuth";
@@ -13,12 +13,12 @@ import Notifications from "../components/routes/Notifications";
 import Favorites from "../components/routes/Favorites";
 import GamesDetail from "../components/routes/games/pages/GamesDetail";
 import GamesLayout from "../components/routes/games/GamesLayout";
-import BooksLayout from "../components/routes/books/BooksLayout";
 import BookDetail from "../components/routes/books/pages/BookDetail";
-import Books from "../components/routes/books/pages/Books";
 import FilmLayout from "../components/routes/film/FilmLayout";
 import FilmDetail from "../components/routes/film/pages/FilmDetail";
-import Film from "../components/routes/film/pages/Film";
+import Film from "../components/routes/film/pages/FilmInfiniteScroll";
+import BooksLayout from "../components/routes/books/BooksLayout";
+import Books from "../components/routes/books/pages/BooksInfiniteScroll";
 
 const routes = [
   {

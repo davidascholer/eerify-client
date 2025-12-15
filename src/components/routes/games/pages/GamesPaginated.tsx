@@ -1,10 +1,8 @@
 import React, { type PropsWithChildren } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import useGamesQuery from "../hooks/useGamesQuery";
-import { AxiosResponse } from "axios";
 import { useSearchParams } from "react-router-dom";
-import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
-import { GameResult } from "../utils/interface";
+import GamesResult from "../components/GamesResult";
 
 const styles = {
   container: {},
@@ -24,15 +22,9 @@ const Games: React.FC<PropsWithChildren> = () => {
     }
   }, [searchParams]);
 
-  if (isLoading && queryText !== "") return <CenteredCircularProgress />;
-
   return (
     <Box style={styles.container}>
-      {(data as AxiosResponse)?.data?.results
-        ? (data as AxiosResponse).data.results.map((game: GameResult) => (
-            <Typography key={game.id}>{game.name}</Typography>
-          ))
-        : null}
+      <GamesResult isLoading={isLoading && queryText !== ""} data={data} />
     </Box>
   );
 };

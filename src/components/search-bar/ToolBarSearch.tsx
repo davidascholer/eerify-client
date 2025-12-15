@@ -14,6 +14,7 @@ import { AxiosResponse } from "axios";
 import GAMES_ENDPOINTS from "../routes/games/utils/endpoints";
 import useGamesQuery from "../routes/games/hooks/useGamesQuery";
 import { GameResult } from "../routes/games/utils/interface";
+import { devDebug } from "../../logger";
 
 const FilmSearchBar = ({
   queryText,
@@ -58,10 +59,13 @@ const BooksSearchBar = ({
   React.useEffect(() => {
     if (data) {
       const returnArray: string[] = [];
-      (data as AxiosResponse).data.items.map((book: BookResult) =>
-        returnArray.push(book.volumeInfo.title.toLowerCase())
-      );
+      (data as AxiosResponse)?.data?.items?.map((book: BookResult) => {
+        let title = book.volumeInfo.title.toLowerCase();
+        // if (title.length > 30) title = title.substring(0, 30) + "...";
+        return returnArray.push(title);
+      });
       const uniqueArray = [...new Set(returnArray)];
+      devDebug("uniqueArray", uniqueArray);
       setPreviewList(uniqueArray);
     }
   }, [data]);

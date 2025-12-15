@@ -8,10 +8,17 @@ import { LanguageType } from "./interface";
 export const QUERY_FILTERS = {
   // Search queries must be called first.
   // e.g. q=+intitle:"harry+potter" OR q=+inauthor:"rowling"
-  searchTitle: (search: string) => "+intitle=" + search,
+  searchTitle: (search: string) =>
+    "+intitle=" + search + "&maxResults=" + RESULT_COUNT,
   searchAuthor: (search: string) => "+inauthor=" + search,
   searchPublisher: (search: string) => "+inpublisher=" + search,
-  page: (page: number) => "&startIndex=" + page * RESULT_COUNT,
+  searchTitleWithPage: (search: string, page: number) =>
+    "+intitle=" +
+    `${search}` +
+    "&maxResults=" +
+    RESULT_COUNT +
+    "&startIndex=" +
+    (page * RESULT_COUNT + 1).toString(),
   free: () => "&filter=free-ebooks",
   paid: () => "&filter=paid-ebooks",
   paidOrFree: () => "&filter=ebooks",
