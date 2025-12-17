@@ -19,6 +19,7 @@ import FilmDetail from "../components/routes/film/pages/FilmDetail";
 import Film from "../components/routes/film/pages/FilmInfiniteScroll";
 import BooksLayout from "../components/routes/books/BooksLayout";
 import Books from "../components/routes/books/pages/BooksInfiniteScroll";
+import HauntedHouse from "../assets/icons/HauntedHouse";
 
 const routes = [
   {
@@ -29,6 +30,15 @@ const routes = [
       {
         path: PATHS.ROOT,
         element: <Home />,
+      },
+      {
+        path: PATHS.ROOT,
+        element: <FilmLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Film /> },
+          { path: PATHS.FILM + "/:slug", element: <FilmDetail /> },
+        ],
       },
       {
         path: PATHS.FILM,

@@ -19,6 +19,7 @@ import {
   optionsMargin,
   toolbarSize,
 } from "./config";
+import HauntedHouse from "../../assets/icons/HauntedHouse";
 
 const rootStyles = {
   buttonContainer: {
@@ -44,6 +45,18 @@ export const MainListItems = () => {
 
   return (
     <React.Fragment>
+      <ListItemButton
+        onClick={() => handleNavigate(PATHS.ROOT)}
+        sx={styles.buttonContainer}
+      >
+        <ListItemIcon sx={styles.iconContainer}>
+          <HauntedHouse sx={[styles.icon]} />
+        </ListItemIcon>
+        <ListItemText
+          primary="Home"
+          primaryTypographyProps={{ fontSize: optionsFontSize }}
+        />
+      </ListItemButton>
       <ListItemButton
         onClick={() => handleNavigate(PATHS.FILM)}
         sx={styles.buttonContainer}
