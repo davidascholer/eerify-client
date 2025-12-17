@@ -30,7 +30,7 @@ function NavItem({
   return (
     <button
       onClick={onClick}
-      className="flex w-full items-center gap-3 px-3 py-2 hover:bg-accent hover:text-accent-foreground transition-colors"
+      className="flex w-full items-center gap-3 px-3 py-2 hover:bg-primary/10 transition-colors"
     >
       <span className="flex items-center justify-center" style={{ width: toolbarSize + "px" }}>
         {icon}
