@@ -1,6 +1,5 @@
 import React from "react";
 import UserAuthPage from "../../features/user-auth/pages/UserAuthPage";
-import { Box } from "@mui/material";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
 
 const styles = {
@@ -12,18 +11,10 @@ const styles = {
 
 const UserAuth: React.FC = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        flexDirection: "column",
-        alignItems: "center",
-        m: 2,
-      }}
-    >
-      <EerifyLogo sx={{ width: "300px", height: "300px", m: 5, mb: 10 }} />
+    <div className="flex w-full flex-col items-center m-2">
+      <EerifyLogo style={{ width: "300px", height: "300px", margin: 20, marginBottom: 40 }} />
       <UserAuthPage propStyles={styles} />
-    </Box>
+    </div>
   );
 };
 

@@ -1,11 +1,6 @@
 import * as React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
-import TheatersIcon from "@mui/icons-material/Theaters";
-import { Box, Divider, Typography, useTheme } from "@mui/material";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { Film, Gamepad2 } from "lucide-react";
 import Book from "../../assets/icons/Book";
 import { useNavigate } from "react-router-dom";
 
@@ -53,18 +48,7 @@ const testGames: Array<FavoritesItemInterface> = [
   },
 ];
 
-const styles = {
-  summary: {
-    display: "flex",
-    flexDirection: "column",
-    pb: 2,
-  },
-  icon: {
-    width: 75,
-    height: 75,
-    p: 1,
-  },
-};
+const iconStyle: React.CSSProperties = { width: 75, height: 75, padding: 4 };
 
 const Card = ({
   title,
@@ -77,26 +61,15 @@ const Card = ({
 }) => {
   return (
     <>
-      <Divider
-        sx={{
-          borderColor: (theme) => theme.colors.colorPalette.blue,
-          m: 2,
-        }}
-      />
-      <AccordionDetails onClick={onPress}>
-        <Typography>{title}</Typography>
-        <Box
-          component="img"
-          sx={{
-            // height: 233,
-            // width: 350,
-            maxHeight: { xs: 233, md: 167 },
-            maxWidth: { xs: 350, md: 250 },
-          }}
+      <div className="border-t my-2" />
+      <div onClick={onPress} className="cursor-pointer">
+        <div className="text-sm mb-2">{title}</div>
+        <img
           alt={title}
           src={poster}
+          className="max-h-[167px] max-w-[250px]"
         />
-      </AccordionDetails>
+      </div>
     </>
   );
 };
@@ -109,91 +82,74 @@ const Summary = ({
   children: React.ReactNode;
 }) => {
   return (
-    <AccordionSummary
-      expandIcon={
-        <ExpandMoreIcon
-          sx={{ color: (theme) => theme.colors.colorPalette.blue }}
-        />
-      }
-      aria-controls="panel1-content"
-      id="panel1-header"
-      sx={styles.summary}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: 1,
-        }}
-      >
+    <AccordionTrigger>
+      <div className="flex flex-col items-center gap-1 py-1 w-full">
         {children}
-        <Typography variant="h5">{title}</Typography>
-      </Box>
-    </AccordionSummary>
+        <div className="text-base font-medium">{title}</div>
+      </div>
+    </AccordionTrigger>
   );
 };
 
 export default function Favorites() {
   const navigate = useNavigate();
-  const theme = useTheme();
   return (
-    <div>
+    <div className="space-y-2">
       {testFilms.length > 0 ? (
-        <Accordion defaultExpanded>
-          <Summary title="Film">
-            <TheatersIcon
-              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
-            />
-          </Summary>
-          <AccordionDetails>
-            {testFilms.map((film) => (
-              <Card
-                key={film.id}
-                title={film.title}
-                poster={film.poster}
-                onPress={() => navigate("/film/" + film.id)}
-              />
-            ))}
-          </AccordionDetails>
+        <Accordion type="single" collapsible defaultValue="films">
+          <AccordionItem value="films">
+            <Summary title="Film">
+              <Film style={iconStyle} className="text-primary" />
+            </Summary>
+            <AccordionContent>
+              {testFilms.map((film) => (
+                <Card
+                  key={film.id}
+                  title={film.title}
+                  poster={film.poster}
+                  onPress={() => navigate("/film/" + film.id)}
+                />
+              ))}
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       ) : null}
       {testBooks.length > 0 ? (
-        <Accordion defaultExpanded>
-          <Summary title="Books">
-            <Book
-              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
-            />
-          </Summary>
-          <AccordionDetails>
-            {testBooks.map((film) => (
-              <Card
-                key={film.id}
-                title={film.title}
-                poster={film.poster}
-                onPress={() => navigate("/books/" + film.id)}
-              />
-            ))}
-          </AccordionDetails>
+        <Accordion type="single" collapsible defaultValue="books">
+          <AccordionItem value="books">
+            <Summary title="Books">
+              <Book style={iconStyle} className="text-primary" />
+            </Summary>
+            <AccordionContent>
+              {testBooks.map((film) => (
+                <Card
+                  key={film.id}
+                  title={film.title}
+                  poster={film.poster}
+                  onPress={() => navigate("/books/" + film.id)}
+                />
+              ))}
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       ) : null}
       {testGames.length > 0 ? (
-        <Accordion defaultExpanded>
-          <Summary title="Games">
-            <VideogameAssetIcon
-              sx={[styles.icon, { color: theme.colors.colorPalette.blue }]}
-            />
-          </Summary>
-          <AccordionDetails>
-            {testGames.map((film) => (
-              <Card
-                key={film.id}
-                title={film.title}
-                poster={film.poster}
-                onPress={() => navigate("/games/" + film.id)}
-              />
-            ))}
-          </AccordionDetails>
+        <Accordion type="single" collapsible defaultValue="games">
+          <AccordionItem value="games">
+            <Summary title="Games">
+              <Gamepad2 style={iconStyle} className="text-primary" />
+            </Summary>
+            <AccordionContent>
+              {testGames.map((film) => (
+                <Card
+                  key={film.id}
+                  title={film.title}
+                  poster={film.poster}
+                  onPress={() => navigate("/games/" + film.id)}
+                />
+              ))}
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       ) : null}
     </div>

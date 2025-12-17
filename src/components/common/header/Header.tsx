@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import "./header.css";
 
 type User = {
@@ -50,12 +50,12 @@ export const Header = ({
             <span className="welcome">
               Welcome, <b>{user.name}</b>!
             </span>
-            <Button size="small" onClick={onLogout} />
+            <Button onClick={onLogout}>Log out</Button>
           </>
         ) : (
           <>
-            <Button size="small" onClick={onLogin} />
-            <Button size="small" onClick={onCreateAccount} />
+            <Button onClick={onLogin}>Log in</Button>
+            <Button onClick={onCreateAccount}>Sign up</Button>
           </>
         )}
       </div>

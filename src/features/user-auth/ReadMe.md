@@ -16,7 +16,7 @@
 - For proper data structures, don't reference but rather move these to or wrap these with the apps current page structure. 
 
 ## UserAuthForm
-- The user auth form is formik wrapper around 3 sub components:
+- The user auth form uses React Hook Form + Zod validation with shadcn UI inputs. It supports three modes:
 
     **Login (default)**
     1. Shows the email and password fields.
@@ -52,10 +52,10 @@
 ---
 
 # Dependencies
-- mui/material
-- formik
-- yup
-- useReactQuery hook from on-prem react-query lib wrapper
+- react-hook-form
+- zod
+- shadcn ui components (form, input, button)
+- TanStack Query wrapper (`useReactQuery`)
 - useCookie hook from on-prem js-cookie lib wrapper
 
 ---

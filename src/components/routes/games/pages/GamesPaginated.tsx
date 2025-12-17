@@ -1,5 +1,4 @@
 import React, { type PropsWithChildren } from "react";
-import { Box } from "@mui/material";
 import useGamesQuery from "../hooks/useGamesQuery";
 import { useSearchParams } from "react-router-dom";
 import GamesResult from "../components/GamesResult";
@@ -23,9 +22,9 @@ const Games: React.FC<PropsWithChildren> = () => {
   }, [searchParams]);
 
   return (
-    <Box style={styles.container}>
+    <div style={styles.container}>
       <GamesResult isLoading={isLoading && queryText !== ""} data={data} />
-    </Box>
+    </div>
   );
 };
 

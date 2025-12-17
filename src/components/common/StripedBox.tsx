@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import React from "react";
 
 interface StripedBoxProps {
@@ -15,22 +14,14 @@ const StripedBox: React.FC<StripedBoxProps> = ({
   styles,
 }) => {
   return (
-    <Box
-      sx={[
-        {
-          background: `repeating-linear-gradient(
-        45deg,
-        ${color1},
-        ${color1}, 20px,
-        ${color2} 20px,
-        ${color2} 40px
-      );`,
-        },
-        styles,
-      ]}
+    <div
+      style={{
+        background: `repeating-linear-gradient(45deg, ${color1}, ${color1} 20px, ${color2} 20px, ${color2} 40px)`,
+        ...(styles || {}),
+      }}
     >
       {children}
-    </Box>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import React, { type PropsWithChildren } from "react";
 import useBooksInfiniteQuery from "../hooks/useBooksInfiniteQuery";
 import { useSearchParams } from "react-router-dom";
 import BookResults from "../components/BookResults";
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 
 const Books: React.FC<PropsWithChildren> = () => {
   const [queryText, setQueryText] = React.useState<string>("");
@@ -31,7 +31,7 @@ const Books: React.FC<PropsWithChildren> = () => {
         isLoading={isLoading && queryText !== ""}
       />
 
-      <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+      <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage} variant="secondary" className="mt-2">
         load more
       </Button>
     </>

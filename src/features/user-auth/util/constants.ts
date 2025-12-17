@@ -1,4 +1,4 @@
-export type FormikObjectValuesProps = {
+export type AuthFormValues = {
   email: string;
   password?: string;
   confirmPassword?: string;

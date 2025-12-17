@@ -3,7 +3,6 @@ A generic page for user authentication. Wrap, replace, or move this page with th
 */
 import React from "react";
 import { UserAuthForm } from "../components/user-auth-form/UserAuthForm";
-import { Box } from "@mui/material";
 
 const styles = {
   container: {
@@ -20,9 +19,9 @@ type UserAuthPageProps = {
 
 const UserAuthPage: React.FC<UserAuthPageProps> = ({ propStyles }) => {
   return (
-    <Box sx={styles.container}>
+    <div className="w-full flex justify-center items-center" style={propStyles as any}>
       <UserAuthForm propStyles={{ ...propStyles }} />
-    </Box>
+    </div>
   );
 };
 

@@ -1,88 +1,64 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Formik } from "formik";
-import { Theme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import { Button, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import useLogin from "../../hooks/useLogin";
-import EmailField from "../common/EmailField";
-import PasswordField from "../common/PasswordField";
-import ConfirmPasswordField from "../common/ConfirmPasswordField";
-import SubmitButton from "../common/SubmitButton";
 import { devDebug } from "../../util/helpers";
-import { FormikObjectValuesProps } from "../../util/constants";
+import { AuthFormValues } from "../../util/constants";
 import useCreateUser from "../../hooks/useCreateUser";
 import useVerifyEmail from "../../hooks/useVerifyEmail";
-import * as yup from "yup";
 import useSendResetPasswordEmail from "../../hooks/useSendResetPasswordEmail";
 import useResendResetPasswordEmail from "../../hooks/useResendResetPasswordEmail";
 import { PATHS } from "../../../../app/paths";
-import CenteredCircularProgress from "../../../../components/loading/CenteredCircularProgress";
-
-// Styles for the form fields
-const styles = {
-  field: {
-    m: 1,
-  },
-};
 
 const USER_NOT_ACTIVATED = "account is not activated";
 
-// Validation types
-export const emailValidation = yup
-  .string()
-  .email("Enter a valid email")
-  .required("Email is required");
+// Zod schema with conditional requirements based on loginType
+const baseSchema = z.object({
+  loginType: z.enum(["FORGOT_PASSWORD", "LOGIN", "SIGNUP"]),
+  email: z.string().email({ message: "Enter a valid email" }),
+  password: z.string().min(8, { message: "Password should be of minimum 8 characters length" }).optional().or(z.literal("")),
+  confirmPassword: z.string().optional().or(z.literal("")),
+});
 
-export const passwordValidation = yup
-  .string()
-  .min(8, "Password should be of minimum 8 characters length")
-  .required("Password is required");
-
-export const confirmPasswordValidation = yup
-  .string()
-  .oneOf([yup.ref("password")], "Passwords must match")
-  .required("Password confirmation is required");
-
-export const nullableValidation = yup.string().nullable().notRequired();
-
-// Wrapper for the Formik form
-const FormBox = styled(Box)(({ theme }: { theme: Theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  border: `1px solid ${theme.colors.colorPalette.blue}`,
-  borderRadius: "5px",
-  width: "100%",
-}));
+const authSchema = baseSchema.superRefine((data, ctx) => {
+  if (data.loginType === "LOGIN") {
+    if (!data.password || data.password.length < 8) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Password is required",
+        path: ["password"],
+      });
+    }
+  }
+  if (data.loginType === "SIGNUP") {
+    if (!data.password || data.password.length < 8) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Password is required", path: ["password"] });
+    }
+    if (!data.confirmPassword) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Password confirmation is required", path: ["confirmPassword"] });
+    } else if (data.password !== data.confirmPassword) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Passwords must match", path: ["confirmPassword"] });
+    }
+  }
+});
 
 // Create a component that displays an error message
 const ErrorBox = ({ msg }: { msg: string }) => {
-  return (
-    <Box
-      sx={[
-        {
-          color: "red",
-          width: "100%",
-          fontSize: "75%",
-          textAlign: "center",
-          my: 2,
-        },
-        styles.field,
-      ]}
-    >
-      {msg}
-    </Box>
-  );
+  if (!msg) return null;
+  return <div className="text-destructive text-center text-xs my-2 w-full">{msg}</div>;
 };
 
 type UserAuthFormProps = {
   propStyles?: object;
 };
 type UserResponseType = { data: object | unknown; error: string | unknown };
-const defaultUser: FormikObjectValuesProps = {
+const defaultUser: AuthFormValues = {
   email: "",
   password: "",
   confirmPassword: "",
@@ -92,16 +68,21 @@ const defaultResponse = { data: {}, error: "" };
 // User authentication form
 export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
   const navigate = useNavigate();
-  const [validationSchema, setValidationSchema] = useState(
-    yup.object({
-      email: nullableValidation,
-      password: nullableValidation,
-      confirmPassword: nullableValidation,
-    })
-  );
+  const [loginType, setLoginType] = useState<"FORGOT_PASSWORD" | "LOGIN" | "SIGNUP">("LOGIN");
+  const formResolver = useMemo(() => zodResolver(authSchema), []);
+  const form = useForm<z.infer<typeof authSchema>>({
+    resolver: formResolver,
+    defaultValues: {
+      loginType,
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    mode: "onSubmit",
+  });
   const [loading, setLoading] = useState(false);
   const [activationEmailSent, setActivationEmailSent] = useState(false);
-  const [postData, setPostData] = useState<FormikObjectValuesProps>({
+  const [postData, setPostData] = useState<AuthFormValues>({
     email: "",
     password: "",
     confirmPassword: "",
@@ -113,9 +94,6 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
   const resendResetPasswordEmail = useResendResetPasswordEmail();
   const [userResponse, setUserResponse] =
     useState<UserResponseType>(defaultResponse);
-  const [loginType, setLoginType] = useState<
-    "FORGOT_PASSWORD" | "LOGIN" | "SIGNUP"
-  >("LOGIN");
 
   const sendActivationEmail = async () => {
     const response = await resendResetPasswordEmail(postData.email);
@@ -208,16 +186,12 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
     setLoading(false);
   };
 
-  // Set the initial validation schema. We cannot set this from the use initial state as type inferencing causes a but in Typescript that won't allow us to set nullable values to required values in different states.
+  // Keep loginType in form state so schema can validate conditionally
   useEffect(() => {
-    setValidationSchema(
-      yup.object({
-        email: emailValidation,
-        password: passwordValidation,
-        confirmPassword: nullableValidation,
-      })
-    );
-  }, []);
+    form.setValue("loginType", loginType, { shouldValidate: false });
+    // Clear errors when switching modes
+    form.clearErrors();
+  }, [loginType]);
 
   // Response of either the login, signup, or forgot password from the request
   // Runs whenever the submit button is clicked
@@ -243,139 +217,123 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
 
   if (activationEmailSent)
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Typography sx={{ m: 2, mb: 5 }}>
+      <div className="flex flex-col items-center justify-center">
+        <div className="my-2 mb-5 text-sm">
           An activation email has been sent to {postData.email}
-        </Typography>
-        <Typography sx={{ mb: 1, fontSize: "75%" }}>
-          Didn't receive the email?
-        </Typography>
-        <Button
-          sx={{ fontSize: "75%" }}
-          variant="contained"
-          onClick={sendActivationEmail}
-        >
-          Resend Activation Email
-        </Button>
-      </Box>
+        </div>
+        <div className="mb-2 text-xs opacity-80">Didn't receive the email?</div>
+        <Button size="sm" onClick={sendActivationEmail}>Resend Activation Email</Button>
+      </div>
     );
 
   return (
-    <Box sx={propStyles}>
-      <Formik
-        initialValues={defaultUser}
-        validationSchema={validationSchema}
-        onSubmit={(values: FormikObjectValuesProps) => {
-          setPostData(values);
-        }}
-      >
-        {/* optional props https://formik.org/docs/api/formik */}
-        {() => (
-          <FormBox>
-            <Form style={{ width: "100%" }}>
-              {/* Only show the email field if user has forgotten their password. */}
-              <EmailField styles={styles.field} />
-              {loginType === "LOGIN" && <PasswordField styles={styles.field} />}
-              {loginType === "SIGNUP" && (
-                <>
-                  <PasswordField styles={styles.field} />
-                  <ConfirmPasswordField styles={styles.field} />
-                </>
+    <div className="w-full" style={propStyles as any}>
+      <div className="flex flex-col items-center p-5 border rounded-md w-full">
+        <Form {...form}>
+          <form
+            className="w-full space-y-3"
+            onSubmit={form.handleSubmit((values) => {
+              setPostData({
+                email: values.email,
+                password: values.password || "",
+                confirmPassword: values.confirmPassword || "",
+              });
+            })}
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input type="email" autoComplete="email" placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
-              {loading ? (
-                <CenteredCircularProgress />
-              ) : (
-                <>
-                  <SubmitButton styles={{ my: 2 }} />
-                  <ErrorBox
-                    msg={
-                      typeof userResponse.error === "string"
-                        ? userResponse.error
-                        : ""
-                    }
-                  />
-                </>
-              )}
-            </Form>
-            {typeof userResponse.error === "string" &&
-              userResponse?.error?.toLowerCase() === USER_NOT_ACTIVATED && (
-                <Button
-                  sx={{ fontSize: "75%" }}
-                  variant="text"
-                  onClick={sendActivationEmail}
-                >
-                  Send Activation Email
-                </Button>
-              )}
-            <Box
-              sx={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-evenly",
-              }}
-            >
-              {loginType !== "LOGIN" && (
-                <Button
-                  variant="text"
-                  onClick={() => {
-                    setLoginType("LOGIN");
-                    setValidationSchema(
-                      yup.object({
-                        email: emailValidation,
-                        password: passwordValidation,
-                        confirmPassword: nullableValidation,
-                      })
-                    );
-                  }}
-                >
-                  Login
-                </Button>
-              )}
-              {loginType !== "SIGNUP" && (
-                <Button
-                  variant="text"
-                  onClick={() => {
-                    setLoginType("SIGNUP");
-                    setValidationSchema(
-                      yup.object({
-                        email: emailValidation,
-                        password: passwordValidation,
-                        confirmPassword: confirmPasswordValidation,
-                      })
-                    );
-                  }}
-                >
-                  Sign Up
-                </Button>
-              )}
-            </Box>
-            {loginType !== "FORGOT_PASSWORD" && loginType !== "SIGNUP" && (
-              <Button
-                variant="text"
-                onClick={() => {
-                  setLoginType("FORGOT_PASSWORD");
-                  setValidationSchema(
-                    yup.object({
-                      email: emailValidation,
-                      password: nullableValidation,
-                      confirmPassword: nullableValidation,
-                    })
-                  );
-                }}
-              >
-                Forgot Password
+            />
+
+            {(loginType === "LOGIN" || loginType === "SIGNUP") && (
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" autoComplete="off" placeholder="Password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            {loginType === "SIGNUP" && (
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" autoComplete="off" placeholder="Confirm Password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+
+            <input type="hidden" {...form.register("loginType")} value={loginType} />
+
+            {loading ? (
+              <div className="flex w-full justify-center my-2">
+                <Loader2 className="size-5 animate-spin" />
+              </div>
+            ) : (
+              <Button type="submit" className="w-full">
+                {loginType === "LOGIN" && "Login"}
+                {loginType === "SIGNUP" && "Sign Up"}
+                {loginType === "FORGOT_PASSWORD" && "Send Reset Email"}
               </Button>
             )}
-          </FormBox>
+            <ErrorBox msg={typeof userResponse.error === "string" ? userResponse.error : ""} />
+          </form>
+        </Form>
+
+        {typeof userResponse.error === "string" &&
+          userResponse?.error?.toLowerCase() === USER_NOT_ACTIVATED && (
+            <Button variant="ghost" size="sm" onClick={sendActivationEmail}>
+              Send Activation Email
+            </Button>
+          )}
+
+        <div className="flex w-full justify-evenly mt-2">
+          {loginType !== "LOGIN" && (
+            <Button variant="ghost" size="sm"
+              onClick={() => {
+                setLoginType("LOGIN");
+              }}
+            >
+              Login
+            </Button>
+          )}
+          {loginType !== "SIGNUP" && (
+            <Button variant="ghost" size="sm"
+              onClick={() => {
+                setLoginType("SIGNUP");
+              }}
+            >
+              Sign Up
+            </Button>
+          )}
+        </div>
+        {loginType !== "FORGOT_PASSWORD" && loginType !== "SIGNUP" && (
+          <Button variant="ghost" size="sm" onClick={() => setLoginType("FORGOT_PASSWORD")}>Forgot Password</Button>
         )}
-      </Formik>
-    </Box>
+      </div>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Box, Typography } from "@mui/material";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { GameResult } from "../utils/interface";
 import { devDebug } from "../utils/logger";
@@ -24,9 +23,9 @@ const GamesResult: React.FC<GamesResultsProps> = ({ isLoading, data }) => {
     <>
       {data?.results
         ? data.results.map((game: GameResult) => (
-            <Typography key={game.id} sx={{ height: "100px" }}>
+            <div key={game.id} className="h-[100px]">
               {game.name}
-            </Typography>
+            </div>
           ))
         : null}
     </>

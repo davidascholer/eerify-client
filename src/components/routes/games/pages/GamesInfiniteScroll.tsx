@@ -1,5 +1,5 @@
 import React, { useRef, type PropsWithChildren } from "react";
-import { Box, BoxProps, Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import useGamesInfiniteQuery from "../hooks/useGamesInfiniteQuery";
 import { useSearchParams } from "react-router-dom";
 import GamesResult from "../components/GamesResult";
@@ -31,7 +31,7 @@ const Games: React.FC<PropsWithChildren> = () => {
   };
 
   return (
-    <Box style={styles.container} onScroll={onScroll}>
+    <div style={styles.container} onScroll={onScroll}>
       {data?.pages
         ? data.pages.map((page: any) => (
             <GamesResult
@@ -43,11 +43,13 @@ const Games: React.FC<PropsWithChildren> = () => {
       <Button
         onClick={() => fetchNextPage()}
         disabled={isFetchingNextPage || !hasNextPage}
+        variant="secondary"
+        className="mt-2"
       >
         load more
       </Button>
       <div ref={ref} />
-    </Box>
+    </div>
   );
 };
 

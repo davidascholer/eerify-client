@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
 import { AxiosResponse } from "axios";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { BookResult } from "../utils/interface";
@@ -18,19 +18,19 @@ const BookResults = ({
   if (isLoading) return <CenteredCircularProgress />;
 
   return (
-    <Box style={styles.container}>
+    <div style={styles.container}>
       {data?.pages
         ? data.pages.map((page: AxiosResponse) =>
             page?.data?.items
               ? page.data.items.map((book: BookResult) => (
-                  <Typography key={book.id} sx={{ height: "100px" }}>
+                  <div key={book.id} className="h-[100px]">
                     {book.volumeInfo.title.toLowerCase()}
-                  </Typography>
+                  </div>
                 ))
               : null
           )
         : null}
-    </Box>
+    </div>
   );
 };
 

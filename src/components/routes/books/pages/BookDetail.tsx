@@ -1,5 +1,4 @@
 import React, { type PropsWithChildren } from "react";
-import { Box, Typography } from "@mui/material";
 
 const styles = {
   container: {},
@@ -7,9 +6,9 @@ const styles = {
 
 const BookDetail: React.FC<PropsWithChildren> = () => {
   return (
-    <Box style={styles.container}>
-      <Typography>BookDetail</Typography>
-    </Box>
+    <div style={styles.container}>
+      <p>BookDetail</p>
+    </div>
   );
 };
 

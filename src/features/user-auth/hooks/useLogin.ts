@@ -1,5 +1,5 @@
 import APIClient from "../../../lib/react-query/services/api-client";
-import { FormikObjectValuesProps, TOKEN_NAMES } from "../util/constants";
+import { AuthFormValues, TOKEN_NAMES } from "../util/constants";
 import USER_ENDPOINTS from "../util/endpoints";
 import useCookie from "../../../lib/js-cookie/hooks/useCookie";
 import {
@@ -18,7 +18,7 @@ const loginClient = () => {
 /*
   Make a server call to the api to get login credentials. Then, place them in cookies upon success.
 */
-const useLogin = (postData: FormikObjectValuesProps) => {
+const useLogin = (postData: AuthFormValues) => {
   const client = loginClient();
   const authCookie = useCookie(TOKEN_NAMES.auth);
   const refreshCookie = useCookie(TOKEN_NAMES.refresh);

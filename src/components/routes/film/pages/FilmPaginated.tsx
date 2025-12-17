@@ -1,5 +1,4 @@
 import React, { type PropsWithChildren } from "react";
-import { Box } from "@mui/material";
 import useFilmQuery from "../hooks/useFilmQuery";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { useSearchParams } from "react-router-dom";
@@ -26,9 +25,9 @@ const FilmPaginated: React.FC<PropsWithChildren> = () => {
   if (isLoading && queryText !== "") return <CenteredCircularProgress />;
 
   return (
-    <Box style={styles.container}>
+    <div style={styles.container}>
       <FilmResults data={data} isLoading={isLoading && queryText !== ""} />
-    </Box>
+    </div>
   );
 };
 

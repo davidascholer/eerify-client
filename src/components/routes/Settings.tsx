@@ -1,31 +1,6 @@
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import Switch from "@mui/material/Switch";
-import { FormControlLabel } from "@mui/material";
+import { Switch } from "@/components/ui/switch";
 import { useAppSelector, useAppDispatch } from "../../lib/redux-toolkit/hooks";
 import { setColorTheme } from "../../redux/slices/settingsSlice";
-
-const label = { inputProps: { "aria-label": "Color Mode" } };
-
-const styles = {
-  container: {},
-  header: { textAlign: "center", mt: 2 },
-  listItemContainer: {
-    display: "flex",
-    justifyContent: "flex-start",
-    mx: 5,
-    my: 2,
-  },
-  listItem: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  listItemContent: { mr: 10 },
-};
 
 const Settings = () => {
   const colorTheme = useAppSelector((state) => state.settings.colorTheme);
@@ -37,63 +12,28 @@ const Settings = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        minHeight: "100%",
-        width: "100%",
-      }}
-    >
-      <Box
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Box>
-          <Typography sx={styles.header}>Settings</Typography>
-          <Divider
-            sx={{
-              borderColor: (theme) => theme.colors.colorPalette.blue,
-              m: 2,
-            }}
-          />
-        </Box>
-        <List sx={styles.container}>
-          <ListItem sx={[styles.listItemContainer]}>
-            <Box sx={styles.listItem}>
-              <ListItemText sx={styles.listItemContent}>
-                <Typography>Color Mode</Typography>
-              </ListItemText>
-              <FormControlLabel
-                sx={styles.listItemContent}
-                control={
-                  <Switch
-                    {...label}
-                    onChange={togglecolorTheme}
-                    checked={isDarkTheme}
-                  />
-                }
-                label={isDarkTheme ? "DARK" : "LIGHT"}
-              />
-            </Box>
-          </ListItem>
-        </List>
-      </Box>
-      <Typography
-        sx={{
-          display: "flex",
-          fontFamily: "typeface Roboto",
-          justifyContent: "center",
-          alignItems: "center",
-          m: 1,
-          fontSize: "0.8rem",
-        }}
-      >
+    <div className="flex flex-col justify-between min-h-full w-full">
+      <div className="w-full">
+        <div>
+          <h2 className="text-center mt-2">Settings</h2>
+          <div className="border-t m-2" />
+        </div>
+        <div className="mx-5 my-2">
+          <div className="flex flex-row items-center">
+            <div className="mr-10">
+              <p>Color Mode</p>
+            </div>
+            <div className="mr-10 flex items-center gap-3">
+              <Switch aria-label="Color Mode" checked={isDarkTheme} onCheckedChange={togglecolorTheme} />
+              <span className="text-sm">{isDarkTheme ? "DARK" : "LIGHT"}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center items-center m-1 text-[0.8rem]">
         v{APP_VERSION}
-      </Typography>
-    </Box>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, type PropsWithChildren } from "react";
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import { useParams } from "react-router-dom";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
 import useUserActivation from "../../features/user-auth/hooks/useUserActivation";
@@ -47,28 +47,28 @@ const Activate: React.FC<PropsWithChildren> = () => {
   }, []);
 
   return (
-    <Box sx={styles.container}>
-      <Link href="/">
-        <EerifyLogo sx={styles.image} />
-      </Link>
+    <div style={styles.container}>
+      <a href="/">
+        <EerifyLogo style={styles.image} />
+      </a>
       {activationSuccessful === null ? <CenteredCircularProgress /> : null}
       {activationSuccessful === false ? (
         <>
-          <Typography sx={{ m: 2 }}>{message}</Typography>
-          <Button onClick={() => navigate(PATHS.USER_AUTH)}>
+          <p className="m-2">{message}</p>
+          <Button onClick={() => navigate(PATHS.USER_AUTH)} variant="secondary">
             Login To Resend Activation Email
           </Button>
         </>
       ) : null}
       {activationSuccessful === true ? (
         <>
-          <Typography sx={{ m: 2 }}>{message}</Typography>
-          <Button variant="contained" onClick={() => navigate(PATHS.USER_AUTH)}>
+          <p className="m-2">{message}</p>
+          <Button onClick={() => navigate(PATHS.USER_AUTH)}>
             Login
           </Button>
         </>
       ) : null}
-    </Box>
+    </div>
   );
 };
 

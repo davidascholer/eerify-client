@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Box, Typography } from "@mui/material";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { FilmResponseInterface } from "../utils/interface";
 import { devDebug } from "../utils/logger";
@@ -21,15 +20,15 @@ const FilmResults: React.FC<FilmResultsProps> = ({ isLoading, data }) => {
   }, [data]);
 
   return (
-    <Box style={styles.container}>
+    <div style={styles.container}>
       {(data as FilmResponseInterface)?.data?.results
         ? (data as FilmResponseInterface).data.results.map((film) => (
-            <Typography key={film.id} sx={{ height: "100px" }}>
+            <div key={film.id} className="h-[100px]">
               {film.title}
-            </Typography>
+            </div>
           ))
         : null}
-    </Box>
+    </div>
   );
 };
 

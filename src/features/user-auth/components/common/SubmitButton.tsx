@@ -1,22 +1,17 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 
 type SubmitButtonProps = {
-  styles: object;
+  children?: React.ReactNode;
+  className?: string;
 };
 
-const PasswordField: React.FC<SubmitButtonProps> = ({ styles }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({ children = "Submit", className }) => {
   return (
-    <Button
-      color="primary"
-      variant="contained"
-      fullWidth
-      type="submit"
-      sx={[styles]}
-    >
-      Submit
+    <Button type="submit" className={className}>
+      {children}
     </Button>
   );
 };
 
-export default PasswordField;
+export default SubmitButton;

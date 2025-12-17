@@ -1,5 +1,5 @@
 import React, { type PropsWithChildren } from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 import useFilmInfiniteQuery from "../hooks/useFilmInfiniteQuery";
 import CenteredCircularProgress from "../../../loading/CenteredCircularProgress";
 import { useSearchParams } from "react-router-dom";
@@ -27,7 +27,7 @@ const Film: React.FC<PropsWithChildren> = () => {
   if (isLoading && queryText !== "") return <CenteredCircularProgress />;
 
   return (
-    <Box style={styles.container}>
+    <div style={styles.container}>
       {data?.pages
         ? data.pages.map((page: any) => (
             <FilmResults
@@ -36,10 +36,10 @@ const Film: React.FC<PropsWithChildren> = () => {
             />
           ))
         : null}
-      <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+      <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage} variant="secondary" className="mt-2">
         load more
       </Button>
-    </Box>
+    </div>
   );
 };
 

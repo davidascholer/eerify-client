@@ -1,40 +1,38 @@
 import React from "react";
-import { Box, TextField, Typography } from "@mui/material";
-import { useFormikContext } from "formik";
-import { FormikObjectValuesProps } from "../../util/constants";
+import { Control, FieldPath, FieldValues } from "react-hook-form";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
-type EmailFieldProps = {
-  styles: object;
+type EmailFieldProps<TFieldValues extends FieldValues> = {
+  control: Control<TFieldValues>;
+  name: FieldPath<TFieldValues>;
+  label?: string;
+  placeholder?: string;
+  autoComplete?: string;
 };
 
-const EmailField: React.FC<EmailFieldProps> = ({ styles }) => {
-  const context = useFormikContext<FormikObjectValuesProps>();
+function EmailField<TFieldValues extends FieldValues>({
+  control,
+  name,
+  label = "Email",
+  placeholder = "Email",
+  autoComplete = "email",
+}: EmailFieldProps<TFieldValues>) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <TextField
-        sx={[styles]}
-        InputLabelProps={{ sx: { userSelect: "text" } }}
-        fullWidth
-        id="email"
-        name="email"
-        label="Email"
-        autoComplete="email"
-        value={context.values.email}
-        onChange={context.handleChange}
-        onBlur={context.handleBlur}
-        error={context.touched.email && Boolean(context.errors.email)}
-      />
-      <Typography sx={[styles]} variant="caption" color="error">
-        {context.touched.email && context.errors.email}
-      </Typography>
-    </Box>
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <Input type="email" autoComplete={autoComplete} placeholder={placeholder} {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
-};
+}
 
 export default EmailField;
