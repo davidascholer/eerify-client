@@ -24,6 +24,15 @@ const defaultTheme = {
       pwa: { raw: "(display-mode: standalone)" },
     },
     colors: {
+      // App brand tokens
+      primary: {
+        DEFAULT: "#5bbad5",
+        foreground: "#000000",
+      },
+      secondary: {
+        DEFAULT: "#ff0000",
+        foreground: "#ffffff",
+      },
       neutral: {
         1: "var(--color-neutral-1)",
         2: "var(--color-neutral-2)",
