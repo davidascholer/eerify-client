@@ -35,7 +35,8 @@ function NavItem({
       onClick={onClick}
       className={
         [
-          "flex w-full items-center gap-3 px-3 py-2 transition-colors text-left",
+          "flex w-full items-center gap-3 px-3 transition-colors text-left",
+          "min-h-[56px]",
           active
             ? "bg-primary-foreground/15 border-l-2 border-primary-foreground font-medium"
             : "hover:bg-primary-foreground/10",
@@ -43,7 +44,10 @@ function NavItem({
       }
       aria-current={active ? "page" : undefined}
     >
-      <span className="flex items-center justify-center" style={{ width: toolbarSize + "px" }}>
+      <span
+        className="flex items-center justify-center"
+        style={{ width: toolbarSize + "px", height: 56 }}
+      >
         {icon}
       </span>
       <span

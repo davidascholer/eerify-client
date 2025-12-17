@@ -22,14 +22,14 @@ const CustomToolbar = ({
       <div className="flex items-center gap-2 pl-2">
         <button
           aria-label="open drawer"
-          className="rounded-md p-1 hover:bg-primary/90"
+          className="rounded-md p-0 hover:bg-primary/90"
           onClick={() => toggleDrawer()}
         >
           <SpiderWebIcon style={{ width: toolbarSize + "px", height: toolbarSize + "px" }} />
         </button>
         <button
           aria-label="home"
-          className="rounded-md p-1 ml-2 hover:bg-primary/90"
+          className="rounded-md p-0 ml-2 hover:bg-primary/90"
           onClick={() => handleNavigate(PATHS.ROOT)}
         >
           <EerifyHoriz style={{ height: toolbarSize + "px", width: "inherit", padding: 4 }} />
