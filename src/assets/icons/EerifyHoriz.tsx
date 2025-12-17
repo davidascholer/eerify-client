@@ -1,14 +1,12 @@
-import { useTheme } from "@mui/material";
-import SvgIcon from "@mui/material/SvgIcon";
+import React from "react";
 
-const EerifyHoriz = ({ sx = {} }: { sx: object }) => {
-  const theme = useTheme();
+type Props = { className?: string; style?: React.CSSProperties };
 
+const EerifyHoriz = ({ className, style }: Props) => {
   return (
-    <SvgIcon sx={[sx]}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1399.01 379.46">
+      <svg className={className} style={style} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1399.01 379.46">
         <defs>
-          <style>{`.cls-2{fill:${theme.colors.iconColor}}.cls-5{fill:red}`}</style>
+          <style>{`.cls-2{fill:currentColor}.cls-5{fill:red}`}</style>
         </defs>
         <g id="Layer_1-2">
           <path
@@ -53,7 +51,6 @@ const EerifyHoriz = ({ sx = {} }: { sx: object }) => {
           />
         </g>
       </svg>
-    </SvgIcon>
   );
 };
 export default EerifyHoriz;

@@ -1,9 +1,12 @@
-import SvgIcon from "@mui/material/SvgIcon";
+import React from "react";
 
-const EerifyLogo = ({ sx = {} }: { sx?: object | undefined }) => {
+type Props = { className?: string; style?: React.CSSProperties };
+
+const EerifyLogo = ({ className, style }: Props) => {
   return (
-    <SvgIcon sx={sx}>
-      <svg
+    <svg
+      className={className}
+      style={style}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1091.4 1091.4"
         id="Layer_2"
@@ -52,7 +55,6 @@ const EerifyLogo = ({ sx = {} }: { sx?: object | undefined }) => {
           />
         </g>
       </svg>
-    </SvgIcon>
   );
 };
 

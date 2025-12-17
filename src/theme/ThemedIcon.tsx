@@ -1,24 +1,12 @@
 import React from "react";
-import { SvgIcon as MUIIcon } from "@mui/material";
 
 export interface ThemedIconProps {
-  Icon: typeof MUIIcon;
-  sx?: object;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  className?: string;
+  style?: React.CSSProperties;
 }
-const ThemedIcon: React.FC<ThemedIconProps> = ({
-  Icon,
-  sx = {},
-}: ThemedIconProps) => {
-  return (
-    <Icon
-      sx={[
-        sx,
-        {
-          color: (theme) => theme.colors.iconColor,
-        },
-      ]}
-    />
-  );
+const ThemedIcon: React.FC<ThemedIconProps> = ({ Icon, className, style }) => {
+  return <Icon className={className} style={style} />;
 };
 
 export default ThemedIcon;

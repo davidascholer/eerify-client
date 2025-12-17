@@ -1,10 +1,12 @@
-import SvgIcon from "@mui/material/SvgIcon";
-import { SxProps } from "@mui/material";
+import React from "react";
 
-export default function EerifyLogoX({ sx }: { sx?: SxProps }) {
+type Props = { className?: string; style?: React.CSSProperties };
+
+export default function EerifyLogoX({ className, style }: Props) {
   return (
-    <SvgIcon sx={sx}>
       <svg
+        className={className}
+        style={style}
         xmlns="http://www.w3.org/2000/svg"
         fill="#707070"
         viewBox="0 0 240 240"
@@ -20,6 +22,5 @@ export default function EerifyLogoX({ sx }: { sx?: SxProps }) {
         <path d="m103.16,51.95c-27.03-5.8-54.05-11.59-81.19-17.42.1-1.73.21-3.43.31-5.15,27.92,4.29,54.42,13.35,80.88,22.57h0Z" />
         <path d="m114.56,56.16c3.18-2.53,9.09-2.54,12.37-.01-1.68,1.91-10.4,2-12.37.01h0Z" />{" "}
       </svg>
-    </SvgIcon>
   );
 }
