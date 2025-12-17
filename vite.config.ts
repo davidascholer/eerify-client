@@ -2,8 +2,6 @@ import tailwindcss from "@tailwindcss/vite";
 import reactSwc from "@vitejs/plugin-react-swc";
 import { defineConfig, PluginOption } from "vite";
 
-import sparkPlugin from "@github/spark/spark-vite-plugin";
-import createIconImportProxy from "@github/spark/vitePhosphorIconProxyPlugin";
 import { resolve } from 'path'
 
 const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname
@@ -18,9 +16,7 @@ export default defineConfig(() => {
       // esbuild handles JSX with tsconfig `jsx: react-jsx`.
       ...(isVitest ? [] : [reactSwc()]),
       tailwindcss(),
-      // DO NOT REMOVE
-      createIconImportProxy() as PluginOption,
-      sparkPlugin() as PluginOption,
+      // Spark plugins removed; icons and app run without proxy
     ],
     define: {
       // Inject app version for use in UI (e.g., Settings page)
