@@ -25,7 +25,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   };
   // Returns the user data object, status string, error object, and refetch function.
   // Bypass the login page if the current page is the login page
-  useAutoLogin();
+  // useAutoLogin();
   const queryParams = new URLSearchParams(window.location.search);
   const message = queryParams.get("message");
 

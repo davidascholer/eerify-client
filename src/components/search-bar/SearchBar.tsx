@@ -2,9 +2,9 @@ import React from "react";
 import { toolbarSize } from "../app-bar/config";
 import { SearchBarType } from "./interface";
 import { KEY_PRESS_TIMEOUT, MAX_SUGGESTION_LIMIT } from "./config";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { X, Search as SearchIcon, Loader2 } from "lucide-react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 const SearchBar: React.FC<SearchBarType> = ({
   sx: propStyles = {},

@@ -31,7 +31,10 @@ const Settings = () => {
         </div>
       </div>
       <div className="flex justify-center items-center m-1 text-[0.8rem]">
-        v{APP_VERSION}
+        {(() => {
+          const version = (import.meta.env.VITE_APP_VERSION as string | undefined) ?? (typeof APP_VERSION !== 'undefined' ? APP_VERSION : '0.0.0');
+          return `v${version}`;
+        })()}
       </div>
     </div>
   );
