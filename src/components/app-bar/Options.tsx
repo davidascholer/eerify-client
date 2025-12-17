@@ -37,8 +37,8 @@ function NavItem({
         [
           "flex w-full items-center gap-3 px-3 py-2 transition-colors text-left",
           active
-            ? "bg-primary/15 border-l-2 border-primary font-medium"
-            : "hover:bg-primary/10",
+            ? "bg-primary-foreground/15 border-l-2 border-primary-foreground font-medium"
+            : "hover:bg-primary-foreground/10",
         ].join(" ")
       }
       aria-current={active ? "page" : undefined}
