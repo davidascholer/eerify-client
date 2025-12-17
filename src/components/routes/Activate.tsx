@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
 import useUserActivation from "../../features/user-auth/hooks/useUserActivation";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../app-root/paths";
+import { PATHS } from "../../app/paths";
 import CenteredCircularProgress from "../loading/CenteredCircularProgress";
 
 const styles = {

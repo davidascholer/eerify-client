@@ -17,7 +17,7 @@ import useVerifyEmail from "../../hooks/useVerifyEmail";
 import * as yup from "yup";
 import useSendResetPasswordEmail from "../../hooks/useSendResetPasswordEmail";
 import useResendResetPasswordEmail from "../../hooks/useResendResetPasswordEmail";
-import { PATHS } from "../../../../app-root/paths";
+import { PATHS } from "../../../../app/paths";
 import CenteredCircularProgress from "../../../../components/loading/CenteredCircularProgress";
 
 // Styles for the form fields

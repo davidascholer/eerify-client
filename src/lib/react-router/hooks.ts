@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../app-root/paths";
+import { PATHS } from "../../app/paths";
 
 // Allows the user to navigate to refresh the current page.
 const whiteList = [PATHS.USER_AUTH];

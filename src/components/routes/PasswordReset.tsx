@@ -11,7 +11,7 @@ import ConfirmPasswordField from "../../features/user-auth/components/common/Con
 import SubmitButton from "../../features/user-auth/components/common/SubmitButton";
 import useResetPasswordConfirm from "../../features/user-auth/hooks/useResetPasswordConfirm";
 import EerifyLogo from "../../assets/icons/EerifyLogo";
-import { PATHS } from "../../app-root/paths";
+import { PATHS } from "../../app/paths";
 import CenteredCircularProgress from "../loading/CenteredCircularProgress";
 
 // Styles for the form fields

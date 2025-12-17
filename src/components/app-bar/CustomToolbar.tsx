@@ -3,7 +3,7 @@ import * as React from "react";
 import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
 import EerifyHoriz from "../../assets/icons/EerifyHoriz";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
-import { PATHS } from "../../app-root/paths";
+import { PATHS } from "../../app/paths";
 // MUI Components
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Toolbar from "@mui/material/Toolbar";

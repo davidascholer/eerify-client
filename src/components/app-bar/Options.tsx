@@ -11,7 +11,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import { useTheme } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
-import { PATHS } from "../../app-root/paths";
+import { PATHS } from "../../app/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
 import {
   iconToToolbarPercentage,
