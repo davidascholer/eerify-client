@@ -14,7 +14,7 @@ const NavDrawer = ({
   const collapsed = openState === "EXPANDED";
   return (
     <aside
-      className="relative shrink-0 overflow-hidden border-r border-[#121212] bg-black text-white"
+      className="relative shrink-0 overflow-hidden border-r border-[var(--color-border)] bg-[var(--color-sidebar)] text-[var(--color-sidebar-foreground)]"
       style={{ width: width + "px", transition: "width 200ms ease" }}
     >
       <div style={{ paddingTop: toolbarSize + "px", height: "100%" }} className="flex flex-col">

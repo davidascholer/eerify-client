@@ -5,7 +5,7 @@ import React, { type PropsWithChildren } from "react";
 import useBooksInfiniteQuery from "../hooks/useBooksInfiniteQuery";
 import { useSearchParams } from "react-router-dom";
 import BookResults from "../components/BookResults";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../ui/button";
 
 const Books: React.FC<PropsWithChildren> = () => {
   const [queryText, setQueryText] = React.useState<string>("");

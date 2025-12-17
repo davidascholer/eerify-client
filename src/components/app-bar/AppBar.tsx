@@ -35,7 +35,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <div className="flex h-screen overflow-hidden bg-[#121212] text-white">
+      <div className="flex h-screen overflow-hidden bg-[var(--color-background)] text-[var(--color-foreground)]">
         {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
           <>
             {/* Topbar */}
@@ -48,7 +48,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         <NavDrawer openState={open} isLoggedIn={loggedIn} />
         {/* Main content */}
         <div
-          className="w-full overflow-y-scroll bg-[#121212]"
+          className="w-full overflow-y-scroll bg-[var(--color-background)]"
           style={{ marginTop: toolbarSize + "px", scrollbarWidth: "none" as any }}
         >
           {children}

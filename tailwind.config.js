@@ -26,7 +26,7 @@ const defaultTheme = {
     colors: {
       // App brand tokens
       primary: {
-        DEFAULT: "#5bbad5",
+        DEFAULT: "##007ED2",
         foreground: "#ffffff",
       },
       secondary: {

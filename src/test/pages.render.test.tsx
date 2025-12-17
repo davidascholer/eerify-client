@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import App from '@/app/App';
-import { PATHS } from '@/app/paths';
+import App from '../app/App';
+import { PATHS } from '../app/paths';
 
 function renderRoute(path: string) {
   // Set the window location for memory router used during Vitest

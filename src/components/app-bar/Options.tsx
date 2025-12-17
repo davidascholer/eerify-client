@@ -69,7 +69,7 @@ export const MainListItems = ({ collapsed = false }: { collapsed?: boolean }) =>
     <React.Fragment>
       <NavItem
         onClick={() => handleNavigate(PATHS.ROOT)}
-        icon={<HauntedHouse className="text-primary" style={{ height: iconSize + "px", width: toolbarSize + "px" }} />}
+        icon={<HauntedHouse className="text-primary" width={iconSize + "px"} />}
         label="Home"
         collapsed={collapsed}
         active={isActive(PATHS.ROOT)}

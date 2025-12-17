@@ -1,6 +1,6 @@
-import { Switch } from "@/components/ui/switch";
 import { useAppSelector, useAppDispatch } from "../../lib/redux-toolkit/hooks";
 import { setColorTheme } from "../../redux/slices/settingsSlice";
+import { Switch } from "../ui/switch";
 
 const Settings = () => {
   const colorTheme = useAppSelector((state) => state.settings.colorTheme);
@@ -24,7 +24,12 @@ const Settings = () => {
               <p>Color Mode</p>
             </div>
             <div className="mr-10 flex items-center gap-3">
-              <Switch aria-label="Color Mode" checked={isDarkTheme} onCheckedChange={togglecolorTheme} />
+              <Switch
+                aria-label="Color Mode"
+                checked={isDarkTheme}
+                onCheckedChange={togglecolorTheme}
+                className="bg-primary"
+              />
               <span className="text-sm">{isDarkTheme ? "DARK" : "LIGHT"}</span>
             </div>
           </div>
@@ -32,7 +37,9 @@ const Settings = () => {
       </div>
       <div className="flex justify-center items-center m-1 text-[0.8rem]">
         {(() => {
-          const version = (import.meta.env.VITE_APP_VERSION as string | undefined) ?? (typeof APP_VERSION !== 'undefined' ? APP_VERSION : '0.0.0');
+          const version =
+            (import.meta.env.VITE_APP_VERSION as string | undefined) ??
+            (typeof APP_VERSION !== "undefined" ? APP_VERSION : "0.0.0");
           return `v${version}`;
         })()}
       </div>
