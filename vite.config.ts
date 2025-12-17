@@ -18,6 +18,23 @@ export default defineConfig(() => {
       tailwindcss(),
       // Spark plugins removed; icons and app run without proxy
     ],
+    server: {
+      proxy: {
+        // Dev-time proxy to avoid CORS when calling TMDB
+        '/tmdb': {
+          target: 'https://api.themoviedb.org/3',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/tmdb/, ''),
+        },
+        '/tmdb-image': {
+          target: 'https://image.tmdb.org/t/p',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/tmdb-image/, ''),
+        },
+      },
+    },
     define: {
       // Inject app version for use in UI (e.g., Settings page)
       APP_VERSION: JSON.stringify(process.env.npm_package_version || '0.0.0'),

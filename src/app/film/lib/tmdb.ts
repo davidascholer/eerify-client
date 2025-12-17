@@ -1,9 +1,8 @@
 import { Movie, MovieDetails } from './types'
 import { getKV } from '@/lib/storage/useKV'
 
-const DEFAULT_TMDB_API_KEY = '***REMOVED***'
-const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
-const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
+const TMDB_BASE_URL = import.meta.env.DEV ? '/tmdb' : 'https://api.themoviedb.org/3'
+const TMDB_IMAGE_BASE_URL = import.meta.env.DEV ? '/tmdb-image' : 'https://image.tmdb.org/t/p'
 
 let cachedApiKey: string | null = null
 
@@ -15,14 +14,15 @@ export const getApiKey = async (): Promise<string> => {
   if (cachedApiKey) return cachedApiKey
   
   try {
-    const storedKey = getKV<string>('tmdb-api-key', DEFAULT_TMDB_API_KEY)
+    const envKey = (import.meta.env.VITE_TMDB_API_KEY ?? '').toString()
+    const storedKey = getKV<string>('tmdb-api-key', envKey)
     cachedApiKey = storedKey
     return storedKey
   } catch (error) {
-    console.error('Error getting API key from storage:', error)
+    console.error('Error getting API key from storage/env:', error)
   }
   
-  return DEFAULT_TMDB_API_KEY
+  return ''
 }
 
 export const getImageUrl = (path: string | null, size: 'w185' | 'w342' | 'w500' | 'w780' | 'original' = 'w500') => {
