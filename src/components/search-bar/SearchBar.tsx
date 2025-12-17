@@ -1,11 +1,10 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Autocomplete, CircularProgress, IconButton } from "@mui/material";
-import { Cancel, Search } from "@mui/icons-material";
 import { toolbarSize } from "../app-bar/config";
 import { SearchBarType } from "./interface";
 import { KEY_PRESS_TIMEOUT, MAX_SUGGESTION_LIMIT } from "./config";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { X, Search as SearchIcon, Loader2 } from "lucide-react";
 
 const SearchBar: React.FC<SearchBarType> = ({
   sx: propStyles = {},
@@ -30,126 +29,72 @@ const SearchBar: React.FC<SearchBarType> = ({
   }, [searchText]);
 
   return (
-    <Box
-      sx={[
-        {
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          alignContent: "center",
-          height: toolbarSize * 0.6 + "px",
-          maxWidth: "600px",
-        },
-        propStyles,
-      ]}
+    <div
+      className="flex flex-row items-center justify-between"
+      style={{ height: toolbarSize * 0.6 + "px", maxWidth: "600px", ...(propStyles as React.CSSProperties) }}
     >
-      <Box
-        component={"form"}
-        sx={{
-          borderWidth: "2px",
-          borderStyle: "solid",
-          borderTopLeftRadius: "50px",
-          borderBottomLeftRadius: "50px",
-          borderColor: (theme) => theme.colors.iconColor,
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "flex-end",
-        }}
-      >
-        <Autocomplete
-          id="controlled-demo"
-          sx={{
-            width: "100%",
-            pl: 1,
-            "& .MuiAutocomplete-clearIndicator": {
-              p: 0,
-              mr: 1,
-            },
-          }}
-          inputValue={searchText}
-          autoComplete
-          blurOnSelect
-          clearOnEscape
-          forcePopupIcon={false}
-          noOptionsText={""}
-          freeSolo
-          disableClearable={searchText.length === 0}
-          options={
-            optionList.length > MAX_SUGGESTION_LIMIT
-              ? optionList.slice(0, MAX_SUGGESTION_LIMIT)
-              : optionList
-          }
-          onInputChange={(e) => {
-            const text = (e?.target as HTMLInputElement)?.value;
-            if (typeof text === "string") setSearchText(text);
-          }}
-          onChange={(e, value) => {
-            if (typeof value === "string") {
-              handleOnSubmit(value);
-              setSearchText(value);
-            }
-          }}
-          clearIcon={
-            <Cancel
-              onClick={() => {
-                setSearchText("");
-              }}
-              sx={{
-                fill: (theme) => theme.colors.colorPalette.blueOpaque("a"),
-                p: 0,
-              }}
-            />
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Search"
-              label=""
-              variant="standard"
-              InputProps={{
-                ...params.InputProps,
-                startAdornment:
-                  showSearchAdornment || searchText.length > 0 ? (
-                    <Search sx={{ opacity: 0.75, mr: 1 }} />
-                  ) : null,
-                disableUnderline: true,
-              }}
-              onFocus={() => setShowSearchAdornment(true)}
-              onBlur={() => setShowSearchAdornment(false)}
-            />
+      <div className="relative flex w-full h-full items-center">
+        <div className="relative w-full">
+          <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/70" />
+          <Input
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Search"
+            className="pl-9 pr-9 rounded-l-full border-2 h-full"
+            onFocus={() => setShowSearchAdornment(true)}
+            onBlur={() => setShowSearchAdornment(false)}
+          />
+          {searchText.length > 0 && (
+            <button
+              type="button"
+              aria-label="Clear search"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/70 hover:text-foreground"
+              onClick={() => setSearchText("")}
+            >
+              <X className="size-4" />
+            </button>
           )}
-        />
-      </Box>
-      <Box
-        sx={{
-          minWidth: "75px",
-          borderRightWidth: "2px",
-          borderTop: "2px",
-          borderBottomWidth: "2px",
-          borderLeftWidth: 0,
-          borderStyle: "solid",
-          borderTopRightRadius: "50px",
-          borderBottomRightRadius: "50px",
-          borderColor: (theme) => theme.colors.iconColor,
-          backgroundColor: (theme) => theme.colors.colorPalette.blueOpaque("7"),
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        </div>
+
+        {optionList.length > 0 && (showSearchAdornment || searchText.length > 0) && (
+          <div className="absolute z-50 mt-1 w-full rounded-md border bg-popover text-popover-foreground shadow-md">
+            <ul className="max-h-72 overflow-y-auto py-1 text-sm">
+              {(optionList.length > MAX_SUGGESTION_LIMIT
+                ? optionList.slice(0, MAX_SUGGESTION_LIMIT)
+                : optionList
+              ).map((opt, idx) => (
+                <li
+                  key={`${opt}-${idx}`}
+                  className="px-3 py-2 hover:bg-accent hover:text-accent-foreground cursor-pointer"
+                  onMouseDown={(e) => {
+                    // onMouseDown to prevent input blur before click
+                    handleOnSubmit(opt);
+                    setSearchText(opt);
+                  }}
+                >
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div
+        className="flex items-center justify-center h-full border-2 border-l-0 rounded-r-full px-4"
       >
-        <IconButton
-          onClick={() => {
-            handleOnSubmit(searchText);
-          }}
+        <Button
+          type="button"
+          variant="default"
+          size="sm"
+          onClick={() => handleOnSubmit(searchText)}
           disabled={loading}
+          className="rounded-full"
         >
-          {loading ? <CircularProgress sx={{ padding: 1 }} /> : <Search />}
-        </IconButton>
-      </Box>
-    </Box>
+          {loading ? <Loader2 className="size-4 animate-spin" /> : <SearchIcon className="size-4" />}
+        </Button>
+      </div>
+    </div>
   );
 };
 

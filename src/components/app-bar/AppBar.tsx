@@ -5,9 +5,6 @@ import { isBlacklisted } from "./blacklist";
 import Toast from "../../features/toast/Toast";
 import { isLoggedIn } from "../../redux/helper";
 import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
-// MUI Components
-import MuiAppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import NavDrawer from "./NavDrawer";
 import { AppBarStateType } from "./types";
 import { toolbarSize } from "./config";
@@ -37,40 +34,25 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          height: "100vh",
-          overflow: "hidden",
-        }}
-      >
+      <div className="flex h-screen overflow-hidden">
         {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
           <>
             {/* Topbar */}
-            <MuiAppBar
-              elevation={0}
-              sx={{
-                zIndex: (theme) => theme.zIndex.drawer + 1,
-              }}
-            >
-              <CustomToolbar toggleDrawer={toggleDrawer}></CustomToolbar>
-            </MuiAppBar>
+            <div className="fixed left-0 right-0 top-0 z-40">
+              <CustomToolbar toggleDrawer={toggleDrawer} />
+            </div>
           </>
         )}
         {/* Sidebar */}
         <NavDrawer openState={open} isLoggedIn={loggedIn} />
         {/* Main content */}
-        <Box
-          sx={{
-            mt: toolbarSize + "px",
-            width: "100%",
-            overflowY: "scroll",
-            scrollbarWidth: "none",
-          }}
+        <div
+          className="w-full overflow-y-scroll"
+          style={{ marginTop: toolbarSize + "px", scrollbarWidth: "none" as any }}
         >
           {children}
-        </Box>
-      </Box>
+        </div>
+      </div>
       <Toast
         msg={message ? message : ""}
         open={!!message}

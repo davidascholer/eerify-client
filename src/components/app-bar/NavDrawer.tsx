@@ -1,52 +1,6 @@
 import { MainListItems, SecondaryListItems } from "./Options";
 import { drawerWidth, toolbarSize } from "./config";
 import { AppBarStateType } from "./types";
-import {
-  Divider,
-  List,
-  styled,
-  Drawer as MUIDrawer,
-  Theme,
-  useTheme,
-} from "@mui/material";
-
-const Drawer = styled(MUIDrawer, {
-  shouldForwardProp: (prop) => prop !== "openState",
-})(({ theme, openState }: { theme: Theme; openState: AppBarStateType }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth + "px",
-    paddingTop: toolbarSize + "px",
-    backgroundColor: theme.colors.backgroundColor,
-    color: theme.palette.primary.contrastText,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(openState === "EXPANDED" && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      // Make it square with the toolbar height
-      width: toolbarSize + "px",
-      //   [theme.breakpoints.up("sm")]: {
-      //     width: theme.spacing(7),
-      //   },
-    }),
-    ...(openState === "HIDDEN" && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: 0,
-    }),
-  },
-}));
 
 const NavDrawer = ({
   openState,
@@ -55,24 +9,22 @@ const NavDrawer = ({
   openState: AppBarStateType;
   isLoggedIn: boolean;
 }) => {
-  const theme = useTheme();
+  const width =
+    openState === "EXPANDED" ? toolbarSize : openState === "HIDDEN" ? 0 : drawerWidth;
+  const collapsed = openState === "EXPANDED";
   return (
-    <Drawer
-      variant="permanent"
-      openState={openState}
-      theme={theme}
-      sx={{ overflow: "hidden" }}
+    <aside
+      className="relative shrink-0 overflow-hidden border-r bg-background text-foreground"
+      style={{ width: width + "px", transition: "width 200ms ease" }}
     >
-      {/* Drawer items */}
-      <List component="nav" sx={{ p: 0, height: "100%" }}>
-        <MainListItems />
-        <Divider
-          variant="middle"
-          sx={{ my: 1, borderColor: (theme) => theme.colors.colorPalette.blue }}
-        />
-        <SecondaryListItems loggedIn={isLoggedIn} />
-      </List>
-    </Drawer>
+      <div style={{ paddingTop: toolbarSize + "px", height: "100%" }} className="flex flex-col">
+        <nav className="flex-1 p-0">
+          <MainListItems collapsed={collapsed} />
+          <div className="my-2 border-t" />
+          <SecondaryListItems collapsed={collapsed} loggedIn={isLoggedIn} />
+        </nav>
+      </div>
+    </aside>
   );
 };
 export default NavDrawer;

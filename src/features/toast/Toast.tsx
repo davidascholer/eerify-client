@@ -1,7 +1,5 @@
-import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
-import { Snackbar } from "@mui/material";
-import { useState } from "react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function Toast({
   msg,
@@ -12,26 +10,16 @@ export default function Toast({
   open: boolean;
   close?: undefined | (() => void);
 }) {
-  const [opened, setOpened] = useState(open);
+  useEffect(() => {
+    if (open) {
+      const id = toast.success(msg);
+      const timer = setTimeout(() => {
+        toast.dismiss(id);
+        close?.();
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [open, msg, close]);
 
-  return (
-    <Snackbar
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      open={opened}
-      autoHideDuration={5000}
-      onClose={() => {
-        setOpened(false);
-        close ? close() : null;
-      }}
-    >
-      <Alert
-        variant="filled"
-        icon={<CheckIcon fontSize="inherit" />}
-        sx={{ backgroundColor: (theme) => theme.colors.colorPalette.blue }}
-        severity="success"
-      >
-        {msg}
-      </Alert>
-    </Snackbar>
-  );
+  return null;
 }

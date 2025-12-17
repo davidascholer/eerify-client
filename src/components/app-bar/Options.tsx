@@ -1,15 +1,7 @@
 import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-// icons
-import TheatersIcon from "@mui/icons-material/Theaters";
 import BookIcon from "../../assets/icons/Book";
 import GhostIcon from "../../assets/icons/Ghost";
 import PentagramIcon from "../../assets/icons/Pentagram";
-import SettingsIcon from "@mui/icons-material/Settings";
-import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
-import { useTheme } from "@mui/material";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app/paths";
 import useLogout from "../../features/user-auth/hooks/useLogout";
@@ -20,135 +12,100 @@ import {
   toolbarSize,
 } from "./config";
 import HauntedHouse from "../../assets/icons/HauntedHouse";
+import { Film, Gamepad2, Settings } from "lucide-react";
 
-const rootStyles = {
-  buttonContainer: {
-    p: 0,
-  },
-  icon: {
-    width: toolbarSize + "px",
-    // Specifiy ratio of icon size to toolbar size
-    height: toolbarSize * iconToToolbarPercentage * 0.01 + "px",
-    my: optionsMargin + "px",
-  },
-};
+const iconSize = toolbarSize * iconToToolbarPercentage * 0.01;
 
-export const MainListItems = () => {
-  const theme = useTheme();
+function NavItem({
+  onClick,
+  icon,
+  label,
+  collapsed,
+}: {
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+  collapsed?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex w-full items-center gap-3 px-3 py-2 hover:bg-accent hover:text-accent-foreground transition-colors"
+    >
+      <span className="flex items-center justify-center" style={{ width: toolbarSize + "px" }}>
+        {icon}
+      </span>
+      <span
+        className="text-sm"
+        style={{ fontSize: optionsFontSize, display: collapsed ? "none" : "inline" }}
+      >
+        {label}
+      </span>
+    </button>
+  );
+}
+
+export const MainListItems = ({ collapsed = false }: { collapsed?: boolean }) => {
   const handleNavigate = useHandleNavigate();
-  const { iconColor } = theme.colors;
-  const styles = {
-    ...rootStyles,
-    iconContainer: {},
-    icon: { ...rootStyles.icon, color: iconColor },
-  };
-
   return (
     <React.Fragment>
-      <ListItemButton
+      <NavItem
         onClick={() => handleNavigate(PATHS.ROOT)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <HauntedHouse sx={[styles.icon]} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Home"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
-      <ListItemButton
+        icon={<HauntedHouse style={{ height: iconSize + "px", width: toolbarSize + "px" }} />}
+        label="Home"
+        collapsed={collapsed}
+      />
+      <NavItem
         onClick={() => handleNavigate(PATHS.FILM)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <TheatersIcon sx={[styles.icon]} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Film"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
-      <ListItemButton
+        icon={<Film style={{ height: iconSize + "px" }} />}
+        label="Film"
+        collapsed={collapsed}
+      />
+      <NavItem
         onClick={() => handleNavigate(PATHS.BOOKS)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <BookIcon sx={styles.icon} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Books"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
-      <ListItemButton
+        icon={<BookIcon style={{ height: iconSize + "px" }} />}
+        label="Books"
+        collapsed={collapsed}
+      />
+      <NavItem
         onClick={() => handleNavigate(PATHS.GAMES)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <VideogameAssetIcon sx={styles.icon} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Games"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
+        icon={<Gamepad2 style={{ height: iconSize + "px" }} />}
+        label="Games"
+        collapsed={collapsed}
+      />
     </React.Fragment>
   );
 };
 
 export const SecondaryListItems = ({
   loggedIn = false,
+  collapsed = false,
 }: {
   loggedIn?: boolean;
+  collapsed?: boolean;
 }) => {
-  const theme = useTheme();
   const handleNavigate = useHandleNavigate();
   const logout = useLogout();
-  const { iconColor } = theme.colors;
-  const styles = {
-    ...rootStyles,
-    iconContainer: {},
-    icon: { ...rootStyles.icon, color: iconColor },
-  };
   return (
     <React.Fragment>
-      <ListItemButton
+      <NavItem
         onClick={() => handleNavigate(PATHS.FAVORITES)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <PentagramIcon sx={styles.icon} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Favorites"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
-      <ListItemButton
+        icon={<PentagramIcon style={{ height: iconSize + "px" }} />}
+        label="Favorites"
+        collapsed={collapsed}
+      />
+      <NavItem
         onClick={() => handleNavigate(PATHS.SETTINGS)}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <SettingsIcon sx={styles.icon} />
-        </ListItemIcon>
-        <ListItemText
-          primary="Settings"
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
-      <ListItemButton
+        icon={<Settings style={{ height: iconSize + "px" }} />}
+        label="Settings"
+        collapsed={collapsed}
+      />
+      <NavItem
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
-        sx={styles.buttonContainer}
-      >
-        <ListItemIcon sx={styles.iconContainer}>
-          <GhostIcon sx={styles.icon} />
-        </ListItemIcon>
-        <ListItemText
-          primary={loggedIn ? "Log Out" : "Log In"}
-          primaryTypographyProps={{ fontSize: optionsFontSize }}
-        />
-      </ListItemButton>
+        icon={<GhostIcon style={{ height: iconSize + "px" }} />}
+        label={loggedIn ? "Log Out" : "Log In"}
+        collapsed={collapsed}
+      />
     </React.Fragment>
   );
 };

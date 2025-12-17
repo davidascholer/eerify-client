@@ -4,14 +4,9 @@ import SpiderWebIcon from "../../assets/icons/SpiderWebIcon";
 import EerifyHoriz from "../../assets/icons/EerifyHoriz";
 import { useHandleNavigate } from "../../lib/react-router/hooks";
 import { PATHS } from "../../app/paths";
-// MUI Components
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
 import { toolbarSize } from "./config";
 import ToolBarSearch from "../search-bar/ToolBarSearch";
+import { Bell } from "lucide-react";
 
 const CustomToolbar = ({
   toggleDrawer,
@@ -20,87 +15,40 @@ const CustomToolbar = ({
 }) => {
   const handleNavigate = useHandleNavigate();
   return (
-    <Toolbar
-      disableGutters
-      sx={{
-        height: toolbarSize + "px",
-        overflow: "hidden",
-        display: "flex",
-        justifyContent: "space-between",
-        alignContent: "center",
-        borderBottom: 1,
-        borderColor: (theme) => theme.palette.divider,
-        backgroundColor: (theme) => theme.colors.backgroundColor,
-      }}
+    <div
+      className="flex items-center justify-between border-b bg-background"
+      style={{ height: toolbarSize + "px", overflow: "hidden" }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <IconButton
-          color="inherit"
+      <div className="flex items-center gap-2 pl-2">
+        <button
           aria-label="open drawer"
-          sx={{
-            // "&:hover": {
-            borderRadius: 2,
-            // },
-            boxSizing: "content-box",
-            m: 0,
-            p: 0,
-          }}
+          className="rounded-md p-1 hover:bg-accent"
           onClick={() => toggleDrawer()}
         >
-          <SpiderWebIcon
-            sx={{ width: toolbarSize + "px", height: toolbarSize + "px" }}
-          />
-        </IconButton>
-        <IconButton
-          color="inherit"
+          <SpiderWebIcon style={{ width: toolbarSize + "px", height: toolbarSize + "px" }} />
+        </button>
+        <button
           aria-label="home"
-          sx={{
-            borderRadius: 4,
-            m: 0,
-            p: 0,
-          }}
+          className="rounded-md p-1 ml-2 hover:bg-accent"
           onClick={() => handleNavigate(PATHS.ROOT)}
         >
-          <EerifyHoriz
-            sx={{
-              height: toolbarSize + "px",
-              width: "inherit",
-              p: 1,
-              ml: 2,
-            }}
-          />
-        </IconButton>
-      </Box>
+          <EerifyHoriz style={{ height: toolbarSize + "px", width: "inherit", padding: 4 }} />
+        </button>
+      </div>
       <ToolBarSearch />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          mr: 2,
-        }}
-      >
-        <IconButton
-          color="inherit"
+      <div className="flex items-center pr-3">
+        <button
+          aria-label="notifications"
+          className="relative rounded-md p-2 hover:bg-accent"
           onClick={() => handleNavigate(PATHS.NOTIFICATIONS)}
         >
-          <Badge badgeContent={1}>
-            <NotificationsIcon
-              sx={{
-                color: (theme) => theme.colors.iconColor,
-                transform: " scale(1.4)",
-              }}
-            />
-          </Badge>
-        </IconButton>
-      </Box>
-    </Toolbar>
+          <Bell className="size-5" />
+          <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-medium px-1 min-w-[16px] h-[16px] leading-none">
+            1
+          </span>
+        </button>
+      </div>
+    </div>
   );
 };
 
