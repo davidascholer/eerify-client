@@ -1,10 +1,6 @@
 import React from "react";
 
-interface NotificationsProps {
-  // Define your props here
-}
-
-const Notifications: React.FC<NotificationsProps> = () => {
+const Notifications: React.FC = () => {
   return (
     <div>
       notifications

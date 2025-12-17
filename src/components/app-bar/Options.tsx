@@ -9,7 +9,6 @@ import useLogout from "../../features/user-auth/hooks/useLogout";
 import {
   iconToToolbarPercentage,
   optionsFontSize,
-  optionsMargin,
   toolbarSize,
 } from "./config";
 import HauntedHouse from "../../assets/icons/HauntedHouse";

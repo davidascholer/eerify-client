@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { isBlacklisted } from "./blacklist";
 import Toast from "../../features/toast/Toast";
 import { isLoggedIn } from "../../redux/helper";
-import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
+// import useAutoLogin from "../../features/user-auth/hooks/useAutoLogin";
 import NavDrawer from "./NavDrawer";
 import { AppBarStateType } from "./types";
 import { toolbarSize } from "./config";

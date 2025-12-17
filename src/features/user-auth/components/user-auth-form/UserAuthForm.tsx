@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, ControllerRenderProps } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import useLogin from "../../hooks/useLogin";
 import { devDebug } from "../../util/helpers";
@@ -15,6 +13,8 @@ import useVerifyEmail from "../../hooks/useVerifyEmail";
 import useSendResetPasswordEmail from "../../hooks/useSendResetPasswordEmail";
 import useResendResetPasswordEmail from "../../hooks/useResendResetPasswordEmail";
 import { PATHS } from "../../../../app/paths";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const USER_NOT_ACTIVATED = "account is not activated";
 
@@ -243,7 +243,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => (
+                render={({ field }: { field: ControllerRenderProps<any, any> }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
@@ -258,7 +258,7 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
               <FormField
                 control={form.control}
                 name="password"
-                render={({ field }) => (
+                render={({ field }: { field: ControllerRenderProps<any, any> }) => (
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
@@ -274,15 +274,15 @@ export const UserAuthForm: React.FC<UserAuthFormProps> = ({ propStyles }) => {
               <FormField
                 control={form.control}
                 name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" autoComplete="off" placeholder="Confirm Password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={({ field }: { field: ControllerRenderProps<any, any> }) => (
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input type="password" autoComplete="off" placeholder="Confirm Password" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
               />
             )}
 

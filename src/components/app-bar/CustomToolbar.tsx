@@ -7,7 +7,6 @@ import { PATHS } from "../../app/paths";
 import { toolbarSize } from "./config";
 import ToolBarSearch from "../search-bar/ToolBarSearch";
 import { Bell } from "lucide-react";
-import { Button } from "../ui/button";
 
 const CustomToolbar = ({
   toggleDrawer,

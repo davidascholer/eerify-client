@@ -1,6 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
 import reactSwc from "@vitejs/plugin-react-swc";
-import react from "@vitejs/plugin-react";
 import { defineConfig, PluginOption } from "vite";
 
 import sparkPlugin from "@github/spark/spark-vite-plugin";
