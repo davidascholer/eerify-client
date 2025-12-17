@@ -69,28 +69,28 @@ export const MainListItems = ({ collapsed = false }: { collapsed?: boolean }) =>
     <React.Fragment>
       <NavItem
         onClick={() => handleNavigate(PATHS.ROOT)}
-        icon={<HauntedHouse style={{ height: iconSize + "px", width: toolbarSize + "px" }} />}
+        icon={<HauntedHouse className="text-primary" style={{ height: iconSize + "px", width: toolbarSize + "px" }} />}
         label="Home"
         collapsed={collapsed}
         active={isActive(PATHS.ROOT)}
       />
       <NavItem
         onClick={() => handleNavigate(PATHS.FILM)}
-        icon={<Film style={{ height: iconSize + "px" }} />}
+        icon={<Film className="text-primary" style={{ height: iconSize + "px" }} />}
         label="Film"
         collapsed={collapsed}
         active={isActive(PATHS.FILM)}
       />
       <NavItem
         onClick={() => handleNavigate(PATHS.BOOKS)}
-        icon={<BookIcon style={{ height: iconSize + "px" }} />}
+        icon={<BookIcon className="text-primary" style={{ height: iconSize + "px" }} />}
         label="Books"
         collapsed={collapsed}
         active={isActive(PATHS.BOOKS)}
       />
       <NavItem
         onClick={() => handleNavigate(PATHS.GAMES)}
-        icon={<Gamepad2 style={{ height: iconSize + "px" }} />}
+        icon={<Gamepad2 className="text-primary" style={{ height: iconSize + "px" }} />}
         label="Games"
         collapsed={collapsed}
         active={isActive(PATHS.GAMES)}
@@ -115,21 +115,21 @@ export const SecondaryListItems = ({
     <React.Fragment>
       <NavItem
         onClick={() => handleNavigate(PATHS.FAVORITES)}
-        icon={<PentagramIcon style={{ height: iconSize + "px" }} />}
+        icon={<PentagramIcon className="text-primary" style={{ height: iconSize + "px" }} />}
         label="Favorites"
         collapsed={collapsed}
         active={isActive(PATHS.FAVORITES)}
       />
       <NavItem
         onClick={() => handleNavigate(PATHS.SETTINGS)}
-        icon={<Settings style={{ height: iconSize + "px" }} />}
+        icon={<Settings className="text-primary" style={{ height: iconSize + "px" }} />}
         label="Settings"
         collapsed={collapsed}
         active={isActive(PATHS.SETTINGS)}
       />
       <NavItem
         onClick={() => (loggedIn ? logout() : handleNavigate(PATHS.USER_AUTH))}
-        icon={<GhostIcon style={{ height: iconSize + "px" }} />}
+        icon={<GhostIcon className="text-primary" style={{ height: iconSize + "px" }} />}
         label={loggedIn ? "Log Out" : "Log In"}
         collapsed={collapsed}
         active={!loggedIn && isActive(PATHS.USER_AUTH)}

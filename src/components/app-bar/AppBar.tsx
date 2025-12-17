@@ -17,9 +17,10 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
   const loggedIn = isLoggedIn();
   const toggleDrawer = () => {
     setOpen((prev) => {
-      if (prev === "EXPANDED") return "HIDDEN";
-      if (prev === "HIDDEN") return "SHRUNK";
-      return "EXPANDED";
+      // Cycle: icons only -> icons + text -> hidden -> icons only
+      if (prev === "EXPANDED") return "SHRUNK"; // icons + text (full drawer)
+      if (prev === "SHRUNK") return "HIDDEN";   // hidden
+      return "EXPANDED";                          // icons only
     });
   };
   // Returns the user data object, status string, error object, and refetch function.
@@ -34,7 +35,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex h-screen overflow-hidden bg-[#121212] text-white">
         {!isBlacklisted(`/${location.pathname.split("/")[1]}`) && (
           <>
             {/* Topbar */}
@@ -47,7 +48,7 @@ const AppBar: React.FC<React.PropsWithChildren> = ({ children }) => {
         <NavDrawer openState={open} isLoggedIn={loggedIn} />
         {/* Main content */}
         <div
-          className="w-full overflow-y-scroll"
+          className="w-full overflow-y-scroll bg-[#121212]"
           style={{ marginTop: toolbarSize + "px", scrollbarWidth: "none" as any }}
         >
           {children}

@@ -16,7 +16,7 @@ const CustomToolbar = ({
   const handleNavigate = useHandleNavigate();
   return (
     <div
-      className="flex items-center justify-between border-b border-primary/30 bg-primary text-primary-foreground"
+      className="flex items-center justify-between border-b border-[#121212] bg-black text-white"
       style={{ height: toolbarSize + "px", overflow: "hidden" }}
     >
       <div className="flex items-center gap-2 pl-2">
@@ -25,14 +25,14 @@ const CustomToolbar = ({
           className="rounded-md p-0 hover:bg-primary/90"
           onClick={() => toggleDrawer()}
         >
-          <SpiderWebIcon style={{ width: toolbarSize + "px", height: toolbarSize + "px" }} />
+          <SpiderWebIcon className="text-primary" style={{ width: toolbarSize + "px", height: toolbarSize + "px" }} />
         </button>
         <button
           aria-label="home"
           className="rounded-md p-0 ml-2 hover:bg-primary/90"
           onClick={() => handleNavigate(PATHS.ROOT)}
         >
-          <EerifyHoriz style={{ height: toolbarSize + "px", width: "inherit", padding: 4 }} />
+          <EerifyHoriz className="text-primary" style={{ height: toolbarSize + "px", width: "inherit", padding: 4 }} />
         </button>
       </div>
       <ToolBarSearch />
@@ -42,7 +42,7 @@ const CustomToolbar = ({
           className="relative rounded-md p-2 hover:bg-primary/90"
           onClick={() => handleNavigate(PATHS.NOTIFICATIONS)}
         >
-          <Bell className="size-5" />
+          <Bell className="size-5 text-primary" />
           <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center rounded-full bg-secondary text-secondary-foreground text-[10px] font-medium px-1 min-w-[16px] h-[16px] leading-none">
             1
           </span>
