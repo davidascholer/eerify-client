@@ -10,6 +10,7 @@ import ReactRouterWrapper from "../lib/react-router/ReactRouterWrapper";
 import Notifications from "../components/routes-deprecated/Notifications";
 import Favorites from "../components/routes-deprecated/Favorites";
 import FilmPage from "./film";
+import BooksPage from "./books";
 import Home from "./home";
 
 const routes = [
@@ -41,14 +42,12 @@ const routes = [
       //   ],
       // },
       // {
-      //   path: PATHS.BOOKS,
-      //   element: <BooksLayout />,
-      //   errorElement: <ErrorPage />,
-      //   children: [
-      //     { index: true, element: <Books /> },
-      //     { path: PATHS.BOOKS + "/:slug", element: <BookDetail /> },
-      //   ],
-      // },
+      // Books route (simple page component)
+      {
+        path: PATHS.BOOKS,
+        element: <BooksPage />,
+        errorElement: <ErrorPage />,
+      },
       {
         path: PATHS.ACTIVATE,
         element: <Activate />,
