@@ -34,7 +34,7 @@ import { MovieDetailsPage } from "./components/MovieDetailsPage";
 import { MovieGridPage } from "./components/MovieGridPage";
 import { SettingsDialog } from "./components/SettingsDialog";
 import { SearchBar } from "./components/SearchBar";
-import { FilterBar, FilterOptions } from "./components/FilterBar";
+import { FilterOptions } from "./components/FilterBar";
 import { ShareFavoritesDialog } from "./components/ShareFavoritesDialog";
 import { ShareWatchlistDialog } from "./components/ShareWatchlistDialog";
 import { SharedFavoritesBanner } from "./components/SharedFavoritesBanner";
@@ -44,19 +44,9 @@ import { UserProfileDialog } from "./components/UserProfileDialog";
 import { DevTools } from "./components/DevTools";
 import { ExportDialog } from "./components/ExportDialog";
 import { Toaster } from "@/components/ui/sonner";
-import { Button } from "@/components/ui/button";
-import {
-  Gear,
-  Moon,
-  Sun,
-  ShareNetwork,
-  Shuffle,
-  User,
-  Eye,
-  Download,
-} from "@phosphor-icons/react";
 import { toast } from "sonner";
-import { useTheme } from "./hooks/use-theme";
+import Pentagram from "@/assets/icons/Pentagram";
+import SpinningPentagram from "@/components/loading/SpinningPentagram";
 
 type ViewMode = "home" | "grid" | "details";
 type GridCategory =
@@ -152,8 +142,6 @@ function FilmPage() {
   const [sharedWatchlistIds, setSharedWatchlistIds] = useState<number[]>([]);
   const [showSharedWatchlistBanner, setShowSharedWatchlistBanner] =
     useState(false);
-
-  const { theme, toggleTheme } = useTheme();
 
   const [favorites, setFavorites] = useKV<number[]>("horror-favorites", []);
   const [watchLater, setWatchLater] = useKV<number[]>("horror-watch-later", []);
@@ -1340,16 +1328,16 @@ function FilmPage() {
     window.history.replaceState({}, "", url.toString());
   };
 
-  const handleRandomMovie = () => {
-    const allMovieIds = Object.keys(allMovies).map(Number);
-    if (allMovieIds.length === 0) {
-      toast.error("No movies available");
-      return;
-    }
-    const randomIndex = Math.floor(Math.random() * allMovieIds.length);
-    const randomMovieId = allMovieIds[randomIndex];
-    handleMovieSelect(randomMovieId);
-  };
+  // const handleRandomMovie = () => {
+  //   const allMovieIds = Object.keys(allMovies).map(Number);
+  //   if (allMovieIds.length === 0) {
+  //     toast.error("No movies available");
+  //     return;
+  //   }
+  //   const randomIndex = Math.floor(Math.random() * allMovieIds.length);
+  //   const randomMovieId = allMovieIds[randomIndex];
+  //   handleMovieSelect(randomMovieId);
+  // };
 
   if (viewMode === "details" && selectedMovieId !== null) {
     return (
@@ -1552,18 +1540,7 @@ function FilmPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <svg
-          className="animate-spin"
-          focusable="false"
-          aria-hidden="true"
-          viewBox="0 0 792.04 791.94"
-          xmlns="http://www.w3.org/2000/svg"
-          width={120}
-          height={120}
-          fill="#007ed2"
-        >
-          <path d="M0 395.68C.68 178.55 174.82.94 395.46 0 612.98-.92 791.7 177.43 792.05 393.97c.36 226.09-183.51 398.23-395.69 397.97C177.61 791.67.71 616.23 0 395.68Zm69.75 112.5c32.06 88.1 88.96 152.94 171.34 195.33 46.46 23.91 95.95 36.07 149.15 37.63-4.7-14.6-8.91-27.71-13.15-40.82-20.05-62.04-40.16-124.05-60.03-186.14-1.48-4.62-3.43-6.04-8.23-6.03-77.4.13-154.8.06-232.2.03h-6.87Zm651.92 2.1c-2.58-.31-4.49-.7-6.41-.74-17.97-.39-35.93-.98-53.9-1.04-59.76-.18-119.52-.12-179.28-.29-3.71-.01-5.73.75-6.62 4.7-1.01 4.52-2.89 8.84-4.32 13.27-21.95 67.89-43.89 135.78-65.81 203.68-1.05 3.25-1.93 6.55-3.31 11.28 60.61-2.62 116.56-17.46 167.96-47.88 72.14-42.7 122.4-103.72 151.7-182.99ZM65.91 494.22c2.87-1.91 4.95-3.19 6.93-4.61 61.68-44.51 123.33-89.05 185.08-133.46 2.85-2.05 3.39-4 2.54-7.08-2.05-7.37-3.59-14.9-5.94-22.17a55008.24 55008.24 0 0 0-59-181.79c-2.5-7.67-5.85-15.06-9.14-23.44-38.83 33.39-72.47 69.46-95.93 114.08-30.98 58.93-41.94 121.92-37.92 187.95 1.45 23.82 5.9 46.99 13.38 70.53Zm539.68-372.15c-2.52 6.21-5.03 11.61-6.94 17.22-13.86 40.78-28 81.47-41.22 122.46-9.24 28.64-17.12 57.71-25.71 86.56-1.11 3.72-.3 5.9 3 8.27 56.71 40.84 113.3 81.85 169.94 122.78 6.79 4.91 13.74 9.59 21.94 15.3 15.94-58.88 18.29-116.69 5.57-175-17.66-81.02-62.51-144.72-126.58-197.59Zm-14.42-9.86c-29.31-20.63-60.03-35.35-93.04-45.32-68.33-20.64-136.72-20.99-204.99.25-32.86 10.22-63.96 24.15-92.22 45.42 2.17 1.78 3.61 3.09 5.17 4.23 58.9 42.91 117.77 85.85 176.76 128.65 12.61 9.15 12.92 9.07 25.62-.07 49.02-35.29 97.98-70.65 146.88-106.1 11.69-8.48 23.06-17.4 35.83-27.06ZM396.88 463.19c15.64 0 31.27.08 46.91-.12 1.65-.02 4.34-1.42 4.77-2.75 9.47-29.6 18.68-59.29 28-88.94 1.05-3.35.12-5.41-2.77-7.48a9714.181 9714.181 0 0 1-73.91-53.59c-2.91-2.13-4.8-2.15-7.74 0-24.15 17.69-48.36 35.29-72.73 52.66-4.03 2.87-5.13 5.54-3.62 10.28 9.1 28.5 18 57.06 26.83 85.64 1.07 3.47 3.38 4.26 6.37 4.27 15.96.04 31.93.02 47.89.03Zm34.99-182.34c20.06 15.44 39.16 30.41 60.62 43.07 12.81-36.73 24.77-72.81 35.1-109.4-.43-.27-.85-.55-1.28-.82-31.24 22.21-62.49 44.43-94.44 67.15Zm-73.27 1.66c-30.28-25.63-61.98-47.01-93.82-69.22-.06 1.38-.17 1.73-.08 2.01 11.02 34.9 22.07 69.8 33.04 104.71 1.15 3.66 3.06 3.98 5.87 2.04 8.35-5.77 16.74-11.48 24.98-17.41 9.7-6.98 19.24-14.18 30.01-22.13ZM180.31 463.99h119.85c-7.46-23.17-14.78-45.88-22.53-69.93-32.67 23.48-64.42 46.28-97.32 69.93Zm429.7.16c.17-.34.33-.68.5-1.02l-96.16-69.04c-7.8 24.27-15.1 47-22.51 70.06h118.18ZM394.92 618.03c.76.06 1.52.11 2.29.17 11.73-36.04 23.46-72.07 35.53-109.16h-73.77c12.24 37.1 24.1 73.05 35.96 108.99Z"></path>
-        </svg>
+        <SpinningPentagram className="w-30" />
       </div>
     );
   }
@@ -1575,7 +1552,7 @@ function FilmPage() {
     <>
       <div className="min-h-screen bg-background">
         <div className="px-6 py-8 space-y-8">
-          <header className="mb-12 flex items-start justify-between gap-4">
+          {/* <header className="mb-12 flex items-start justify-between gap-4">
             <div className="flex gap-2 mt-2">
               <Button
                 variant="outline"
@@ -1593,48 +1570,8 @@ function FilmPage() {
               >
                 <User size={20} />
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setExportDialogOpen(true)}
-                title="Export your collections"
-              >
-                <Download size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShareWatchlistDialogOpen(true)}
-                title="Share your watchlist"
-              >
-                <Eye size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShareDialogOpen(true)}
-                title="Share your favorites"
-              >
-                <ShareNetwork size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={toggleTheme}
-                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              >
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setSettingsOpen(true)}
-                title="Settings"
-              >
-                <Gear size={20} />
-              </Button>
             </div>
-          </header>
+          </header> */}
 
           <div className="space-y-6">
             <SearchBar onMovieSelect={handleMovieSelect} />

@@ -1,4 +1,4 @@
-import { TriggerRatings } from '@/lib/types'
+import { TriggerRatings } from "../lib/types"
 
 let customApiUrl: string | null = null
 

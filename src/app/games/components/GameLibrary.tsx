@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { GameCard } from './GameCard'
-import { SearchBar } from './SearchBar'
-import { FilterControls } from './FilterControls'
-import { EmptyState } from './EmptyState'
-import { rawgApi } from '../lib/api'
-import type { Game, Genre, Platform, Tag } from '../lib/types'
-import { toast } from 'sonner'
+import { useState, useEffect } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GameCard } from "./GameCard";
+import { SearchBar } from "./SearchBar";
+import { FilterControls } from "./FilterControls";
+import { EmptyState } from "./EmptyState";
+import { rawgApi } from "../lib/api";
+import type { Game, Genre, Platform, Tag } from "../lib/types";
+import { toast } from "sonner";
+import SpinningPentagram from "@/components/loading/SpinningPentagram";
 
 interface GameLibraryProps {
-  collection: number[]
-  watchlist: number[]
-  onToggleCollection: (gameId: number) => void
-  onToggleWatchlist: (gameId: number) => void
-  onGameClick: (gameId: number) => void
+  collection: number[];
+  watchlist: number[];
+  onToggleCollection: (gameId: number) => void;
+  onToggleWatchlist: (gameId: number) => void;
+  onGameClick: (gameId: number) => void;
 }
 
 export function GameLibrary({
@@ -23,83 +24,95 @@ export function GameLibrary({
   onToggleWatchlist,
   onGameClick,
 }: GameLibraryProps) {
-  const [games, setGames] = useState<Game[]>([])
-  const [genres, setGenres] = useState<Genre[]>([])
-  const [platforms, setPlatforms] = useState<Platform[]>([])
-  const [tags, setTags] = useState<Tag[]>([])
-  const [loading, setLoading] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('all')
-  const [selectedPlatform, setSelectedPlatform] = useState('all')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [activeTab, setActiveTab] = useState('browse')
+  const [games, setGames] = useState<Game[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const [platforms, setPlatforms] = useState<Platform[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("all");
+  const [selectedPlatform, setSelectedPlatform] = useState("all");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState("browse");
 
-  const HORROR_GENRE_ID = '19'
-
-  useEffect(() => {
-    rawgApi.getGenres().then((res) => setGenres(res.results)).catch(console.error)
-    rawgApi.getPlatforms().then((res) => setPlatforms(res.results)).catch(console.error)
-    rawgApi.getTags().then((res) => setTags(res.results)).catch(console.error)
-  }, [])
+  const HORROR_GENRE_ID = "19";
 
   useEffect(() => {
+    rawgApi
+      .getGenres()
+      .then((res) => setGenres(res.results))
+      .catch(console.error);
+    rawgApi
+      .getPlatforms()
+      .then((res) => setPlatforms(res.results))
+      .catch(console.error);
+    rawgApi
+      .getTags()
+      .then((res) => setTags(res.results))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
     const timer = setTimeout(() => {
-      fetchGames()
-    }, 300)
+      fetchGames();
+    }, 300);
 
-    return () => clearTimeout(timer)
-  }, [searchQuery, selectedGenre, selectedPlatform, selectedTags])
+    return () => clearTimeout(timer);
+  }, [searchQuery, selectedGenre, selectedPlatform, selectedTags]);
 
   const fetchGames = async () => {
-    setLoading(true)
     try {
       const params = {
         search: searchQuery || undefined,
         genres: HORROR_GENRE_ID,
-        platforms: selectedPlatform !== 'all' ? selectedPlatform : undefined,
-        tags: selectedTags.length > 0 ? selectedTags.join(',') : undefined,
-      }
-      const response = await rawgApi.getGames(params)
-      setGames(response.results)
+        platforms: selectedPlatform !== "all" ? selectedPlatform : undefined,
+        tags: selectedTags.length > 0 ? selectedTags.join(",") : undefined,
+      };
+      const response = await rawgApi.getGames(params);
+      setGames(response.results);
     } catch (error) {
-      console.error(error)
-      toast.error('Failed to fetch games')
+      console.error(error);
+      toast.error("Failed to fetch games");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleClearSearch = () => {
-    setSearchQuery('')
-  }
+    setSearchQuery("");
+  };
 
   const handleClearFilters = () => {
-    setSelectedGenre('all')
-    setSelectedPlatform('all')
-    setSelectedTags([])
-  }
+    setSelectedGenre("all");
+    setSelectedPlatform("all");
+    setSelectedTags([]);
+  };
 
   const handleTagToggle = (tagId: string) => {
     setSelectedTags((current) => {
       if (current.includes(tagId)) {
-        return current.filter((id) => id !== tagId)
+        return current.filter((id) => id !== tagId);
       } else {
-        return [...current, tagId]
+        return [...current, tagId];
       }
-    })
-  }
+    });
+  };
 
   const handleClearTags = () => {
-    setSelectedTags([])
-  }
+    setSelectedTags([]);
+  };
 
-  const collectionGames = games.filter((game) => collection.includes(game.id))
-  const watchlistGames = games.filter((game) => watchlist.includes(game.id))
+  const collectionGames = games.filter((game) => collection.includes(game.id));
+  const watchlistGames = games.filter((game) => watchlist.includes(game.id));
 
   return (
     <div>
-
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="space-y-6"
+      >
         <TabsList className="grid w-full max-w-md grid-cols-3">
           <TabsTrigger value="browse">Browse</TabsTrigger>
           <TabsTrigger value="collection">
@@ -138,8 +151,8 @@ export function GameLibrary({
           /> */}
 
           {loading ? (
-            <div className="flex items-center justify-center py-16">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-accent"></div>
+            <div className="min-h-screen bg-background flex items-center justify-center">
+              <SpinningPentagram className="w-30" />
             </div>
           ) : games.length === 0 ? (
             <EmptyState type="search" />
@@ -201,5 +214,5 @@ export function GameLibrary({
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

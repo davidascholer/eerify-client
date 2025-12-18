@@ -266,7 +266,7 @@ export function MovieCard({
                     toast.success(`Added "${movie.title}" to Watch Later`)
                   }
                 }}
-                className="px-3 py-2 bg-primary rounded-md hover:bg-primary/80 transition-colors border-2 border-primary shadow-md shrink-0 cursor-pointer"
+                className="px-3 py-2 rounded-md hover:bg-primary/80 transition-colors border-2 border-primary shadow-md shrink-0 cursor-pointer"
                 title={isWatchLater ? "Remove from Watch Later" : "Add to Watch Later"}
               >
                 {isWatchLater ? (

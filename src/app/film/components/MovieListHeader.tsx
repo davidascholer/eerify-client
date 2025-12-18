@@ -17,11 +17,6 @@ export function MovieListHeader({ title, onViewAll, totalCount }: MovieListHeade
         onClick={onViewAll}
       >
         {title}
-        {totalCount !== undefined && totalCount > 0 && (
-          <span className="text-muted-foreground text-lg ml-2">
-            ({totalCount})
-          </span>
-        )}
       </h2>
       {onViewAll && (
         <Button
