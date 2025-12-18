@@ -33,6 +33,13 @@ export default defineConfig(() => {
           secure: true,
           rewrite: (path) => path.replace(/^\/tmdb-image/, ''),
         },
+        // Dev-time proxy to avoid CORS when calling RAWG
+        '/rawg': {
+          target: 'https://api.rawg.io/api',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/rawg/, ''),
+        },
       },
     },
     define: {

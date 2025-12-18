@@ -11,6 +11,7 @@ import Notifications from "../components/routes-deprecated/Notifications";
 import Favorites from "../components/routes-deprecated/Favorites";
 import FilmPage from "./film";
 import BooksPage from "./books";
+import GamesPage from "./games";
 import Home from "./home";
 
 const routes = [
@@ -46,6 +47,11 @@ const routes = [
       {
         path: PATHS.BOOKS,
         element: <BooksPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: PATHS.GAMES,
+        element: <GamesPage />,
         errorElement: <ErrorPage />,
       },
       {
