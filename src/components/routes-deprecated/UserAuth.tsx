@@ -11,8 +11,17 @@ const styles = {
 
 const UserAuth: React.FC = () => {
   return (
-    <div className="flex w-full flex-col items-center m-2">
-      <EerifyLogo style={{ width: "300px", height: "300px", margin: 20, marginBottom: 40 }} />
+    <div className="flex w-full flex-col items-center m-2 gap-4">
+      <EerifyLogo
+        style={{
+          width: "300px",
+          height: "300px",
+          margin: 20,
+        }}
+      />
+      <p className="text-muted-foreground mt-2 text-lg">
+        Discover Your Next Nightmare
+      </p>
       <UserAuthPage propStyles={styles} />
     </div>
   );

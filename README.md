@@ -39,7 +39,7 @@ npm install
 # set environment variables
 cp .env.example .env.local
 echo "VITE_TMDB_API_KEY=your_tmdb_key" >> .env.local
-echo "VITE_RAWG_API_KEY=your_rawg_key" >> .env.local
+echo "VITE_GAMES_API_KEY=your_rawg_key" >> .env.local
 
 # start the dev server
 npm run dev
@@ -70,7 +70,7 @@ npm run preview
 ## Environment
 
 - `VITE_TMDB_API_KEY`: TMDB API key used by film features
-- `VITE_RAWG_API_KEY`: RAWG API key used by games features
+- `VITE_GAMES_API_KEY`: RAWG API key used by games features
 - `VITE_APP_VERSION` (optional): If not set, the app injects `APP_VERSION` from `package.json` via `vite.config.ts`
 
 Place secrets in `.env.local` (ignored by git). See `.env.example` for keys.

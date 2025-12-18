@@ -1576,14 +1576,6 @@ function FilmPage() {
       <div className="min-h-screen bg-background">
         <div className="px-6 py-8 space-y-8">
           <header className="mb-12 flex items-start justify-between gap-4">
-            <div>
-              <h1 className="text-5xl font-bold text-foreground tracking-tight">
-                HorrorMovies
-              </h1>
-              <p className="text-muted-foreground mt-2 text-lg">
-                Discover your next nightmare
-              </p>
-            </div>
             <div className="flex gap-2 mt-2">
               <Button
                 variant="outline"

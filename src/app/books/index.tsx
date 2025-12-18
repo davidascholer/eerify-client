@@ -197,55 +197,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <h1 className="text-4xl font-bold tracking-tight">HorrorBooks</h1>
-            
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowSearch(true)}
-              >
-                <MagnifyingGlass size={20} />
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleRandomBook}
-              >
-                <Shuffle size={20} />
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowShare(true)}
-              >
-                <ShareNetwork size={20} />
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowProfile(true)}
-              >
-                <User size={20} />
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-              >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <main className="container mx-auto px-6 py-8 space-y-8">
         {sharedBooks.length > 0 && (

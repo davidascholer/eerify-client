@@ -3,7 +3,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { GameCard } from './GameCard'
 import { SearchBar } from './SearchBar'
 import { FilterControls } from './FilterControls'
-import { TagsFilter } from './TagsFilter'
 import { EmptyState } from './EmptyState'
 import { rawgApi } from '../lib/api'
 import type { Game, Genre, Platform, Tag } from '../lib/types'
@@ -99,14 +98,6 @@ export function GameLibrary({
 
   return (
     <div>
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-          Horror Game Library
-        </h1>
-        <p className="text-muted-foreground text-lg">
-          Discover and collect your favorite horror games
-        </p>
-      </header>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsList className="grid w-full max-w-md grid-cols-3">
@@ -139,12 +130,12 @@ export function GameLibrary({
             />
           </div>
 
-          <TagsFilter
+          {/* <TagsFilter
             tags={tags}
             selectedTags={selectedTags}
             onTagToggle={handleTagToggle}
             onClearAll={handleClearTags}
-          />
+          /> */}
 
           {loading ? (
             <div className="flex items-center justify-center py-16">

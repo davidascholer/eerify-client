@@ -33,14 +33,15 @@ const SearchBar: React.FC<SearchBarType> = ({
       className="flex flex-row items-center justify-between"
       style={{ height: toolbarSize * 0.6 + "px", maxWidth: "600px", ...(propStyles as React.CSSProperties) }}
     >
-      <div className="relative flex w-full h-full items-center">
+      <div className="relative flex w-full h-full items-center justify-center border-2 border-r-0 rounded-l-full px-4">
+
         <div className="relative w-full">
-          <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/70" />
+          <SearchIcon className="absolute left-1 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/70" />
           <Input
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search"
-            className="pl-9 pr-9 rounded-l-full border-2 h-full"
+            className="pl-6 h-full border-0 focus:ring-0 bg-transparent"
             onFocus={() => setShowSearchAdornment(true)}
             onBlur={() => setShowSearchAdornment(false)}
           />
@@ -83,16 +84,14 @@ const SearchBar: React.FC<SearchBarType> = ({
       <div
         className="flex items-center justify-center h-full border-2 border-l-0 rounded-r-full px-4"
       >
-        <Button
+        <button
           type="button"
-          variant="default"
-          size="sm"
           onClick={() => handleOnSubmit(searchText)}
           disabled={loading}
           className="rounded-full"
         >
           {loading ? <Loader2 className="size-4 animate-spin" /> : <SearchIcon className="size-4" />}
-        </Button>
+        </button>
       </div>
     </div>
   );

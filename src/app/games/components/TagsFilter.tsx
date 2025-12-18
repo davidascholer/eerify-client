@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { X } from '@phosphor-icons/react'
-import type { Tag } from '../lib/types'
 import { motion } from 'framer-motion'
+import { Tag } from '../lib/types'
 
 interface TagsFilterProps {
   tags: Tag[]
