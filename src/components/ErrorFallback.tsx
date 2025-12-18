@@ -1,7 +1,7 @@
-import { Alert, AlertTitle, AlertDescription } from "../app/film/components/ui/alert";
-import { Button } from "../app/film/components/ui/button";
 
 import { AlertTriangleIcon, RefreshCwIcon } from "lucide-react";
+import { Button } from "./ui/button";
+import { Alert, AlertTitle, AlertDescription } from "./ui/alert";
 
 type ErrorFallbackProps = {
   error: Error;
@@ -31,7 +31,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps)
           </pre>
         </div>
         
-        <Button 
+        <Button
           onClick={resetErrorBoundary} 
           className="w-full"
           variant="outline"
